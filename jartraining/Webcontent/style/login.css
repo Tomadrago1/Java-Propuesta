@@ -1,0 +1,96 @@
+/* Resetear margenes y padding */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Aplicar fuente y estilos generales al body */
+body {
+    font-family: 'Nunito', sans-serif;
+    background: #004a8d; /* Degradado de tonos de azul más marcado */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+/* Estilos para el contenedor principal */
+#contenedor {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+}
+
+/* Estilos para la caja de login */
+#login {
+    background: rgb(0, 0, 0);
+    padding: 5rem; /* Aumentar el padding para hacer el formulario más grande */
+    border-radius: 8px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2); /* Sombra más prominente */
+    width: 100%;
+    max-width: 400px; /* Aumentar el ancho máximo del formulario */
+}
+
+/* Estilos para el título */
+.titulo {
+    font-family: 'Overpass', sans-serif;
+    font-size: 2.5rem; /* Aumentar el tamaño del título */
+    font-weight: 600;
+    margin-bottom: 1.5rem; /* Aumentar el margen inferior */
+    color: #ffffff;
+    text-align: center;
+}
+
+/* Contenedor del input con icono */
+.input-container {
+    position: relative;
+    margin-bottom: 1.25rem; /* Aumentar el margen inferior para separarlo más de los otros campos */
+}
+
+/* Estilos para los inputs */
+.input-container input {
+    width: 100%;
+    padding: 0.75rem 0.75rem 0.75rem 2.5rem; /* Espacio para el icono */
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 1rem;
+    color: #333;
+    background: #f9f9f9;
+}
+
+/* Estilos para los iconos dentro del input */
+.input-container i {
+    position: absolute;
+    left: 0.75rem;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #f57c00; /* Naranja */
+    font-size: 1rem;
+    pointer-events: none; /* Evita que el icono interfiera con el clic */
+}
+
+/* Placeholder en los inputs */
+.input-container input::placeholder {
+    color: #aaa;
+}
+
+/* Estilos para el botón */
+#loginform button {
+    width: 100%;
+    padding: 0.75rem;
+    background-color: #f57c00;
+    border: none;
+    border-radius: 4px;
+    color: #fff;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+/* Cambio de color del botón al pasar el ratón */
+#loginform button:hover {
+    background-color: #0056b3;
+}
