@@ -1,4 +1,4 @@
-package servletEjercicio;
+package servletRutina;
 
 import java.io.IOException;
 
@@ -10,13 +10,13 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import entities.Ejercicio;
-import logic.ctrlEjercicios;
+import entities.Rutina;
+import logic.ctrlRutina;
 
-// Aca se modifica el ejercicio y vuelve a la lista de ejercicios
+// Aca se modifica el rutina y vuelve a la lista de rutinas
 
-@WebServlet("/actualizarEjercicio")
-public class actualizarEjercicio extends HttpServlet {
+@WebServlet("/actualizarRutina")
+public class actualizarRutina extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -24,15 +24,16 @@ public class actualizarEjercicio extends HttpServlet {
     	String nombre = request.getParameter("nombre");
         String desc = request.getParameter("descripcion");
 
-    	ctrlEjercicios ctrl = new ctrlEjercicios();
-        Boolean success= ctrl.modificarEjercicio(id, nombre, desc);
+    	ctrlRutina ctrl = new ctrlRutina();
+        
+        Boolean success= ctrl.modificarRutina(id, nombre, desc);
 
         if (success) {
-    		LinkedList<Ejercicio> ejercicios = ctrl.getAll();
-            request.setAttribute("listaEjercicios", ejercicios);
-            request.getRequestDispatcher("WEB-INF/ejercicioManagement.jsp").forward(request, response);
+    		LinkedList<Rutina> rutinas = ctrl.getAll();
+            request.setAttribute("listaRutinas", rutinas);
+            request.getRequestDispatcher("WEB-INF/rutinaManagement.jsp").forward(request, response);
         } else {
-            response.getWriter().append("Error al actualizar el ejercicio.");
+            response.getWriter().append("Error al actualizar el rutina.");
         }
     }
 }
