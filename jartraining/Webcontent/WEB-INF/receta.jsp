@@ -1,5 +1,5 @@
 <%@page import="java.util.LinkedList"%>
-<%@page import="entities.Ingrediente"%>
+<%@page import="java.util.Map"%>
 <%@page import="entities.Receta"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -12,10 +12,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="style/UserManagementstyles.css">
     
-    <%
-    	Receta r = (Receta)request.getAttribute("Receta");
-        LinkedList<Ingrediente> li = (LinkedList<Ingrediente>)request.getAttribute("ListaIngredientes");
-    %>
+<%
+Receta r = (Receta)request.getAttribute("Receta");
+LinkedList<Map<String, Object>> li = (LinkedList<Map<String, Object>>)request.getAttribute("ListaIngredientes");
+%>
     
 </head>
 <body>
@@ -25,23 +25,30 @@
             <table>
                 <thead>
                     <tr>
-                        <th>Id</th>
                         <th>Nombre</th>
                         <th>Descripcion</th>
-                        <th>Editar Ingrediente</th>
+                        <th>Cantidad</th>
+                        <th>Editar Cantidad</th>
                         <th>Baja Ingrediente</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <% for (Ingrediente ing : li) { %>
+                    <% for (Map<String, Object> ingrediente : li) { %>
                     <tr>
-                        <td><%= ing.getId() %></td>
-                        <td><%= ing.getNombre() %></td>
-                        <td><%= ing.getDesc() %></td>
-                        <td><a href="editarIngrediente?id=<%= ing.getId() %>" class="action-btn edit-btn">Editar</a></td>
+                        <td><%= ingrediente.get("nombre") %></td>
+                        <td><%= ingrediente.get("descripcion") %></td>
+                        <td><%= ingrediente.get("cantidad") %></td>
                         <td>
-                            <form action="EliminarIngrediente" method="post" style="display:inline;">
-                                <input type="hidden" name="id" value="<%= ing.getId() %>">
+                        	<form action="editarCantidadIngrediente" method="post" style="display:inline;">
+                        		<input type="hidden" name="cantidad" value="<%=ingrediente.get("cantidad")%>">
+                                <input type="hidden" name="idIngrediente" value="<%=ingrediente.get("id")%>">
+                                <input type="hidden" name="idReceta" value="<%=r.getId()%>">
+                                <input type="submit" value="Editar" class="action-btn edit-btn">
+                           	</form>
+                        <td>
+                            <form action="eliminarIngredienteReceta" method="post" style="display:inline;">
+                                <input type="hidden" name="idIngrediente" value="<%= ingrediente.get("id")%>">
+                                <input type="hidden" name="idReceta" value="<%=r.getId()%>">
                                 <input type="submit" value="Borrar" class="action-btn delete-btn" onclick="return confirm('¿Estás seguro de que deseas eliminar este ingrediente?');">
                             </form>
                         </td>
@@ -50,7 +57,10 @@
                 </tbody>
             </table>
             <div style="text-align: right; margin-top: 20px; margin-bottom:20px; padding: 0 20px;">
-                <a href="crearIngrediente" class="action-btn create-btn">Crear Ingrediente</a>
+            	<form action="agregarIngrediente" method="post" style="display:inline;">
+            		<input type="hidden" name="idReceta" value="<%=r.getId()%>">
+                	<input type="submit" value="Agregar Ingrediente" class="action-btn create-btn">
+            	</form>
             </div>
         </div>
     </div>

@@ -40,7 +40,6 @@
                     %>
                     <tr>         
                         <td>
-                            <%--- <a href="verMasReceta?id=<%=rec.getId()%>" class="action-btn edit-btn">Ver Más</a>--%>
                             <form action="verMasReceta" method="post" style="display:inline;">
                                 <input type="hidden" name="id" value="<%=rec.getId()%>">
                                 <input type="submit" value="Ver Más" class="action-btn edit-btn">
@@ -58,9 +57,14 @@
                             }
                             %>
                         </td>       
-                        <td><a href="editarReceta?id=<%=rec.getId()%>" class="action-btn edit-btn">Editar</a></td>
                         <td>
-                            <form action="EliminarReceta" method="post" style="display:inline;">
+                            <form action="editarReceta" method="post" style="display:inline;">
+                                <input type="hidden" name="id" value="<%=rec.getId()%>">
+                                <input type="submit" value="Editar" class="action-btn edit-btn">
+                            </form>
+                        </td>
+                        <td>
+                            <form action="eliminarReceta" method="post" style="display:inline;">
                                 <input type="hidden" name="id" value="<%=rec.getId()%>">
                                 <input type="submit" value="Borrar" class="action-btn delete-btn" onclick="return confirm('¿Estás seguro de que deseas eliminar esta receta?');">
                             </form>
@@ -72,7 +76,9 @@
                 </tbody>
             </table>
             <div style="text-align: right; margin-top: 20px; margin-bottom:20px; padding: 0 20px;">
-                <a href="crearReceta" class="action-btn create-btn">Crear Receta</a>
+                <form action="crearReceta" method="post" style="display:inline;">
+                	<input type="submit" value="Crear Receta" class="action-btn create-btn">
+                </form>
             </div>
         </div>
     </div>

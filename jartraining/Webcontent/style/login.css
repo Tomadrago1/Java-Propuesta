@@ -1,131 +1,96 @@
-body {
-    font-family: 'Overpass', sans-serif;
-    font-weight: normal;
-    font-size: 100%;
-    color: #1b262c;
-    
-    margin: 0;
-    background-color: #0f4c75;
-}
-
-#contenedor {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    
+/* Resetear margenes y padding */
+* {
     margin: 0;
     padding: 0;
-    min-width: 100vw;
-    min-height: 100vh;
+    box-sizing: border-box;
+}
+
+/* Aplicar fuente y estilos generales al body */
+body {
+    font-family: 'Nunito', sans-serif;
+    background: #004a8d; /* Degradado de tonos de azul más marcado */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+/* Estilos para el contenedor principal */
+#contenedor {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     width: 100%;
     height: 100%;
 }
 
-#central {
-    max-width: 320px;
-    width: 100%;
-}
-
-.titulo {
-    font-size: 250%;
-    color:#bbe1fa;
-    text-align: center;
-    margin-bottom: 20px;
-}
-
+/* Estilos para la caja de login */
 #login {
+    background: rgb(0, 0, 0);
+    padding: 5rem; /* Aumentar el padding para hacer el formulario más grande */
+    border-radius: 8px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2); /* Sombra más prominente */
     width: 100%;
-    padding: 50px 30px;
-    background-color: #3282b8;
-    
-    -webkit-box-shadow: 0px 0px 5px 5px rgba(0,0,0,0.15);
-    -moz-box-shadow: 0px 0px 5px 5px rgba(0,0,0,0.15);
-    box-shadow: 0px 0px 5px 5px rgba(0,0,0,0.15);
-    
-    border-radius: 3px 3px 3px 3px;
-    -moz-border-radius: 3px 3px 3px 3px;
-    -webkit-border-radius: 3px 3px 3px 3px;
-    
-    box-sizing: border-box;
+    max-width: 400px; /* Aumentar el ancho máximo del formulario */
 }
 
-#login input {
+/* Estilos para el título */
+.titulo {
     font-family: 'Overpass', sans-serif;
-    font-size: 110%;
-    color: #1b262c;
-    
-    display: block;
-    width: 100%;
-    height: 40px;
-    
-    margin-bottom: 10px;
-    padding: 5px 5px 5px 10px;
-    
-    box-sizing: border-box;
-    
-    border: none;
-    border-radius: 3px 3px 3px 3px;
-    -moz-border-radius: 3px 3px 3px 3px;
-    -webkit-border-radius: 3px 3px 3px 3px;
-}
-
-/*#login input::placeholder {
-    font-family: 'Overpass', sans-serif;
-    color: #E4E4E4;
-}*/
-
-#login button {
-    font-family: 'Overpass', sans-serif;
-    font-size: 110%;
-    color:#1b262c;
-    width: 100%;
-    height: 40px;
-    border: none;
-    
-    border-radius: 3px 3px 3px 3px;
-    -moz-border-radius: 3px 3px 3px 3px;
-    -webkit-border-radius: 3px 3px 3px 3px;
-    
-    background-color: #bbe1fa;
-    
-    margin-top: 10px;
-}
-
-#login button:hover {
-    background-color: #0f4c75;
-    color:#bbe1fa;
-}
-
-.pie-form {
-    font-size: 90%;
-    text-align: center;    
-    margin-top: 15px;
-}
-
-.pie-form a {
-    display: block;
-    text-decoration: none;
-    color: #bbe1fa;
-    margin-bottom: 3px;
-}
-
-.pie-form a:hover {
-    color: #0f4c75;
-}
-
-.inferior {
-    margin-top: 10px;
-    font-size: 90%;
+    font-size: 2.5rem; /* Aumentar el tamaño del título */
+    font-weight: 600;
+    margin-bottom: 1.5rem; /* Aumentar el margen inferior */
+    color: #ffffff;
     text-align: center;
 }
 
-.inferior a {
-    display: block;
-    text-decoration: none;
-    color: #bbe1fa;
-    margin-bottom: 3px;
+/* Contenedor del input con icono */
+.input-container {
+    position: relative;
+    margin-bottom: 1.25rem; /* Aumentar el margen inferior para separarlo más de los otros campos */
 }
 
-.inferior a:hover {
-    color: #3282b8;
+/* Estilos para los inputs */
+.input-container input {
+    width: 100%;
+    padding: 0.75rem 0.75rem 0.75rem 2.5rem; /* Espacio para el icono */
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 1rem;
+    color: #333;
+    background: #f9f9f9;
+}
+
+/* Estilos para los iconos dentro del input */
+.input-container i {
+    position: absolute;
+    left: 0.75rem;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #f57c00; /* Naranja */
+    font-size: 1rem;
+    pointer-events: none; /* Evita que el icono interfiera con el clic */
+}
+
+/* Placeholder en los inputs */
+.input-container input::placeholder {
+    color: #aaa;
+}
+
+/* Estilos para el botón */
+#loginform button {
+    width: 100%;
+    padding: 0.75rem;
+    background-color: #f57c00;
+    border: none;
+    border-radius: 4px;
+    color: #fff;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+/* Cambio de color del botón al pasar el ratón */
+#loginform button:hover {
+    background-color: #0056b3;
 }

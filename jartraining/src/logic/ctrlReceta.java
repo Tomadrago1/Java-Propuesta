@@ -1,9 +1,8 @@
 package logic;
 
 import java.util.LinkedList;
-
+import java.util.Map;
 import data.DaoReceta;
-import entities.Ingrediente;
 import entities.Receta;
 
 public class ctrlReceta {
@@ -16,28 +15,34 @@ public class ctrlReceta {
     public Receta getById(int id) {
     	return dr.getRecetaById(id);
     }
-    /*
-    public Usuario validate(Usuario u) {
-        return du.getByUser(u);
-    }*/
 
     public LinkedList<Receta> getAll() {
         return dr.getAll();
     }
     
-    public LinkedList<Ingrediente> getIngredientes(int idReceta){
+    public LinkedList<Map<String, Object>> getIngredientesConCantidad(int idReceta){
     	return dr.getIngredientesReceta(idReceta);
     }
-    /*public void add(Usuario u) {
-        du.addUsuario(u);
+    
+    public boolean modificar(int id, String nombre, String descripcion, String nivelDificultad) {
+        return dr.modificarReceta(id, nombre, descripcion, nivelDificultad);
     }
     
-    public boolean eliminar(int id) {
-    	return du.eliminarUsuario(id);
+    public boolean eliminarReceta(int id) {
+    	return dr.eliminarReceta(id);
     }
     
-    public boolean modificar(int id, String nombre, String apellido, String email, String nombreUsuario, int tipoUsu) {
-        // Obtiene todos los usuarios utilizando DaoProfesional
-        return du.modificarUser(id, nombre, apellido, email, nombreUsuario, tipoUsu);
-    }*/
+    public void add(Receta r) {
+    	dr.addReceta(r);
+	};
+	public boolean addIngredienteReceta(int idReceta,int idIngrediente,double cantidad) {
+		return dr.addIngredienteReceta(idReceta,idIngrediente,cantidad);
+	};
+	
+	public boolean borrarIngredienteReceta(int idReceta,int idIngrediente) {
+		return dr.borrarIngredienteReceta(idReceta,idIngrediente);
+	};
+	public boolean modificarCantidadIngredienteReceta(int idReceta,int idIngrediente,double cantidad) {
+		return dr.modificarCantidadIngredienteReceta(idReceta,idIngrediente,cantidad);
+	};
 }

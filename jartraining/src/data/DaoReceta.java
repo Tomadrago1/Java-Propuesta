@@ -1,7 +1,9 @@
 package data;
 import entities.*;
 import java.sql.*;
+import java.util.HashMap;
 import java.util.LinkedList;
+import java.util.Map;
 
 
 public class DaoReceta{
@@ -127,50 +129,49 @@ public class DaoReceta{
 		    return r;
 		}
 		
-		public LinkedList<Ingrediente> getIngredientesReceta(int idReceta) {
+		public LinkedList<Map<String, Object>> getIngredientesReceta(int idReceta) {
 		    PreparedStatement stmt = null;
 		    ResultSet rs = null;
-		    LinkedList<Ingrediente> ingredientes = new LinkedList<>();
+		    LinkedList<Map<String, Object>> ingredientes = new LinkedList<>();
 		    try {
-		        stmt = DbConnector.getInstancia().getConn().prepareStatement("select i.id,i.nombre,i.descripcion from Receta r inner join ingrediente_receta ir on r.id=ir.id_receta inner join ingrediente i on ir.id_ingrediente=i.id where r.id=?");
+		        stmt = DbConnector.getInstancia().getConn().prepareStatement("select i.id,i.nombre,i.descripcion,ir.cantidad_porcion from Receta r inner join ingrediente_receta ir on r.id=ir.id_receta inner join ingrediente i on ir.id_ingrediente=i.id where r.id=?");
 		        stmt.setInt(1, idReceta);
 		        rs = stmt.executeQuery();
-				if(rs!=null) {
-					while(rs.next()) {
-						Ingrediente i=new Ingrediente();
-						i.setId(rs.getInt("i.id"));
-						i.setNombre(rs.getString("i.nombre"));
-						i.setDesc(rs.getString("i.descripcion"));
-						ingredientes.add(i);
-					}
-				}	
-			} catch (SQLException e) {
-				e.printStackTrace();
-				
-			} finally {
-				try {
-					if(rs!=null) {rs.close();}
-					if(stmt!=null) {stmt.close();}
-					DbConnector.getInstancia().releaseConn();
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
-			}
-		return ingredientes;
+		        if (rs != null) {
+		            while (rs.next()) {
+		                Map<String, Object> ingrediente = new HashMap<>();
+		                ingrediente.put("id", rs.getInt("i.id"));
+		                ingrediente.put("nombre", rs.getString("i.nombre"));
+		                ingrediente.put("descripcion", rs.getString("i.descripcion"));
+		                ingrediente.put("cantidad", rs.getDouble("ir.cantidad_porcion"));
+		                ingredientes.add(ingrediente);
+		            }
+		        }
+		    } catch (SQLException e) {
+		        e.printStackTrace();
+		    } finally {
+		        try {
+		            if (rs != null) { rs.close(); }
+		            if (stmt != null) { stmt.close(); }
+		            DbConnector.getInstancia().releaseConn();
+		        } catch (SQLException e) {
+		            e.printStackTrace();
+		        }
+		    }
+		    return ingredientes;
 		}
 		
 		
 		
 		
-		public boolean modificarProfesional(int id, String nombre, String apellido, String profesion/*String nombreUsuario*/) {
+		public boolean modificarReceta(int id, String nombre, String descripcion, String nivelDificultad) {
 		    PreparedStatement stmt = null;
 		    try {
 		        stmt = DbConnector.getInstancia().getConn().prepareStatement(
-		                "UPDATE profesional SET nombre = ?, apellido = ?, profesion = ? WHERE id = ?");/*nombre_usuario = ?*/
+		                "UPDATE receta SET nombre = ?, descripcion = ?, nivel_dificultad = ? WHERE id = ?");
 		        stmt.setString(1, nombre);
-		        stmt.setString(2, apellido);
-		        stmt.setString(3, profesion);
-		        /*stmt.setString(4, nombreUsuario);*/
+		        stmt.setString(2, descripcion);
+		        stmt.setString(3, nivelDificultad);
 		        stmt.setInt(4, id);
 
 		        int filasActualizadas = stmt.executeUpdate(); 
@@ -188,46 +189,77 @@ public class DaoReceta{
 		    }
 		}
 		
-		public boolean eliminarProfesional(int id) {
-		    PreparedStatement stmt = null;
+		public boolean eliminarReceta(int idReceta) {
+		    PreparedStatement stmt1 = null;
+		    PreparedStatement stmt2 = null;
+		    PreparedStatement stmt3 = null;
+		    Connection conn = null;
+		    boolean result = false;
+
 		    try {
-		        stmt = DbConnector.getInstancia().getConn().prepareStatement("UPDATE profesional SET estado= 0 WHERE id = ?");
-		        stmt.setInt(1, id);
-		        int filasBorradas = stmt.executeUpdate();
-		        return filasBorradas > 0; // Devuelve true si se eliminó al menos una fila
+		        conn = DbConnector.getInstancia().getConn();
+		        conn.setAutoCommit(false); // Iniciar la transacción
+
+		        // Elimina las relaciones en las tablas intermedias
+		        stmt1 = conn.prepareStatement("DELETE FROM ingrediente_receta WHERE id_receta = ?");
+		        stmt1.setInt(1, idReceta);
+		        stmt1.executeUpdate();
+
+		        stmt2 = conn.prepareStatement("DELETE FROM nutriente_receta WHERE id_receta = ?");
+		        stmt2.setInt(1, idReceta);
+		        stmt2.executeUpdate();
+
+		        // Elimina la receta en la tabla principal
+		        stmt3 = conn.prepareStatement("DELETE FROM Receta WHERE id = ?");
+		        stmt3.setInt(1, idReceta);
+		        stmt3.executeUpdate();
+
+		        // Confirma la transacción
+		        conn.commit();
+		        result = true;
+
 		    } catch (SQLException e) {
 		        e.printStackTrace();
-		        return false; // Devuelve false si ocurrió un error
+		        if (conn != null) {
+		            try {
+		                // Revertir en caso de error
+		                conn.rollback();
+		            } catch (SQLException ex) {
+		                ex.printStackTrace();
+		            }
+		        }
 		    } finally {
 		        try {
-		            if (stmt != null) { stmt.close(); }
+		            if (stmt1 != null) stmt1.close();
+		            if (stmt2 != null) stmt2.close();
+		            if (stmt3 != null) stmt3.close();
+		            if (conn != null) conn.setAutoCommit(true); // Restablecer el modo de autocommit
 		            DbConnector.getInstancia().releaseConn();
 		        } catch (SQLException e) {
 		            e.printStackTrace();
 		        }
 		    }
+		    return result;
 		}
 
-		public void addProfesional(Profesional p) {
+		public void addReceta(Receta r) {
 			PreparedStatement stmt= null;
 			ResultSet keyResultSet=null;
 			try {
 				stmt=DbConnector.getInstancia().getConn().
 						prepareStatement(
-								"insert into Profesional(nombre, apellido, profesion, estado) values(?,?,?,?)", /*nombre_usuario, contrasena*/
+								"insert into Receta(nombre, descripcion, nivel_dificultad, id_profesional) values(?,?,?,?)",
 								PreparedStatement.RETURN_GENERATED_KEYS
 								);
-				stmt.setString(1, p.getNombre());
-				stmt.setString(2, p.getApellido());
-				stmt.setString(3, p.getProfesion());
-				/*stmt.setString(4, p.getNombreUsuario());*/
-				/*stmt.setString(4, p.getPassword());*/
-				stmt.setBoolean(4, p.getEstado());
+				stmt.setString(1, r.getNombre());
+				stmt.setString(2, r.getDesc());
+				stmt.setString(3, r.getNivelDificultad());
+				stmt.setObject(4, r.getProfesional());
 				stmt.executeUpdate();
 				
 				keyResultSet=stmt.getGeneratedKeys();
 	            if(keyResultSet!=null && keyResultSet.next()){
-	                p.setIdProfesional(keyResultSet.getInt(1));
+	                r.setId(keyResultSet.getInt(1));
 	                ;
 	            }
 			
@@ -243,5 +275,78 @@ public class DaoReceta{
 	            }
 			}
 		}
+		
+		public boolean addIngredienteReceta(int idReceta, int idIngrediente, double cantidad) {
+		    PreparedStatement stmt = null;
+		    try {
+		        stmt = DbConnector.getInstancia().getConn().prepareStatement(
+		                "INSERT INTO ingrediente_receta (id_receta, id_ingrediente, cantidad_porcion) VALUES (?, ?, ?)");
+
+		        stmt.setInt(1, idReceta);
+		        stmt.setInt(2, idIngrediente);
+		        stmt.setDouble(3, cantidad);
+		        int rowsAffected = stmt.executeUpdate();
+		        return rowsAffected > 0;
+		    } catch (SQLException e) {
+		        e.printStackTrace();
+		        return false;
+		    } finally {
+		        try {
+		            if (stmt != null) stmt.close();
+		            DbConnector.getInstancia().releaseConn();
+		        } catch (SQLException e) {
+		            e.printStackTrace();
+		        }
+		    }
+		}
+		
+		public boolean modificarCantidadIngredienteReceta(int idReceta, int idIngrediente, double cantidad) {
+		    PreparedStatement stmt = null;
+		    try {
+		        stmt = DbConnector.getInstancia().getConn().prepareStatement(
+		                "UPDATE ingrediente_receta SET cantidad_porcion = ? WHERE id_ingrediente = ? and id_receta = ?");
+
+		        stmt.setDouble(1, cantidad);
+		        stmt.setInt(2, idIngrediente);
+		        stmt.setInt(3, idReceta);
+		        int rowsAffected = stmt.executeUpdate();
+		        return rowsAffected > 0;
+		    } catch (SQLException e) {
+		        e.printStackTrace();
+		        return false;
+		    } finally {
+		        try {
+		            if (stmt != null) stmt.close();
+		            DbConnector.getInstancia().releaseConn();
+		        } catch (SQLException e) {
+		            e.printStackTrace();
+		        }
+		    }
+		}
+		
+		public boolean borrarIngredienteReceta(int idReceta,int idIngrediente) {
+		    PreparedStatement stmt = null;
+		    try {
+		        stmt = DbConnector.getInstancia().getConn().prepareStatement(
+		                "DELETE FROM ingrediente_receta WHERE id_receta = ? and id_ingrediente = ?");
+
+		        stmt.setInt(1, idReceta);
+		        stmt.setInt(2, idIngrediente);
+		        int rowsAffected = stmt.executeUpdate();
+		        return rowsAffected > 0;
+		    } catch (SQLException e) {
+		        e.printStackTrace();
+		        return false;
+		    } finally {
+		        try {
+		            if (stmt != null) stmt.close();
+		            DbConnector.getInstancia().releaseConn();
+		        } catch (SQLException e) {
+		            e.printStackTrace();
+		        }
+		    }
+		}
+
 }
+
 

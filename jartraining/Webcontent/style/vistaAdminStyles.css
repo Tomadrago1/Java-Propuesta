@@ -1,6 +1,6 @@
 body {
     font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
+    background-color: #004a8d;
     margin: 0;
     padding: 0;
     display: flex;
@@ -11,10 +11,9 @@ body {
 
 .super-container {
 	display: column;
-    justify-content: center;
 }
 .admin-container {
-    background-color: #fff;
+    background-color: rgb(0, 0, 0);
     padding: 30px;
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0,0,0,0.1);
@@ -22,7 +21,11 @@ body {
 }
 h1 {
     margin-bottom: 20px;
-    color: #333;
+    color: #ffffff;
+}
+h2 {
+    margin-bottom: 20px;
+    color: #ffffff;
 }
 .admin-btn {
     display: block;
@@ -30,17 +33,13 @@ h1 {
     margin: 10px 0;
     padding: 15px;
     font-size: 16px;
-    color: #fff;
-    background-color: #007BFF;
+    color: #ffffff;
+    background-color: #004a8d;
     border: none;
     border-radius: 5px;
     cursor: pointer;
     text-decoration: none;
 }
 .admin-btn:hover {
-    background-color: #0056b3;
-}
-
-.centrah1 {
-    text-align: center;
+    background-color: #f57c00;
 }

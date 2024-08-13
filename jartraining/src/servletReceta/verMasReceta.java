@@ -1,7 +1,9 @@
 package servletReceta;
 
 import java.io.IOException;
+
 import java.util.LinkedList;
+import java.util.Map;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -10,7 +12,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import entities.Ingrediente;
+/*import entities.Ingrediente;*/
 import entities.Receta;
 import logic.ctrlReceta;
 
@@ -45,9 +47,8 @@ public class verMasReceta extends HttpServlet {
         int idReceta = Integer.parseInt(request.getParameter("id"));
         ctrlReceta ctrl = new ctrlReceta();
         Receta receta = ctrl.getById(idReceta);
-        System.out.println(receta.toString());
-        LinkedList<Ingrediente> ingredientes = ctrl.getIngredientes(idReceta);
-        request.setAttribute("ListaIngredientes", ingredientes);
+        LinkedList<Map<String, Object>> ingredientesConCantidad = ctrl.getIngredientesConCantidad(idReceta);
+        request.setAttribute("ListaIngredientes", ingredientesConCantidad);
         request.setAttribute("Receta", receta);
         RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/receta.jsp");
         dispatcher.forward(request, response);

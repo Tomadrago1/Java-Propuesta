@@ -12,27 +12,25 @@
 </head>
 <body>
 <div class="super-container">
-    <div class="centrah1">
 	<h1>Bienvenido <%= u.getNombre() + " " + u.getApellido() %></h1>
-    </div>
     <div class="admin-container">
-        <h1>Panel de Administración</h1>
+        <h2>Panel de Administración</h2>
         <form action="verUsuarios" method="post">
-            <input type="submit" class="admin-btn" value="Ver Usuarios">
+            <input type="submit" class="admin-btn" value="Usuarios">
         </form>
         <form action="verProfesionales" method="post">
-            <input type="submit" class="admin-btn" value="Ver Profesionales">
+            <input type="submit" class="admin-btn" value="Profesionales">
         </form>
         <form action="verRecetas" method="post">
-            <input type="submit" class="admin-btn" value="Ver Recetas">
+            <input type="submit" class="admin-btn" value="Recetas">
         </form>
         <form action="verRutinas" method="post">
-            <input type="submit" class="admin-btn" value="Ver Rutinas">
+            <input type="submit" class="admin-btn" value="Rutinas">
         </form>
         <form action="listadoEjercicios" method="post">
-            <input type="submit" class="admin-btn" value="Ver Ejercicios">
+            <input type="submit" class="admin-btn" value="Ejercicios">
         </form>
     </div>
     </div>
 </body>
-</html>
+</html> 

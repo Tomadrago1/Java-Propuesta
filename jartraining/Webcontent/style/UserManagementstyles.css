@@ -1,54 +1,87 @@
 body {
-			font-family: Arial, sans-serif;
-			margin: 0;
-			padding: 0;
-			background-color: #f4f4f4;
-		}
-		h1 {
-			text-align: center;
-			color: #333;
-		}
-		.container {
-			width: 80%;
-			margin: auto;
-			overflow: hidden;
-		}
-		table {
-			width: 100%;
-			margin: 20px 0;
-			border-collapse: collapse;
-			box-shadow: 0 2px 3px rgba(0,0,0,0.1);
-		}
-		
-		table th, table td {
-			padding: 12px;
-			border: 1px solid #ddd;
-			text-align: center;
-		}
-		table th {
-			background-color: #f2f2f2;
-		}
-		table tr:nth-child(even) {
-			background-color: #f9f9f9;
-		}
-		table tr:hover {
-			background-color: #f1f1f1;
-		}
-		/* Additional styling for edit and delete buttons */
-		.action-btn {
-			text-align: center;
-			cursor: pointer;
-			color: #fff;
-			padding: 5px 10px;
-			border-radius: 3px;
-			text-decoration: none;
-		}
-		.edit-btn {
-			background-color: #004080;
-		}
-		.delete-btn {
-			background-color: #f44336;
-		}
-		.create-btn {
-			background-color: green;
-		}
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+}
+
+h1 {
+    text-align: center;
+    color: #333;
+}
+
+.container {
+    width: 80%;
+    margin: auto;
+    overflow: hidden;
+}
+
+table {
+    width: 100%;
+    margin: 20px 0;
+    border-collapse: collapse;
+    box-shadow: 0 2px 3px rgba(0,0,0,0.1);
+}
+
+table th, table td {
+    padding: 12px;
+    border: 1px solid #ddd;
+    text-align: center;
+}
+
+table th {
+    background-color: #f2f2f2;
+}
+
+table tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+table tr:hover {
+    background-color: #f1f1f1;
+}
+
+/* Estilo para los botones de acción */
+.action-btn {
+    text-align: center;
+    cursor: pointer;
+    color: #fff;
+    padding: 5px 10px;
+    border-radius: 3px;
+    text-decoration: none;
+}
+
+.edit-btn {
+    background-color: #004080;
+}
+
+.delete-btn {
+    background-color: #f44336;
+}
+
+.create-btn {
+    background-color: green;
+}
+
+/* Estilo para el menú desplegable 
+.container form select {
+    padding: 10px;
+    width: 100%;
+    border: 1px solid #ddd;
+    border-radius: 3px;
+    background-color: #f9f9f9;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    font-size: 16px;
+    color: #333;
+}
+
+.container form select:hover {
+    background-color: #f1f1f1;
+}
+
+.container form select:focus {
+    outline: none;
+    border-color: #004080;
+    box-shadow: 0 0 5px rgba(0, 64, 128, 0.5);
+}*/
