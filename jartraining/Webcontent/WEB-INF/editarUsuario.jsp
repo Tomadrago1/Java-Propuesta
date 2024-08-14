@@ -6,7 +6,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="style/editarUsuarioStyles.css">
+    <link rel="stylesheet" href="style/crear-editar.css">
     <title>Editar Usuario</title>
 	
 </head>

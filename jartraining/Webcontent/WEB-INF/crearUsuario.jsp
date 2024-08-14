@@ -6,7 +6,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="style/crearUsuarioStyles.css">
+    <link rel="stylesheet" href="style/crear-editar.css">
     <title>Crear Usuario</title>
 </head>
 <body>

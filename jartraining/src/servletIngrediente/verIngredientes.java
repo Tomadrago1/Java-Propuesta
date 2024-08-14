@@ -1,6 +1,7 @@
 package servletIngrediente;
 
 import java.io.IOException;
+import java.util.LinkedList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -9,17 +10,20 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import entities.Ingrediente;
+import logic.ctrlIngrediente;
+
 /**
- * Servlet implementation class crearIngrediente
+ * Servlet implementation class verIngrediente
  */
-@WebServlet("/crearIngrediente")
-public class crearIngrediente extends HttpServlet {
+@WebServlet("/verIngredientes")
+public class verIngredientes extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public crearIngrediente() {
+    public verIngredientes() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -36,21 +40,11 @@ public class crearIngrediente extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String idRecetaStr = request.getParameter("idReceta");
-		if (idRecetaStr != null) {
-		    try {
-		        int idReceta = Integer.parseInt(idRecetaStr);
-		        request.setAttribute("idReceta", idReceta);
-		        RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/crearIngrediente.jsp");
-		        dispatcher.forward(request, response);
-		    } catch (NumberFormatException e) {
-		        // Manejo del caso donde idReceta no es un número válido
-		        // Aquí puedes redirigir a una página de error o mostrar un mensaje adecuado
-		        response.sendError(HttpServletResponse.SC_BAD_REQUEST, "ID de receta inválido.");
-		    }
-		} else {
-			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/crearIngrediente.jsp");
-	        dispatcher.forward(request, response);
-		}
+        ctrlIngrediente ctrl = new ctrlIngrediente();
+        LinkedList<Ingrediente> ingredientes = ctrl.getAll();
+		request.setAttribute("ingredientes", ingredientes);
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/ingredienteManagement.jsp");
+        dispatcher.forward(request, response);
 	}
+
 }

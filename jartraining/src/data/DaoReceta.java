@@ -49,42 +49,7 @@ public class DaoReceta{
 			}
 		return recetas;
 		}
-		
-		/*public Profesional getByProfesional(Profesional prof) {
-			Profesional p=null;
-			PreparedStatement stmt=null;
-			ResultSet rs=null;
-			try {
-				stmt=DbConnector.getInstancia().getConn().prepareStatement(
-						"select id_profesional,nombre,apellido,nombre_usuario,estado from Profesional where nombre_usuario=? and contraseña=?"
-						);
-				stmt.setString(1, prof.getNombreUsuario());
-				stmt.setString(2, prof.getPassword());
-				rs=stmt.executeQuery();
-				if(rs!=null && rs.next()) {
-					p=new Profesional();
-					p.setIdProfesional(rs.getInt("id_usuario"));
-					p.setNombre(rs.getString("nombre"));
-					p.setApellido(rs.getString("apellido"));
-					p.setProfesion(rs.getString("email"));
-					p.setNombreUsuario(rs.getString("nombre_usuario"));
-					p.setEstado(rs.getBoolean("estado"));
-				}
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}finally {
-				try {
-					if(rs!=null) {rs.close();}
-					if(stmt!=null) {stmt.close();}
-					DbConnector.getInstancia().releaseConn();
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
-			}
 			
-			return p;
-		}*/
-		
 		public Receta getRecetaById(int id) {
 		    Receta r = null; // Inicializar Receta
 		    PreparedStatement stmt = null;

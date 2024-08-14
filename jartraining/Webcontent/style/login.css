@@ -25,7 +25,7 @@ body {
 
 /* Estilos para la caja de login */
 #login {
-    background: rgb(0, 0, 0);
+    background: #fff;
     padding: 5rem; /* Aumentar el padding para hacer el formulario más grande */
     border-radius: 8px;
     box-shadow: 0 0 15px rgba(0, 0, 0, 0.2); /* Sombra más prominente */
@@ -39,7 +39,7 @@ body {
     font-size: 2.5rem; /* Aumentar el tamaño del título */
     font-weight: 600;
     margin-bottom: 1.5rem; /* Aumentar el margen inferior */
-    color: #ffffff;
+    color: black;
     text-align: center;
 }
 
@@ -57,7 +57,7 @@ body {
     border-radius: 4px;
     font-size: 1rem;
     color: #333;
-    background: #f9f9f9;
+    background: #dcdcdc;
 }
 
 /* Estilos para los iconos dentro del input */
