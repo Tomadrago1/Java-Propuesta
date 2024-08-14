@@ -1,7 +1,6 @@
-package servletProfesional;
+package servletIngrediente;
 
 import java.io.IOException;
-
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -10,21 +9,20 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-
-import entities.Profesional;
-import logic.ctrlProfesional;
+import entities.Ingrediente;
+import logic.ctrlIngrediente;
 
 /**
- * Servlet implementation class editarProfesional
+ * Servlet implementation class editarIngrediente
  */
-@WebServlet("/editarProfesional")
-public class editarProfesional extends HttpServlet {
+@WebServlet("/editarIngrediente")
+public class editarIngrediente extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public editarProfesional() {
+    public editarIngrediente() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -34,19 +32,18 @@ public class editarProfesional extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		int idProfesional = Integer.parseInt(request.getParameter("id"));
-        ctrlProfesional ctrl= new ctrlProfesional();
-        Profesional profesional = ctrl.getById(idProfesional);
-        request.setAttribute("profesional", profesional);
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/editarProfesional.jsp");
+		int idIngrediente = Integer.parseInt(request.getParameter("idIngrediente"));
+        ctrlIngrediente ctrl= new ctrlIngrediente();
+        Ingrediente ingrediente = ctrl.getById(idIngrediente);
+        request.setAttribute("ingrediente", ingrediente);
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/editarIngrediente.jsp");
         dispatcher.forward(request, response);
 	}
-
 }

@@ -44,40 +44,20 @@ public class DaoRutina {
 		return rutinas;
 	}
 	
-	public boolean eliminarRutina(int id_rut) {
-	    PreparedStatement stmt = null;
-	    Connection conn = null;
+	public boolean eliminarRutina(int id) {
+		PreparedStatement stmt = null;
 	    try {
-	        conn = DbConnector.getInstancia().getConn();
-	        conn.setAutoCommit(false); // Inicia la transacción
-
-	        // Elimina las referencias en rutina_ejercicio
-	        stmt = conn.prepareStatement("DELETE FROM rutina_ejercicio WHERE id_rutina = ?");
-	        stmt.setInt(1, id_rut);
-	        stmt.executeUpdate();
-
-	        // Elimina la rutina en la tabla principal
-	        stmt = conn.prepareStatement("DELETE FROM rutina WHERE id = ?");
-	        stmt.setInt(1, id_rut);
-	        int filasAfectadas = stmt.executeUpdate();
-
-	        conn.commit(); // Confirma la transacción
-	        return filasAfectadas > 0; // Retorna true si se eliminó la rutina
-
+	        stmt = DbConnector.getInstancia().getConn().prepareStatement("DELETE FROM rutina WHERE id = ?");
+	        stmt.setInt(1, id);
+	        int filasBorradas = stmt.executeUpdate();
+	        return filasBorradas > 0; // Devuelve true si se eliminó al menos una fila
 	    } catch (SQLException e) {
-	        if (conn != null) {
-	            try {
-	                conn.rollback(); // Revertir la transacción en caso de error
-	            } catch (SQLException ex) {
-	                ex.printStackTrace();
-	            }
-	        }
 	        e.printStackTrace();
-	        return false; // Retorna false si ocurre un error
+	        return false; // Devuelve false si ocurrió un error
 	    } finally {
 	        try {
 	            if (stmt != null) { stmt.close(); }
-	            if (conn != null) { conn.setAutoCommit(true); conn.close(); }
+	            DbConnector.getInstancia().releaseConn();
 	        } catch (SQLException e) {
 	            e.printStackTrace();
 	        }
@@ -229,31 +209,7 @@ public class DaoRutina {
 	            e.printStackTrace();
 	        }
 	    }
-	}
-	
-	public boolean agregarEjercicioRutina(int id_rut,int id_eje,int series,int repes) {
-		PreparedStatement stmt = null;
-	    try {
-	        stmt = DbConnector.getInstancia().getConn().prepareStatement(
-	                "INSERT INTO rutina_ejercicio (id_rutina, id_ejercicio, repeticiones_aproximadas, series_aproximadas) VALUES (?, ?, ?, ?);");
-	        stmt.setInt(1, id_rut);
-	        stmt.setInt(2, id_eje);
-	        stmt.setInt(3, repes);
-	        stmt.setInt(4, series);
-	        
-	        int filasActualizadas = stmt.executeUpdate(); 
-	        return filasActualizadas > 0; // Retornar true si se actualizó al menos una fila
-	    } catch (SQLException e) {
-	        e.printStackTrace();
-	        return false; // Retornar false si ocurre un error
-	    } finally {
-	        try {
-	        	if (stmt != null) { stmt.close(); }
-	            DbConnector.getInstancia().releaseConn();
-	        } catch (SQLException e) {
-	            e.printStackTrace();
-	        }
-	    }
+
 	}
 	
 	public boolean quitarEjercicioRutina(int id_rut,int id_eje) {

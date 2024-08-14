@@ -23,20 +23,11 @@ public class ctrlIngrediente{
     	return di.addIngrediente(i);
     }
     
-    /*public LinkedList<Map<String, Object>> getIngredientesConCantidad(int idReceta){
-    	return di.getIngredientesReceta(idReceta);
+    public boolean eliminarIngrediente(int id){
+    	return di.eliminarIngrediente(id);
     }
     
-    public boolean modificar(int id, String nombre, String descripcion, String nivelDificultad) {
-        // Obtiene todos los profesionales utilizando DaoProfesional
-        return di.modificarReceta(id, nombre, descripcion, nivelDificultad);
+    public boolean modificar(int id, String nombre, String descripcion) {
+        return di.modificarIngrediente(id, nombre, descripcion);
     }
-    
-    public boolean eliminarReceta(int id) {
-    	return di.eliminarReceta(id);
-    }
-    
-    public void add(Ingrediente r) {
-    di.addReceta(r);
-	}*/
 }

@@ -38,12 +38,7 @@ public class ctrlRutina {
     	return du.modificarEjercicioRutina(id_rut, id_eje, series, repes);
     }
     
-    public boolean agregarEjercicioRutina(int id_rut,int id_eje,int series,int repes) {
-    	return du.agregarEjercicioRutina(id_rut, id_eje, series, repes);
-    }
-    
     public boolean quitarEjercicioRutina(int id_rut,int id_eje) {
     	return du.quitarEjercicioRutina(id_rut, id_eje);
     }
-    
 }

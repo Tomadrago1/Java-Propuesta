@@ -19,7 +19,7 @@
 </head>
 <body>
     <div class="container">
-        <h1>Personas</h1>
+        <h1>Usuarios</h1>
         <div>
             <table>
                 <thead>
@@ -43,7 +43,12 @@
                         <td><%=usu.getApellido()%></td>
                         <td><%=usu.getEmail()%></td>
                         <td><%=usu.getNombreUsuario()%></td>  
-                        <td><a href="editarUsuario?id=<%=usu.getIdUsuario()%>" class="action-btn edit-btn">Editar</a></td>
+                        <td>
+                        	<form action="editarUsuario" method="post" style="display:inline;">
+                                <input type="hidden" name="id" value="<%=usu.getIdUsuario()%>">
+                                <input type="submit" value="Editar" class="action-btn edit-btn">
+                            </form>
+                        </td>
                         <td>
                             <form action="EliminarUsuario" method="post" style="display:inline;">
                                 <input type="hidden" name="id" value="<%=usu.getIdUsuario()%>">
@@ -57,7 +62,9 @@
                 </tbody>
             </table>
             <div style="text-align: right; margin-top: 20px; margin-bottom:20px; padding: 0 20px;">
-                <a href="crearUsuario" class="action-btn create-btn">Crear Usuario</a>
+	            <form action="crearUsuario" method="post" style="display:inline;">
+	            	<input type="submit" value="Crear Usuario" class="action-btn create-btn">
+	            </form>
             </div>
         </div>
     </div>

@@ -28,6 +28,7 @@ LinkedList<Map<String, Object>> li = (LinkedList<Map<String, Object>>)request.ge
                         <th>Nombre</th>
                         <th>Descripcion</th>
                         <th>Cantidad</th>
+                        <th>Unidad Medida</th>
                         <th>Editar Cantidad</th>
                         <th>Baja Ingrediente</th>
                     </tr>
@@ -38,6 +39,7 @@ LinkedList<Map<String, Object>> li = (LinkedList<Map<String, Object>>)request.ge
                         <td><%= ingrediente.get("nombre") %></td>
                         <td><%= ingrediente.get("descripcion") %></td>
                         <td><%= ingrediente.get("cantidad") %></td>
+                        <td><%= ingrediente.get("unidad") %></td>
                         <td>
                         	<form action="editarCantidadIngrediente" method="post" style="display:inline;">
                         		<input type="hidden" name="cantidad" value="<%=ingrediente.get("cantidad")%>">

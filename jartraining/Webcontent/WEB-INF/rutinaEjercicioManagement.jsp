@@ -59,10 +59,9 @@
                     <%}%>
                 </tbody>
             </table>
-            <form action="addEjercicioRutina" method="post" class="create-btn-container">
-                <input type="hidden" name="id_rut" value="<%=r.getId()%>">
-                <input type="submit" value="Agregar Ejercicio" class="action-btn create-btn">
-            </form>
+            <div class="create-btn-container">
+                <a href="addEjercicioRutina" class="action-btn create-btn">Añadir Ejercicio</a>
+            </div>
         </div>
     </div>
 </body>

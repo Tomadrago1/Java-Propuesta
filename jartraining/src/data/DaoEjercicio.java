@@ -97,44 +97,25 @@ public class DaoEjercicio {
 	}
 
 	
-	public boolean eliminarEjercicio(int id_eje) {
+	public boolean eliminarEjercicio(int id) {
 	    PreparedStatement stmt = null;
-	    Connection conn = null;
 	    try {
-	        conn = DbConnector.getInstancia().getConn();
-	        conn.setAutoCommit(false); 
-	        
-	        stmt = conn.prepareStatement("DELETE FROM rutina_ejercicio WHERE id_ejercicio = ?");
-	        stmt.setInt(1, id_eje);
-	        stmt.executeUpdate();
-
-	        stmt = conn.prepareStatement("DELETE FROM ejercicios WHERE id = ?");
-	        stmt.setInt(1, id_eje);
-	        int filasAfectadas = stmt.executeUpdate();
-
-	        conn.commit();
-	        return filasAfectadas > 0;
-
+	        stmt = DbConnector.getInstancia().getConn().prepareStatement("DELETE FROM ejercicios WHERE id = ?");
+	        stmt.setInt(1, id);
+	        int filasBorradas = stmt.executeUpdate();
+	        return filasBorradas > 0; // Devuelve true si se eliminó al menos una fila
 	    } catch (SQLException e) {
-	        if (conn != null) {
-	            try {
-	                conn.rollback(); // Revertir la transacción en caso de error
-	            } catch (SQLException ex) {
-	                ex.printStackTrace();
-	            }
-	        }
 	        e.printStackTrace();
-	        return false; // Retorna false si ocurre un error
+	        return false; // Devuelve false si ocurrió un error
 	    } finally {
 	        try {
 	            if (stmt != null) { stmt.close(); }
-	            if (conn != null) { conn.setAutoCommit(true); conn.close(); }
+	            DbConnector.getInstancia().releaseConn();
 	        } catch (SQLException e) {
 	            e.printStackTrace();
 	        }
 	    }
 	}
-
 	
 	public void addEjercicio(Ejercicio e) {
 		PreparedStatement stmt= null;

@@ -25,16 +25,10 @@ public class actualizarEjercicioRutina extends HttpServlet {
         int id_eje = Integer.parseInt(request.getParameter("id_eje"));
         int series = Integer.parseInt(request.getParameter("series"));
         int repes = Integer.parseInt(request.getParameter("repes"));
-        String metodo = (request.getParameter("metodo"));
         
         ctrlRutina ctrl = new ctrlRutina();
-        Boolean success = false;
         
-        if ("modificar".equals(metodo)) {
-            success = ctrl.modificarEjercicioRutina(id_rut, id_eje, series, repes);
-        } else {
-            success = ctrl.agregarEjercicioRutina(id_rut, id_eje, series, repes);
-        }
+        Boolean success = ctrl.modificarEjercicioRutina(id_rut, id_eje, series, repes);
 
         if (success) {
         	LinkedList<Map<String,Object>> ejercicios = ctrl.getEjerciciosByRutina(id_rut);
@@ -43,7 +37,7 @@ public class actualizarEjercicioRutina extends HttpServlet {
             request.setAttribute("rutina", r);
             request.getRequestDispatcher("WEB-INF/rutinaEjercicioManagement.jsp").forward(request, response);
         } else {
-            response.getWriter().append("Error al actualizar la rutina.");
+            response.getWriter().append("Error al actualizar el usuario.");
         }
     }
 }

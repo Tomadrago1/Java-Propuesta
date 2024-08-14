@@ -43,7 +43,12 @@
                         <td><%=prof.getApellido()%></td>
                         <td><%=prof.getProfesion()%></td>
                         <td><%=prof.getNombreUsuario()%></td>      
-                        <td><a href="editarProfesional?id=<%=prof.getIdProfesional()%>" class="action-btn edit-btn">Editar</a></td>
+                        <td>
+                        	<form action="editarProfesional" method="post" style="display:inline;">
+                                <input type="hidden" name="id" value="<%=prof.getIdProfesional()%>">
+                                <input type="submit" value="Editar" class="action-btn edit-btn">
+                            </form>
+                         </td>
                         <td>
                             <form action="EliminarProfesional" method="post" style="display:inline;">
                                 <input type="hidden" name="id" value="<%=prof.getIdProfesional()%>">
@@ -57,7 +62,9 @@
                 </tbody>
             </table>
             <div style="text-align: right; margin-top: 20px; margin-bottom:20px; padding: 0 20px;">
-                <a href="crearProfesional" class="action-btn create-btn">Crear Profesional</a>
+   	           <form action="crearProfesional" method="post" style="display:inline;">
+	               <input type="submit" value="Crear Profesional" class="action-btn create-btn">
+               </form>
             </div>
         </div>
     </div>

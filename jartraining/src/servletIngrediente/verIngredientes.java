@@ -1,7 +1,7 @@
-package servletProfesional;
+package servletIngrediente;
 
 import java.io.IOException;
-
+import java.util.LinkedList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -10,21 +10,20 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-
-import entities.Profesional;
-import logic.ctrlProfesional;
+import entities.Ingrediente;
+import logic.ctrlIngrediente;
 
 /**
- * Servlet implementation class editarProfesional
+ * Servlet implementation class verIngrediente
  */
-@WebServlet("/editarProfesional")
-public class editarProfesional extends HttpServlet {
+@WebServlet("/verIngredientes")
+public class verIngredientes extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public editarProfesional() {
+    public verIngredientes() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -34,18 +33,17 @@ public class editarProfesional extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		int idProfesional = Integer.parseInt(request.getParameter("id"));
-        ctrlProfesional ctrl= new ctrlProfesional();
-        Profesional profesional = ctrl.getById(idProfesional);
-        request.setAttribute("profesional", profesional);
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/editarProfesional.jsp");
+        ctrlIngrediente ctrl = new ctrlIngrediente();
+        LinkedList<Ingrediente> ingredientes = ctrl.getAll();
+		request.setAttribute("ingredientes", ingredientes);
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/ingredienteManagement.jsp");
         dispatcher.forward(request, response);
 	}
 

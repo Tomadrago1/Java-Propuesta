@@ -17,9 +17,12 @@ import logic.ctrlUsuario;
 @WebServlet("/actualizarUsuario")
 public class ActualizarUsuarioServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
-
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+    
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    	
+    }
+    
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         int id = Integer.parseInt(request.getParameter("id"));
         String nombre = request.getParameter("nombre");
         String apellido = request.getParameter("apellido");

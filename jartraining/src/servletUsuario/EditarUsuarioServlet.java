@@ -20,7 +20,10 @@ public class EditarUsuarioServlet extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        int idUsuario = Integer.parseInt(request.getParameter("id"));
+        
+    }
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    	int idUsuario = Integer.parseInt(request.getParameter("id"));
         ctrlUsuario ctrl = new ctrlUsuario();
         Usuario usuario = ctrl.getById(idUsuario);
 
