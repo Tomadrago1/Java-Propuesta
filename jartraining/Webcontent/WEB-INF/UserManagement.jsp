@@ -20,7 +20,7 @@
 <body>
     <div class="container">
         <h1>Usuarios</h1>
-        <div>
+        <div class="div-table">
             <table>
                 <thead>
                     <tr>

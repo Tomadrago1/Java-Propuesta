@@ -40,9 +40,11 @@ public class editarCantidadIngrediente extends HttpServlet {
 		int idReceta = Integer.parseInt(request.getParameter("idReceta"));
 		int idIngrediente = Integer.parseInt(request.getParameter("idIngrediente"));
 		double cantidad = Double.parseDouble(request.getParameter("cantidad"));
+		String unidadMedida= request.getParameter("unidadMedida");
 		ctrlIngrediente ctrlI = new ctrlIngrediente();
 		Ingrediente ing = ctrlI.getById(idIngrediente);
 		request.setAttribute("idReceta", idReceta);
+		request.setAttribute("unidadMedida", unidadMedida);
 		request.setAttribute("Ingrediente", ing);
 		request.setAttribute("cantidad", cantidad);
     	request.getRequestDispatcher("WEB-INF/cantIngrediente.jsp").forward(request, response);

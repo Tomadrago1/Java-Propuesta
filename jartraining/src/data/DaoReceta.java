@@ -109,7 +109,7 @@ public class DaoReceta{
 		                ingrediente.put("nombre", rs.getString("i.nombre"));
 		                ingrediente.put("descripcion", rs.getString("i.descripcion"));
 		                ingrediente.put("cantidad", rs.getDouble("ir.cantidad_porcion"));
-		                ingrediente.put("unidad", rs.getDouble("ir.unidad_medida"));
+		                ingrediente.put("unidad", rs.getString("ir.unidad_medida"));
 		                ingredientes.add(ingrediente);
 		            }
 		        }
@@ -242,15 +242,16 @@ public class DaoReceta{
 			}
 		}
 		
-		public boolean addIngredienteReceta(int idReceta, int idIngrediente, double cantidad) {
+		public boolean addIngredienteReceta(int idReceta, int idIngrediente, double cantidad, String unidadMedida) {
 		    PreparedStatement stmt = null;
 		    try {
 		        stmt = DbConnector.getInstancia().getConn().prepareStatement(
-		                "INSERT INTO ingrediente_receta (id_receta, id_ingrediente, cantidad_porcion) VALUES (?, ?, ?)");
+		                "INSERT INTO ingrediente_receta (id_receta, id_ingrediente, cantidad_porcion, unidad_medida) VALUES (?, ?, ?,?)");
 
 		        stmt.setInt(1, idReceta);
 		        stmt.setInt(2, idIngrediente);
 		        stmt.setDouble(3, cantidad);
+		        stmt.setString(4,unidadMedida);
 		        int rowsAffected = stmt.executeUpdate();
 		        return rowsAffected > 0;
 		    } catch (SQLException e) {
@@ -266,15 +267,16 @@ public class DaoReceta{
 		    }
 		}
 		
-		public boolean modificarCantidadIngredienteReceta(int idReceta, int idIngrediente, double cantidad) {
+		public boolean modificarCantidadIngredienteReceta(int idReceta, int idIngrediente, double cantidad, String unidadMedida) {
 		    PreparedStatement stmt = null;
 		    try {
 		        stmt = DbConnector.getInstancia().getConn().prepareStatement(
-		                "UPDATE ingrediente_receta SET cantidad_porcion = ? WHERE id_ingrediente = ? and id_receta = ?");
+		                "UPDATE ingrediente_receta SET cantidad_porcion = ?, unidad_medida= ? WHERE id_ingrediente = ? and id_receta = ?");
 
 		        stmt.setDouble(1, cantidad);
-		        stmt.setInt(2, idIngrediente);
-		        stmt.setInt(3, idReceta);
+		        stmt.setString(2, unidadMedida);
+		        stmt.setInt(3, idIngrediente);
+		        stmt.setInt(4, idReceta);
 		        int rowsAffected = stmt.executeUpdate();
 		        return rowsAffected > 0;
 		    } catch (SQLException e) {

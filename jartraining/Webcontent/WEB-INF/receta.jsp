@@ -45,6 +45,7 @@ LinkedList<Map<String, Object>> li = (LinkedList<Map<String, Object>>)request.ge
                         		<input type="hidden" name="cantidad" value="<%=ingrediente.get("cantidad")%>">
                                 <input type="hidden" name="idIngrediente" value="<%=ingrediente.get("id")%>">
                                 <input type="hidden" name="idReceta" value="<%=r.getId()%>">
+                                <input type="hidden" name="unidadMedida" value="<%=ingrediente.get("unidad")%>">
                                 <input type="submit" value="Editar" class="action-btn edit-btn">
                            	</form>
                         <td>

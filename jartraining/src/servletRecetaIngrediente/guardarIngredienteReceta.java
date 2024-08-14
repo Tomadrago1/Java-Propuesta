@@ -44,30 +44,25 @@ public class guardarIngredienteReceta extends HttpServlet {
 		int idReceta = Integer.parseInt(request.getParameter("idReceta"));
 		int idIngrediente = Integer.parseInt(request.getParameter("idIngrediente"));
 		double cantidad = Double.parseDouble(request.getParameter("cantidad"));
-		System.out.println(idReceta);
-		System.out.println(idIngrediente);
-		System.out.println(cantidad);
+		String unidadMedida = request.getParameter("unidadMedida");
 		ctrlReceta ctrlR = new ctrlReceta();
-		boolean success = ctrlR.modificarCantidadIngredienteReceta(idReceta,idIngrediente,cantidad);
+		Receta receta = ctrlR.getById(idReceta);
+		boolean success = ctrlR.modificarCantidadIngredienteReceta(idReceta,idIngrediente,cantidad,unidadMedida);
 		if(success){
-			Receta receta = ctrlR.getById(idReceta);
 	        LinkedList<Map<String, Object>> ingredientesConCantidad = ctrlR.getIngredientesConCantidad(idReceta);
 	        request.setAttribute("ListaIngredientes", ingredientesConCantidad);
 	        request.setAttribute("Receta", receta);
 	        RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/receta.jsp");
 	        dispatcher.forward(request, response);
-	    	request.getRequestDispatcher("WEB-INF/cantIngrediente.jsp").forward(request, response);
 		}
 		else {
-			success = ctrlR.addIngredienteReceta(idReceta,idIngrediente,cantidad);
+			success = ctrlR.addIngredienteReceta(idReceta,idIngrediente,cantidad,unidadMedida);
 			if(success) {
-				Receta receta = ctrlR.getById(idReceta);
 		        LinkedList<Map<String, Object>> ingredientesConCantidad = ctrlR.getIngredientesConCantidad(idReceta);
 		        request.setAttribute("ListaIngredientes", ingredientesConCantidad);
 		        request.setAttribute("Receta", receta);
 		        RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/receta.jsp");
 		        dispatcher.forward(request, response);
-		    	request.getRequestDispatcher("WEB-INF/cantIngrediente.jsp").forward(request, response);
 			}else {
 				response.getWriter().append("Error");
 			}
