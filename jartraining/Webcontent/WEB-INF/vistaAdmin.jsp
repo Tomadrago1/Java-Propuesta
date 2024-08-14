@@ -24,9 +24,6 @@
         <form action="verRecetas" method="post">
             <input type="submit" class="admin-btn" value="Recetas">
         </form>
-        <form action="verIngredientes" method="post">
-        	<input type="submit" class="admin-btn" value="Ingredientes">
-        </form>
         <form action="verRutinas" method="post">
             <input type="submit" class="admin-btn" value="Rutinas">
         </form>

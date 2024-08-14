@@ -19,7 +19,7 @@
 </head>
 <body>
     <div class="container">
-        <h1>Usuarios</h1>
+        <h1>Personas</h1>
         <div>
             <table>
                 <thead>

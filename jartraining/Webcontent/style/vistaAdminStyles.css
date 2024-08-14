@@ -13,7 +13,7 @@ body {
 display: column;
 }
 .admin-container {
-    background-color: #fff;
+    background-color: rgb(0, 0, 0);
     padding: 30px;
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0,0,0,0.1);
@@ -21,11 +21,11 @@ display: column;
 }
 h1 {
     margin-bottom: 20px;
-    color: #fff;
+    color: #ffffff;
 }
 h2 {
     margin-bottom: 20px;
-    color: black;
+    color: #ffffff;
 }
 .admin-btn {
     display: block;
@@ -34,12 +34,12 @@ h2 {
     padding: 15px;
     font-size: 16px;
     color: #ffffff;
-    background-color: #f57c00;
+    background-color: #004a8d;
     border: none;
     border-radius: 5px;
     cursor: pointer;
     text-decoration: none;
 }
 .admin-btn:hover {
-    background-color: #004a8d;
+    background-color: #f57c00;
 }

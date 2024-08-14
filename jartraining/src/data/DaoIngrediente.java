@@ -39,6 +39,40 @@ public class DaoIngrediente{
 			}
 		return ingredientes;
 		}
+		/*public Profesional getByProfesional(Profesional prof) {
+			Profesional p=null;
+			PreparedStatement stmt=null;
+			ResultSet rs=null;
+			try {
+				stmt=DbConnector.getInstancia().getConn().prepareStatement(
+						"select id_profesional,nombre,apellido,nombre_usuario,estado from Profesional where nombre_usuario=? and contraseña=?"
+						);
+				stmt.setString(1, prof.getNombreUsuario());
+				stmt.setString(2, prof.getPassword());
+				rs=stmt.executeQuery();
+				if(rs!=null && rs.next()) {
+					p=new Profesional();
+					p.setIdProfesional(rs.getInt("id_usuario"));
+					p.setNombre(rs.getString("nombre"));
+					p.setApellido(rs.getString("apellido"));
+					p.setProfesion(rs.getString("email"));
+					p.setNombreUsuario(rs.getString("nombre_usuario"));
+					p.setEstado(rs.getBoolean("estado"));
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}finally {
+				try {
+					if(rs!=null) {rs.close();}
+					if(stmt!=null) {stmt.close();}
+					DbConnector.getInstancia().releaseConn();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			
+			return p;
+		}*/
 		
 		public Ingrediente getIngredienteById(int id) {
 		    Ingrediente i = null; // Inicializar Receta
@@ -138,76 +172,6 @@ public class DaoIngrediente{
 
 		    return añadido;
 		}
-		
-		public boolean eliminarIngrediente(int idIngrediente) {
-		    PreparedStatement stmt1 = null;
-		    PreparedStatement stmt2 = null;
-		    Connection conn = null;
-		    boolean result = false;
 
-		    try {
-		        conn = DbConnector.getInstancia().getConn();
-		        conn.setAutoCommit(false); // Iniciar la transacción
-
-		        // Elimina las relaciones en la tabla intermedia
-		        stmt1 = conn.prepareStatement("DELETE FROM ingrediente_receta WHERE id_ingrediente = ?");
-		        stmt1.setInt(1, idIngrediente);
-		        stmt1.executeUpdate();
-
-		        // Elimina el ingrediente en la tabla principal
-		        stmt2 = conn.prepareStatement("DELETE FROM Ingrediente WHERE id = ?");
-		        stmt2.setInt(1, idIngrediente);
-		        stmt2.executeUpdate();
-
-		        // Confirma la transacción
-		        conn.commit();
-		        result = true;
-
-		    } catch (SQLException e) {
-		        e.printStackTrace();
-		        if (conn != null) {
-		            try {
-		                // Revertir en caso de error
-		                conn.rollback();
-		            } catch (SQLException ex) {
-		                ex.printStackTrace();
-		            }
-		        }
-		    } finally {
-		        try {
-		            if (stmt1 != null) stmt1.close();
-		            if (stmt2 != null) stmt2.close();
-		            if (conn != null) conn.setAutoCommit(true); // Restablecer el modo de autocommit
-		            DbConnector.getInstancia().releaseConn();
-		        } catch (SQLException e) {
-		            e.printStackTrace();
-		        }
-		    }
-		    return result;
-		}
-
-		public boolean modificarIngrediente(int id, String nombre, String descripcion) {
-		    PreparedStatement stmt = null;
-		    try {
-		        stmt = DbConnector.getInstancia().getConn().prepareStatement(
-		                "UPDATE ingrediente SET nombre = ?, descripcion = ? WHERE id = ?");
-		        stmt.setString(1, nombre);
-		        stmt.setString(2, descripcion);
-		        stmt.setInt(3, id);
-
-		        int filasActualizadas = stmt.executeUpdate(); 
-		        return filasActualizadas > 0; // Retornar true si se actualizó al menos una fila
-		    } catch (SQLException e) {
-		        e.printStackTrace();
-		        return false; // Retornar false si ocurre un error
-		    } finally {
-		        try {
-		            if (stmt != null) { stmt.close(); }
-		            DbConnector.getInstancia().releaseConn();
-		        } catch (SQLException e) {
-		            e.printStackTrace();
-		        }
-		    }
-		}
 }
 
