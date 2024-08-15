@@ -67,6 +67,7 @@
             	</form>
             </div>
         </div>
+        <a href="index.html" style="color: red">Volver</a>
     </div>
 </body>
 </html>

@@ -63,6 +63,7 @@
 	            	<input type="submit" value="Crear Rutina" class="action-btn create-btn">
 	            </form>
             </div>
+            <a href="index.html" style="color: red">Volver</a>
         </div>
     </div>
 </body>

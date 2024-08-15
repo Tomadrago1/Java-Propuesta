@@ -49,6 +49,7 @@
                 <a href="crearEjercicio" class="action-btn create-btn">Crear Ejercicio</a>
             </div>
         </div>
+        <a href="index.html" style="color: red">Volver</a>
     </div>
 </body>
 </html>

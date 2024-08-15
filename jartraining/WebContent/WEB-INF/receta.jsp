@@ -66,6 +66,7 @@ LinkedList<Map<String, Object>> li = (LinkedList<Map<String, Object>>)request.ge
             	</form>
             </div>
         </div>
+        <a href="index.html" style="color: red">Volver</a>
     </div>
 </body>
 </html>

@@ -50,12 +50,13 @@
                     <% } %>
                 </tbody>
             </table>
-            <div style="text-align: right; margin-top: 20px;">
+            <div style="text-align: right; margin-top: 20px; margin-bottom:20px; padding: 0 20px;">
                 <form action="crearIngrediente" method="post" style="display:inline;">
                     <input type="submit" value="Crear Ingrediente" class="action-btn create-btn">
                 </form>
             </div>
         </div>
+        <a href="index.html" style="color: red">Volver</a>
     </div>
 </body>
 </html>
