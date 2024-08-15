@@ -18,7 +18,7 @@ public class editarRutina extends HttpServlet {
         super();
     }
 
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         int idRutina = Integer.parseInt(request.getParameter("id"));
         ctrlRutina ctrl = new ctrlRutina();
         Rutina rut = ctrl.getOne(idRutina);
