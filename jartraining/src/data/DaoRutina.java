@@ -177,7 +177,7 @@ public class DaoRutina {
 		LinkedList<Map<String, Object>> ejercicios = new LinkedList<>();
 
 		try {
-			stmt = DbConnector.getInstancia().getConn().prepareStatement("SELECT eje.id, eje.nombre, eje.descripcion, re.series_aproximadas, re.repeticiones_aproximadas FROM rutina_ejercicio AS re INNER JOIN ejercicios AS eje ON re.id_ejercicio = eje.id WHERE id_rutina = ?");
+			stmt = DbConnector.getInstancia().getConn().prepareStatement("SELECT eje.id, eje.nombre, eje.descripcion, re.series_aproximadas, re.repeticiones_aproximadas FROM rutina_ejercicio AS re INNER JOIN ejercicio AS eje ON re.id_ejercicio = eje.id WHERE id_rutina = ?");
 			stmt.setInt(1, id);
 			rs = stmt.executeQuery();
 

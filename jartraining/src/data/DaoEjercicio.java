@@ -13,7 +13,7 @@ public class DaoEjercicio {
 		
 		try {
 			stmt= DbConnector.getInstancia().getConn().createStatement();
-			rs= stmt.executeQuery("select * from Ejercicios");
+			rs= stmt.executeQuery("select * from ejercicio");
 
 			if(rs!=null) {
 				while(rs.next()) {
@@ -47,7 +47,7 @@ public class DaoEjercicio {
 		ResultSet rs=null;
 		try {
 			stmt=DbConnector.getInstancia().getConn().prepareStatement(
-					"Select * from ejercicios where id = ?"
+					"Select * from ejercicio where id = ?"
 					);
 			stmt.setInt(1, id);
 			rs=stmt.executeQuery();
@@ -76,7 +76,7 @@ public class DaoEjercicio {
 	    PreparedStatement stmt = null;
 	    try {
 	        stmt = DbConnector.getInstancia().getConn().prepareStatement(
-	                "UPDATE ejercicios SET nombre = ?, descripcion = ? WHERE id = ?");
+	                "UPDATE ejercicio SET nombre = ?, descripcion = ? WHERE id = ?");
 	        stmt.setString(1, nombre);
 	        stmt.setString(2, descripcion);
 	        stmt.setInt(3, id);
@@ -108,7 +108,7 @@ public class DaoEjercicio {
 	        stmt.setInt(1, id_eje);
 	        stmt.executeUpdate();
 
-	        stmt = conn.prepareStatement("DELETE FROM ejercicios WHERE id = ?");
+	        stmt = conn.prepareStatement("DELETE FROM ejercicio WHERE id = ?");
 	        stmt.setInt(1, id_eje);
 	        int filasAfectadas = stmt.executeUpdate();
 
@@ -142,7 +142,7 @@ public class DaoEjercicio {
 		try {
 			stmt=DbConnector.getInstancia().getConn().
 					prepareStatement(
-							"INSERT INTO ejercicios (nombre, descripcion) VALUES(?, ?)",
+							"INSERT INTO ejercicio (nombre, descripcion) VALUES(?, ?)",
 							PreparedStatement.RETURN_GENERATED_KEYS
 							);
 			stmt.setString(1, e.getNombre());
