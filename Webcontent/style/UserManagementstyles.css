@@ -1,0 +1,171 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+body {
+	font-family: 'Poppins', sans-serif;
+	margin: 0;
+	padding: 0;
+	background-color: #004a8d;
+}
+tbody {
+	background-color: #dcdcdc;
+}
+h1 {
+	text-align: center;
+	color: #fff;
+}
+.container {
+	width: 80%;
+	margin: auto;
+	overflow: hidden;
+}
+
+.container-create{
+	text-align: right;
+	margin-top: 20px;
+	margin-bottom:20px;
+	padding: 0 20px;
+}
+table {
+    width: 100%;
+    margin: 20px 0;
+    border-collapse: separate; /* Cambiar a 'separate' para que los bordes redondeados se apliquen correctamente */
+    border-spacing: 0; /* Elimina los espacios entre celdas */
+    box-shadow: 0 2px 3px rgba(0,0,0,0.1);
+    border-radius: 10px; /* Aplica el borde redondeado */
+    overflow: hidden; /* Asegura que el contenido no sobresalga de la tabla */
+}
+
+/* Opcional: para redondear el borde del contenedor de la tabla también */
+.div-table {
+    border-radius: 20px; /* Ajusta el radio según sea necesario */
+    overflow: hidden; /* Asegura que el contenido no sobresalga del contenedor */
+}
+
+table th, table td {
+	padding: 12px;
+	border: 1px solid #ddd;
+	text-align: center;
+}
+table th {
+	background-color: silver;
+}
+table tr{
+	transition: all 0.4s ease;
+}
+table tr:hover {
+	background-color: white;
+}
+/* Additional styling for edit and delete buttons */
+.action-btn {
+	font-family: 'Poppins', sans-serif;
+	text-align: center;
+	cursor: pointer;
+	color: #fff;
+	padding: 5px 10px;
+	border-radius: 3px;
+	text-decoration: none;
+}
+.viewmore-btn {
+    background-color: rgba(20,20,255,0.8); 
+    color: white;
+    border: 2px solid #e67e22; 
+    padding: 5px 12px; 
+    border-radius: 8px; 
+    cursor: pointer;
+    text-align: center;
+    font-weight: bold;
+    font-size: 14px; 
+    transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.viewmore-btn:hover {
+    background-color: #d87a00; 
+    color: white;
+    transform: scale(1.05); 
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2);
+}
+
+.viewmore-btn:active {
+    background-color: #b65a00; 
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); 
+    transform: scale(0.98); 
+}
+.create-btn {
+    background-color: #004d00; 
+    color: white;
+    border: 2px solid #003300; 
+    padding: 10px 19px; 
+    border-radius: 8px; 
+    cursor: pointer;
+    text-align: center;
+    font-weight: bold;
+    font-size: 14px; 
+    transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); 
+}
+
+.create-btn:hover {
+    background-color: #006600; 
+    color: #f0f0f0; 
+    transform: scale(1.05); 
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2);
+}
+
+.create-btn:active {
+    background-color: #003300; 
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transform: scale(0.98);
+}
+
+.edit-btn {
+    background-color: rgba(255, 168, 47, 0.8); 
+    color: white;
+    border: 2px solid #e67e22; 
+    padding: 5px 12px; 
+    border-radius: 8px; 
+    cursor: pointer;
+    text-align: center;
+    font-weight: bold;
+    font-size: 14px; 
+    transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.edit-btn:hover {
+    background-color: #d87a00; 
+    color: white;
+    transform: scale(1.05); 
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2);
+}
+
+.edit-btn:active {
+    background-color: #b65a00; 
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); 
+    transform: scale(0.98); 
+}
+.delete-btn {
+    background-color: #ff4c4c;
+    color: white;
+    border: 2px solid #ff0000; 
+    padding: 5px 12px; 
+    border-radius: 8px; 
+    cursor: pointer;
+    text-align: center;
+    font-weight: bold;
+    font-size: 14px; 
+    transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); 
+}
+
+.delete-btn:hover {
+    background-color: #e60000; 
+    color: #f0f0f0; 
+    transform: scale(1.05); 
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2); 
+}
+
+.delete-btn:active {
+    background-color: #c70000;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); 
+    transform: scale(0.98); 
+}
