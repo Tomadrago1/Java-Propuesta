@@ -58,7 +58,7 @@
                     <%}%>
                 </tbody>
             </table>
-             <div style="text-align: right; margin-top: 20px; margin-bottom:20px; padding: 0 20px;">
+             <div class="container-create">
 	            <form action="crearRutina" method="post" style="display:inline;">
 	            	<input type="submit" value="Crear Rutina" class="action-btn create-btn">
 	            </form>

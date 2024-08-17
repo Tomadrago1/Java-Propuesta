@@ -11,7 +11,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="style/ejercicioManagement.css">
+    <link rel="stylesheet" href="style/UserManagementstyles.css">
     <title>Gestión de Ejercicios</title>
     
     <%
@@ -31,7 +31,8 @@
                         <th>Descripción</th>
                         <th>Series</th>
                         <th>Repeticiones</th>
-                        <th>Acciones</th>
+                        <th>Editar Ejercicio</th>
+                        <th>Eliminar Ejercicio</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -49,6 +50,8 @@
                                 <input type="hidden" name="repes" value="<%=eje.get("repes")%>">                                
                                 <input type="submit" value="Editar" class="action-btn edit-btn">
                             </form>
+                        </td>
+                        <td>
                             <form action="quitarEjercicioRutina" method="post" class="inline-form">
                                 <input type="hidden" name="id_rut" value="<%=eje.get("id_rut")%>">
                                 <input type="hidden" name="id_eje" value="<%=eje.get("id_eje")%>">
@@ -60,7 +63,7 @@
                 </tbody>
             </table>
             
-            <div class="create-btn-container">
+            <div class="container-create">
             	<form action="addEjercicioRutina" method="post" class="inline-form">
                 	<input type="hidden" name="id_rut" value="<%=r.getId()%>">
               		<input type="submit" value="Añadir Ejercicio" class="action-btn create-btn">

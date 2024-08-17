@@ -6,7 +6,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="style/editarEjercicio.css">
+    <link rel="stylesheet" href="style/crear-editar.css">
     <title>Editar Ejercicio</title>
 	
 </head>

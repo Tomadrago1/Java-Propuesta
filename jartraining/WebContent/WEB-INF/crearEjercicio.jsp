@@ -4,7 +4,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="style/crearEjercicio.css">
+    <link rel="stylesheet" href="style/crear-editar.css">
     <title>Crear Ejercicio</title>
 </head>
 <body>

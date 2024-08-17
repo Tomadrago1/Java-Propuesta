@@ -9,7 +9,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="style/ejercicioManagement.css">
+    <link rel="stylesheet" href="style/UserManagementstyles.css">
     <title>Gestión de Ejercicios</title>
     
     <%
@@ -26,7 +26,8 @@
                     <tr>
                         <th>Nombre</th>
                         <th>Descripción</th>
-                        <th>Acciones</th>
+                        <th>Editar Ejercicio</th>
+                        <th>Eliminar Ejercicio</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -36,6 +37,8 @@
                         <td><%=eje.getDescripcion()%></td>
                         <td class="actions">
                             <a href="editarEjercicio?id=<%=eje.getId()%>" class="action-btn edit-btn">Editar</a>
+                        </td>
+                        <td>    
                             <form action="eliminarEjercicio" method="post" class="inline-form">
                                 <input type="hidden" name="id" value="<%=eje.getId()%>">
                                 <input type="submit" value="Borrar" class="action-btn delete-btn" onclick="return confirm('¿Estás seguro de que deseas eliminar este ejercicio?');">
@@ -45,8 +48,10 @@
                     <%}%>
                 </tbody>
             </table>
-            <div class="create-btn-container">
-                <a href="crearEjercicio" class="action-btn create-btn">Crear Ejercicio</a>
+            <div class="container-create">
+                <form action="crearEjercicio" method="post" style="display:inline;">
+                    <input type="submit" value="Crear Ejercicio" class="action-btn create-btn">
+                </form>
             </div>
         </div>
         <a href="index.html" style="color: red">Volver</a>
