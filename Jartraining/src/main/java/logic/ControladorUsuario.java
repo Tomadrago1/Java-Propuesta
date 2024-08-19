@@ -31,7 +31,6 @@ public class ControladorUsuario {
 	}
 
 	public boolean modificar(int id, String nombre, String apellido, String email, String nombreUsuario, int tipoUsu) {
-		// Obtiene todos los usuarios utilizando DaoProfesional
 		return du.modificarUser(id, nombre, apellido, email, nombreUsuario, tipoUsu);
 	}
 }

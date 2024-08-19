@@ -18,17 +18,18 @@ import logic.ctrlIngrediente;
 @WebServlet("/eliminarIngrediente")
 public class eliminarIngrediente extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public eliminarIngrediente() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#HttpServlet()
+	 */
+	public eliminarIngrediente() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
@@ -36,18 +37,19 @@ public class eliminarIngrediente extends HttpServlet {
 	}
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	    int id = Integer.parseInt(request.getParameter("idIngrediente"));
-	    ctrlIngrediente ctrl = new ctrlIngrediente();
-	    boolean success = ctrl.eliminarIngrediente(id); // Llama al método para eliminar el usuario
-	    if (success) {
-        	LinkedList<Ingrediente> ingredientes = ctrl.getAll();
-        	request.setAttribute("ingredientes", ingredientes);
-        	request.getRequestDispatcher("WEB-INF/ingredienteManagement.jsp").forward(request, response);
-	    } else {
-	        response.getWriter().append("Error al eliminar el Ingrediente."); // Mensaje de error
-	    }
+		int id = Integer.parseInt(request.getParameter("idIngrediente"));
+		ctrlIngrediente ctrl = new ctrlIngrediente();
+		boolean success = ctrl.eliminarIngrediente(id); // Llama al método para eliminar el usuario
+		if (success) {
+			LinkedList<Ingrediente> ingredientes = ctrl.getAll();
+			request.setAttribute("ingredientes", ingredientes);
+			request.getRequestDispatcher("WEB-INF/ingredienteManagement.jsp").forward(request, response);
+		} else {
+			response.getWriter().append("Error al eliminar el Ingrediente."); // Mensaje de error
+		}
 	}
 }

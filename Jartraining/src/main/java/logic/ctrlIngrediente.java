@@ -1,10 +1,12 @@
 package logic;
+
 import java.util.LinkedList;
+import java.util.Map;
+
 import data.DaoIngrediente;
 import entities.Ingrediente;
 
-
-public class ctrlIngrediente{
+public class ctrlIngrediente {
     private DaoIngrediente di;
 
     public ctrlIngrediente() {
@@ -12,22 +14,40 @@ public class ctrlIngrediente{
     }
 
     public Ingrediente getById(int id) {
-    	return di.getIngredienteById(id);
+        return di.getIngredienteById(id);
     }
 
     public LinkedList<Ingrediente> getAll() {
         return di.getAll();
     }
-    
+
     public boolean add(Ingrediente i) {
-    	return di.addIngrediente(i);
+        return di.addIngrediente(i);
     }
-    
-    public boolean eliminarIngrediente(int id){
-    	return di.eliminarIngrediente(id);
+
+    public boolean eliminarIngrediente(int id) {
+        return di.eliminarIngrediente(id);
     }
-    
+
     public boolean modificar(int id, String nombre, String descripcion) {
         return di.modificarIngrediente(id, nombre, descripcion);
     }
+
+    public LinkedList<Map<String, Object>> getNutrientesConCantidad(int idIngrediente) {
+        return di.getNutrientesIngrediente(idIngrediente);
+    }
+
+    public boolean modificarCantidadNutrienteIngrediente(int idNutriente, int idIngrediente, double cantidad,
+            String unidadMedida) {
+        return di.modificarCantidadNutrienteIngrediente(idNutriente, idIngrediente, cantidad, unidadMedida);
+    }
+
+    public boolean addNutrienteIngrediente(int idNutriente, int idIngrediente, double cantidad, String unidadMedida) {
+        return di.addNutrienteIngrediente(idNutriente, idIngrediente, cantidad, unidadMedida);
+    }
+
+    public boolean borrarNutrienteIngrediente(int idNutriente, int idIngrediente) {
+        return di.borrarNutrienteIngrediente(idNutriente, idIngrediente);
+    }
+
 }

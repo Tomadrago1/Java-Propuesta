@@ -18,17 +18,18 @@ import logic.ctrlIngrediente;
 @WebServlet("/editarIngrediente")
 public class editarIngrediente extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public editarIngrediente() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#HttpServlet()
+	 */
+	public editarIngrediente() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
@@ -36,14 +37,15 @@ public class editarIngrediente extends HttpServlet {
 	}
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int idIngrediente = Integer.parseInt(request.getParameter("idIngrediente"));
-        ctrlIngrediente ctrl= new ctrlIngrediente();
-        Ingrediente ingrediente = ctrl.getById(idIngrediente);
-        request.setAttribute("ingrediente", ingrediente);
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/editarIngrediente.jsp");
-        dispatcher.forward(request, response);
+		ctrlIngrediente ctrl = new ctrlIngrediente();
+		Ingrediente ingrediente = ctrl.getById(idIngrediente);
+		request.setAttribute("ingrediente", ingrediente);
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/editarIngrediente.jsp");
+		dispatcher.forward(request, response);
 	}
 }

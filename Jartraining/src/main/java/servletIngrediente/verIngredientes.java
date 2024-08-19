@@ -19,17 +19,18 @@ import logic.ctrlIngrediente;
 @WebServlet("/verIngredientes")
 public class verIngredientes extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public verIngredientes() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#HttpServlet()
+	 */
+	public verIngredientes() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
@@ -37,14 +38,15 @@ public class verIngredientes extends HttpServlet {
 	}
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        ctrlIngrediente ctrl = new ctrlIngrediente();
-        LinkedList<Ingrediente> ingredientes = ctrl.getAll();
+		ctrlIngrediente ctrl = new ctrlIngrediente();
+		LinkedList<Ingrediente> ingredientes = ctrl.getAll();
 		request.setAttribute("ingredientes", ingredientes);
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/ingredienteManagement.jsp");
-        dispatcher.forward(request, response);
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/ingredienteManagement.jsp");
+		dispatcher.forward(request, response);
 	}
 
 }

@@ -19,17 +19,18 @@ import logic.ctrlIngrediente;
 @WebServlet("/guardarIngredienteNuevoReceta")
 public class guardarIngredienteNuevoReceta extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public guardarIngredienteNuevoReceta() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#HttpServlet()
+	 */
+	public guardarIngredienteNuevoReceta() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
@@ -37,7 +38,8 @@ public class guardarIngredienteNuevoReceta extends HttpServlet {
 	}
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String nombre = request.getParameter("nombre");
@@ -53,8 +55,8 @@ public class guardarIngredienteNuevoReceta extends HttpServlet {
 			request.setAttribute("ListaIngredientes", ingredientes);
 			request.setAttribute("receta", idReceta);
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/ingredienteRecetaManagement.jsp");
-	        dispatcher.forward(request, response);
-		}else {
+			dispatcher.forward(request, response);
+		} else {
 			response.getWriter().append("Error");
 		}
 	}
