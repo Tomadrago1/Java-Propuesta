@@ -31,6 +31,9 @@
                     <form action="verIngredientes" method="post">
                         <input type="submit" class="admin-btn" value="Ingredientes">
                     </form>
+                    <form action="verNutrientes" method="post">
+                        <input type="submit" class="admin-btn" value="Nutrientes">
+                    </form>
                     <form action="verRutinas" method="post">
                         <input type="submit" class="admin-btn" value="Rutinas">
                     </form>

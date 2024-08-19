@@ -25,6 +25,7 @@ LinkedList<Map<String, Object>> li = (LinkedList<Map<String, Object>>)request.ge
             <table>
                 <thead>
                     <tr>
+                        <th></th>
                         <th>Nombre</th>
                         <th>Descripcion</th>
                         <th>Cantidad</th>
@@ -36,18 +37,24 @@ LinkedList<Map<String, Object>> li = (LinkedList<Map<String, Object>>)request.ge
                 <tbody>
                     <% for (Map<String, Object> ingrediente : li) { %>
                     <tr>
+                        <td>
+                            <form action="verMasIngrediente" method="post" style="display:inline;">
+                                <input type="hidden" name="id" value="<%=ingrediente.get("id")%>">
+                                <input type="submit" value="Ver Más" class="action-btn edit-btn">
+                            </form>
+                        </td>
                         <td><%= ingrediente.get("nombre") %></td>
                         <td><%= ingrediente.get("descripcion") %></td>
                         <td><%= ingrediente.get("cantidad") %></td>
                         <td><%= ingrediente.get("unidad") %></td>
                         <td>
-                        	<form action="editarCantidadIngrediente" method="post" style="display:inline;">
-                        		<input type="hidden" name="cantidad" value="<%=ingrediente.get("cantidad")%>">
+                            <form action="editarCantidadIngrediente" method="post" style="display:inline;">
+                                <input type="hidden" name="cantidad" value="<%=ingrediente.get("cantidad")%>">
                                 <input type="hidden" name="idIngrediente" value="<%=ingrediente.get("id")%>">
                                 <input type="hidden" name="idReceta" value="<%=r.getId()%>">
                                 <input type="hidden" name="unidadMedida" value="<%=ingrediente.get("unidad")%>">
                                 <input type="submit" value="Editar" class="action-btn edit-btn">
-                           	</form>
+                            </form>
                         <td>
                             <form action="eliminarIngredienteReceta" method="post" style="display:inline;">
                                 <input type="hidden" name="idIngrediente" value="<%= ingrediente.get("id")%>">
@@ -60,10 +67,10 @@ LinkedList<Map<String, Object>> li = (LinkedList<Map<String, Object>>)request.ge
                 </tbody>
             </table>
             <div style="text-align: right; margin-top: 20px; margin-bottom:20px; padding: 0 20px;">
-            	<form action="agregarIngrediente" method="post" style="display:inline;">
-            		<input type="hidden" name="idReceta" value="<%=r.getId()%>">
-                	<input type="submit" value="Agregar Ingrediente" class="action-btn create-btn">
-            	</form>
+                <form action="agregarIngrediente" method="post" style="display:inline;">
+                    <input type="hidden" name="idReceta" value="<%=r.getId()%>">
+                    <input type="submit" value="Agregar Ingrediente" class="action-btn create-btn">
+                </form>
             </div>
         </div>
         <a href="index.html" style="color: red">Volver</a>

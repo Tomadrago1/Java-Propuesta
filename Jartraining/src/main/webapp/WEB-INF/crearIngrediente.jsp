@@ -25,7 +25,7 @@
     <div class="container">
         <h1>Crear Ingrediente</h1>
         <form action="<%= actionUrl %>" method="post">
-        	<input type="hidden" name="idReceta" value="<%= (idReceta != null) ? idReceta : "" %>">
+            <input type="hidden" name="idReceta" value="<%= (idReceta != null) ? idReceta : "" %>">
             <div class="form-group">
                 <label for="nombre">Nombre:</label>
                 <input type="text" id="nombre" name="nombre">
