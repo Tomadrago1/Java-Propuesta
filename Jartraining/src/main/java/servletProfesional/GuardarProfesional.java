@@ -61,7 +61,7 @@ public class GuardarProfesional extends HttpServlet {
         ctrl.add(nuevoProfesional);
     	LinkedList<Profesional> profesionales = ctrl.getAll();
 		request.setAttribute("listaProfesionales", profesionales);
-    	request.getRequestDispatcher("WEB-INF/profesionalManagement.jsp").forward(request, response);
+    	request.getRequestDispatcher("WEB-INF/Profesional/profesionalManagement.jsp").forward(request, response);
     }
 }
 

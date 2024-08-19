@@ -52,7 +52,7 @@ public class actualizarProfesional extends HttpServlet {
         if (success) {
         	LinkedList<Profesional> profesionales = ctrl.getAll();
     		request.setAttribute("listaProfesionales", profesionales);
-    		request.getRequestDispatcher("WEB-INF/profesionalManagement.jsp").forward(request, response);
+    		request.getRequestDispatcher("WEB-INF/Profesional/profesionalManagement.jsp").forward(request, response);
         } else {
             response.getWriter().append("Error al actualizar el usuario.");
         }

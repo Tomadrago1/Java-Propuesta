@@ -18,17 +18,18 @@ import logic.ctrlRutina;
 @WebServlet("/verRutinas")
 public class verRutinas extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public verRutinas() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#HttpServlet()
+	 */
+	public verRutinas() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
@@ -36,14 +37,15 @@ public class verRutinas extends HttpServlet {
 	}
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		ctrlRutina ctrl = new ctrlRutina();
 		LinkedList<Rutina> rutinas = ctrl.getAll();
-        request.setAttribute("listaRutinas", rutinas);
-        request.getRequestDispatcher("WEB-INF/rutinaManagement.jsp").forward(request, response);
+		request.setAttribute("listaRutinas", rutinas);
+		request.getRequestDispatcher("WEB-INF/Rutina/rutinaManagement.jsp").forward(request, response);
 	}
 
 }

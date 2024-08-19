@@ -38,11 +38,12 @@ public class crearIngrediente extends HttpServlet {
 	 *      response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		Integer idReceta = Integer.parseInt(request.getParameter("idReceta"));
-		if (idReceta != null) {
+		String idRecetaStr = request.getParameter("idReceta");
+		if (idRecetaStr != null) {
 			try {
+				int idReceta = Integer.parseInt(idRecetaStr);
 				request.setAttribute("idReceta", idReceta);
-				RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/crearIngrediente.jsp");
+				RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/Ingrediente/crearIngrediente.jsp");
 				dispatcher.forward(request, response);
 			} catch (NumberFormatException e) {
 				// Manejo del caso donde idReceta no es un número válido
@@ -50,7 +51,7 @@ public class crearIngrediente extends HttpServlet {
 				response.sendError(HttpServletResponse.SC_BAD_REQUEST, "ID de receta inválido.");
 			}
 		} else {
-			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/crearIngrediente.jsp");
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/Ingrediente/crearIngrediente.jsp");
 			dispatcher.forward(request, response);
 		}
 	}

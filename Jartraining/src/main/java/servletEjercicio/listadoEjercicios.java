@@ -19,17 +19,18 @@ import logic.ctrlEjercicios;
 @WebServlet("/listadoEjercicios")
 public class listadoEjercicios extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public listadoEjercicios() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#HttpServlet()
+	 */
+	public listadoEjercicios() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
@@ -37,14 +38,15 @@ public class listadoEjercicios extends HttpServlet {
 	}
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+
 		ctrlEjercicios ctrl = new ctrlEjercicios();
 		LinkedList<Ejercicio> ejercicios = ctrl.getAll();
-        request.setAttribute("listaEjercicios", ejercicios);
-        request.getRequestDispatcher("WEB-INF/ejercicioManagement.jsp").forward(request, response);
+		request.setAttribute("listaEjercicios", ejercicios);
+		request.getRequestDispatcher("WEB-INF/Ejercicio/ejercicioManagement.jsp").forward(request, response);
 	}
 
 }

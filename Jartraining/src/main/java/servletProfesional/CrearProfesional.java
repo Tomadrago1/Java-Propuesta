@@ -35,7 +35,7 @@ public class CrearProfesional extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/crearProfesional.jsp");
+		RequestDispatcher dispatcher = request.getRequestDispatcher("WEB-INF/Profesional/crearProfesional.jsp");
         dispatcher.forward(request, response);
 	}
 

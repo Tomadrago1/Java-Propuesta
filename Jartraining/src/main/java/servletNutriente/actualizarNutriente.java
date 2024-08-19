@@ -49,7 +49,7 @@ public class actualizarNutriente extends HttpServlet {
     if (success) {
       LinkedList<Nutriente> nutrientes = ctrl.getAll();
       request.setAttribute("nutrientes", nutrientes);
-      request.getRequestDispatcher("WEB-INF/nutrienteManagement.jsp").forward(request, response);
+      request.getRequestDispatcher("/WEB-INF/Nutriente/nutrienteManagement.jsp").forward(request, response);
     } else {
       response.getWriter().append("Error al actualizar el nutriente.");
     }

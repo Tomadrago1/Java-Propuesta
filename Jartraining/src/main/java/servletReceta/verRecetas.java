@@ -43,6 +43,6 @@ public class verRecetas extends HttpServlet {
 		ctrlReceta ctrl = new ctrlReceta();
 		LinkedList<Receta> recetas = ctrl.getAll();
         request.setAttribute("listaRecetas", recetas);
-        request.getRequestDispatcher("WEB-INF/recetaManagement.jsp").forward(request, response);
+        request.getRequestDispatcher("WEB-INF/Receta/recetaManagement.jsp").forward(request, response);
 	}
 }

@@ -45,7 +45,7 @@ public class editarIngrediente extends HttpServlet {
 		ctrlIngrediente ctrl = new ctrlIngrediente();
 		Ingrediente ingrediente = ctrl.getById(idIngrediente);
 		request.setAttribute("ingrediente", ingrediente);
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/editarIngrediente.jsp");
+		RequestDispatcher dispatcher = request.getRequestDispatcher("WEB-INF/Ingrediente/editarIngrediente.jsp");
 		dispatcher.forward(request, response);
 	}
 }

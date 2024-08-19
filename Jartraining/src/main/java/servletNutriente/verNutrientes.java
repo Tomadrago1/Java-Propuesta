@@ -45,7 +45,7 @@ public class verNutrientes extends HttpServlet {
     ctrlNutriente ctrl = new ctrlNutriente();
     LinkedList<Nutriente> nutrientes = ctrl.getAll();
     request.setAttribute("nutrientes", nutrientes);
-    RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/nutrienteManagement.jsp");
+    RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/Nutriente/nutrienteManagement.jsp");
     dispatcher.forward(request, response);
   }
 

@@ -31,7 +31,7 @@ public class actualizarRutina extends HttpServlet {
         if (success) {
     		LinkedList<Rutina> rutinas = ctrl.getAll();
             request.setAttribute("listaRutinas", rutinas);
-            request.getRequestDispatcher("WEB-INF/rutinaManagement.jsp").forward(request, response);
+            request.getRequestDispatcher("WEB-INF/Rutina/rutinaManagement.jsp").forward(request, response);
         } else {
             response.getWriter().append("Error al actualizar el rutina.");
         }

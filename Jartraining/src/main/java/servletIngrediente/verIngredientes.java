@@ -45,7 +45,7 @@ public class verIngredientes extends HttpServlet {
 		ctrlIngrediente ctrl = new ctrlIngrediente();
 		LinkedList<Ingrediente> ingredientes = ctrl.getAll();
 		request.setAttribute("ingredientes", ingredientes);
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/ingredienteManagement.jsp");
+		RequestDispatcher dispatcher = request.getRequestDispatcher("WEB-INF/Ingrediente/ingredienteManagement.jsp");
 		dispatcher.forward(request, response);
 	}
 

@@ -50,7 +50,7 @@ public class verMasIngrediente extends HttpServlet {
     LinkedList<Map<String, Object>> nutrientesConCantidad = ctrl.getNutrientesConCantidad(idIngrediente);
     request.setAttribute("ListaNutrientes", nutrientesConCantidad);
     request.setAttribute("Ingrediente", ingrediente);
-    RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/ingrediente.jsp");
+    RequestDispatcher dispatcher = request.getRequestDispatcher("WEB-INF/ingrediente.jsp");
     dispatcher.forward(request, response);
   }
 }

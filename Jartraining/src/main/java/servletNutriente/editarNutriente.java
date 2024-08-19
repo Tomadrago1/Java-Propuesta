@@ -45,7 +45,7 @@ public class editarNutriente extends HttpServlet {
     ctrlNutriente ctrl = new ctrlNutriente();
     Nutriente nutriente = ctrl.getById(idNutriente);
     request.setAttribute("nutriente", nutriente);
-    RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/editarNutriente.jsp");
+    RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/Nutriente/editarNutriente.jsp");
     dispatcher.forward(request, response);
   }
 }

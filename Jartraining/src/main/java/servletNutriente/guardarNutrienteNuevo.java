@@ -49,7 +49,7 @@ public class guardarNutrienteNuevo extends HttpServlet {
     if (success) {
       LinkedList<Nutriente> nutrientes = ctrlN.getAll();
       request.setAttribute("nutrientes", nutrientes);
-      RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/nutrienteManagement.jsp");
+      RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/Nutriente/nutrienteManagement.jsp");
       dispatcher.forward(request, response);
     } else {
       response.getWriter().append("Error");

@@ -45,7 +45,7 @@ public class editarProfesional extends HttpServlet {
         ctrlProfesional ctrl= new ctrlProfesional();
         Profesional profesional = ctrl.getById(idProfesional);
         request.setAttribute("profesional", profesional);
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/editarProfesional.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/Profesional/editarProfesional.jsp");
         dispatcher.forward(request, response);
 	}
 

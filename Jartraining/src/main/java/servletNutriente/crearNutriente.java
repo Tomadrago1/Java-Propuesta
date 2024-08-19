@@ -14,26 +14,26 @@ Servlet implementation class crearNutriente
 */
 @WebServlet("/crearNutriente")
 public class crearNutriente extends HttpServlet {
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    public crearNutriente() {
-        super();
-    }// TODO Auto-generated constructor stub}
+	public crearNutriente() {
+		super();
+	}// TODO Auto-generated constructor stub}
 
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/crearNutriente.jsp");
-        dispatcher.forward(request, response);
-    }
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/crearNutriente.jsp");
+		dispatcher.forward(request, response);
+	}
 
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {// TODO Auto-generated method stub
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {// TODO Auto-generated method stub
 
-        Integer idIngrediente = Integer.parseInt(request.getParameter("idIngrediente"));
+		Integer idIngrediente = Integer.parseInt(request.getParameter("idIngrediente"));
 		if (idIngrediente != null) {
 			try {
 				request.setAttribute("idIngrediente", idIngrediente);
-				RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/crearNutriente.jsp");
+				RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/Nutriente/crearNutriente.jsp");
 				dispatcher.forward(request, response);
 			} catch (NumberFormatException e) {
 				// Manejo del caso donde idReceta no es un número válido
@@ -41,7 +41,7 @@ public class crearNutriente extends HttpServlet {
 				response.sendError(HttpServletResponse.SC_BAD_REQUEST, "ID de receta inválido.");
 			}
 		} else {
-			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/crearNutriente.jsp");
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/Nutriente/crearNutriente.jsp");
 			dispatcher.forward(request, response);
 		}
 	}

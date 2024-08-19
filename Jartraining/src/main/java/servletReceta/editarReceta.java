@@ -43,7 +43,7 @@ public class editarReceta extends HttpServlet {
         ctrlReceta ctrl= new ctrlReceta();
         Receta receta = ctrl.getById(idReceta);
         request.setAttribute("receta", receta);
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/editarReceta.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/Receta/editarReceta.jsp");
         dispatcher.forward(request, response);
 	}
 

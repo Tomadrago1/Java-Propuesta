@@ -47,7 +47,7 @@ public class eliminarReceta extends HttpServlet {
 		    if (success) {
 	        	LinkedList<Receta> recetas = ctrl.getAll();
 	        	request.setAttribute("listaRecetas", recetas);
-	        	request.getRequestDispatcher("WEB-INF/recetaManagement.jsp").forward(request, response);
+	        	request.getRequestDispatcher("WEB-INF/Receta/recetaManagement.jsp").forward(request, response);
 		    } else {
 		        response.getWriter().append("Error al eliminar el usuario."); // Mensaje de error
 		    }

@@ -71,6 +71,6 @@ public class GuardarUsuario extends HttpServlet {
     	request.getSession().setAttribute("usuario", usuario);*/
 		request.setAttribute("listaUsuarios", usuarios);
 		request.setAttribute("ususario", nombreUsuario);
-    	request.getRequestDispatcher("WEB-INF/UserManagement.jsp").forward(request, response);
+    	request.getRequestDispatcher("WEB-INF/Usuario/UserManagement.jsp").forward(request, response);
     }
 }
