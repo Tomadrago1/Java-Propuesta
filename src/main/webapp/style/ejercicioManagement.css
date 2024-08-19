@@ -1,0 +1,89 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+}
+
+h1 {
+    text-align: center;
+    color: #333;
+}
+
+.container {
+    width: 80%;
+    margin: auto;
+    overflow: hidden;
+}
+
+table {
+    width: 100%;
+    margin: 20px 0;
+    border-collapse: collapse;
+    box-shadow: 0 2px 3px rgba(0, 0, 0, 0.1);
+}
+
+table th, table td {
+    padding: 12px;
+    border: 1px solid #ddd;
+    text-align: center;
+}
+
+table th {
+    background-color: #f2f2f2;
+}
+
+table tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+table tr:hover {
+    background-color: #f1f1f1;
+}
+
+/* Estilo adicional para los botones de editar y borrar */
+.actions {
+    display: flex;
+    justify-content: center;
+    gap: 10px; /* Espaciado entre botones */
+}
+
+.action-btn {
+    text-align: center;
+    cursor: pointer;
+    color: #fff;
+    padding: 5px 10px;
+    border-radius: 3px;
+    text-decoration: none;
+    width: 80px; /* Misma anchura para ambos botones */
+    box-sizing: border-box; /* Asegura que el padding no altere el tamaño del botón */
+}
+
+.edit-btn {
+    background-color: #e5be01;
+}
+
+.delete-btn {
+    background-color: #f44336;
+}
+
+.create-btn {
+    background-color: green;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+    text-align: center;
+    width: auto;
+    display: inline-block; /* Asegura que no se corte el botón */
+}
+
+/* Efectos de hover */
+.action-btn:hover, .create-btn:hover {
+    opacity: 0.8;
+}
+
+/* Cambia el cursor a pointer */
+.action-btn, .create-btn {
+    cursor: pointer;
+}
