@@ -265,16 +265,14 @@ public class DaoIngrediente {
 		return nutrientes;
 	}
 
-	public boolean modificarCantidadNutrienteIngrediente(int idNutriente, int idIngrediente, double cantidad,
-			String unidadMedida) {
+	public boolean modificarCantidadNutrienteIngrediente(int idNutriente, int idIngrediente, double cantidad) {
 		PreparedStatement stmt = null;
 		try {
 			stmt = DbConnector.getInstancia().getConn().prepareStatement(
-					"UPDATE nutriente_ingrediente SET cantidad = ?, unidad_medida = ? WHERE id_nutriente = ? AND id_ingrediente = ?");
+					"UPDATE nutriente_ingrediente SET cantidad = ? WHERE id_nutriente = ? AND id_ingrediente = ?");
 			stmt.setDouble(1, cantidad);
-			stmt.setString(2, unidadMedida);
-			stmt.setInt(3, idNutriente);
-			stmt.setInt(4, idIngrediente);
+			stmt.setInt(2, idNutriente);
+			stmt.setInt(3, idIngrediente);
 
 			int filasActualizadas = stmt.executeUpdate();
 			return filasActualizadas > 0; // Retornar true si se actualizó al menos una fila
@@ -293,15 +291,14 @@ public class DaoIngrediente {
 		}
 	}
 
-	public boolean addNutrienteIngrediente(int idNutriente, int idIngrediente, double cantidad, String unidadMedida) {
+	public boolean addNutrienteIngrediente(int idNutriente, int idIngrediente, double cantidad) {
 		PreparedStatement stmt = null;
 		try {
 			stmt = DbConnector.getInstancia().getConn().prepareStatement(
-					"INSERT INTO nutriente_ingrediente (id_nutriente, id_ingrediente, cantidad, unidad_medida) VALUES (?, ?, ?, ?)");
+					"INSERT INTO nutriente_ingrediente (id_nutriente, id_ingrediente, cantidad) VALUES (?, ?, ?)");
 			stmt.setInt(1, idNutriente);
 			stmt.setInt(2, idIngrediente);
 			stmt.setDouble(3, cantidad);
-			stmt.setString(4, unidadMedida);
 
 			int filasAfectadas = stmt.executeUpdate();
 			return filasAfectadas > 0; // Retornar true si se insertó al menos una fila

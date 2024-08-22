@@ -27,8 +27,7 @@
                   <tr>
                     <th>Nombre</th>
                     <th>Descripcion</th>
-                    <th>Cantidad</th>
-                    <th>Unidad Medida</th>
+                    <th>Cantidad cada 100 gramos</th>
                     <th>Editar Cantidad</th>
                     <th>Baja Nutriente</th>
                   </tr>
@@ -43,10 +42,7 @@
                         <%= nutriente.get("descripcion") %>
                       </td>
                       <td>
-                        <%= nutriente.get("cantidad") %>
-                      </td>
-                      <td>
-                        <%= nutriente.get("unidad_medida") %>
+                        <%= ((Double) nutriente.get("cantidad") % 1 == 0) ? String.valueOf(((Double) nutriente.get("cantidad")).intValue()) : nutriente.get("cantidad") %> gramos
                       </td>
                       <td>
                         <form action="editarCantidadNutriente" method="post" style="display:inline;">

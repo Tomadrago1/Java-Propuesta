@@ -46,10 +46,9 @@ public class guardarNutrienteIngrediente extends HttpServlet {
 		int idNutriente = Integer.parseInt(request.getParameter("idNutriente"));
 		int idIngrediente = Integer.parseInt(request.getParameter("idIngrediente"));
 		double cantidad = Double.parseDouble(request.getParameter("cantidad"));
-		String unidadMedida = request.getParameter("unidadMedida");
 		ctrlIngrediente ctrlI = new ctrlIngrediente();
 		Ingrediente ingrediente = ctrlI.getById(idIngrediente);
-		boolean success = ctrlI.modificarCantidadNutrienteIngrediente(idNutriente, idIngrediente, cantidad, unidadMedida);
+		boolean success = ctrlI.modificarCantidadNutrienteIngrediente(idNutriente, idIngrediente, cantidad);
 		if (success) {
 			LinkedList<Map<String, Object>> nutrientesConCantidad = ctrlI.getNutrientesConCantidad(idIngrediente);
 			request.setAttribute("ListaNutrientes", nutrientesConCantidad);
@@ -57,7 +56,7 @@ public class guardarNutrienteIngrediente extends HttpServlet {
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/ingrediente.jsp");
 			dispatcher.forward(request, response);
 		} else {
-			success = ctrlI.addNutrienteIngrediente(idNutriente, idIngrediente, cantidad, unidadMedida);
+			success = ctrlI.addNutrienteIngrediente(idNutriente, idIngrediente, cantidad);
 			if (success) {
 				LinkedList<Map<String, Object>> nutrientesConCantidad = ctrlI.getNutrientesConCantidad(idIngrediente);
 				request.setAttribute("ListaNutrientes", nutrientesConCantidad);

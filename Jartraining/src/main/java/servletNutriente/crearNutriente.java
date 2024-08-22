@@ -27,22 +27,24 @@ public class crearNutriente extends HttpServlet {
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {// TODO Auto-generated method stub
+			throws ServletException, IOException {
 
-		Integer idIngrediente = Integer.parseInt(request.getParameter("idIngrediente"));
-		if (idIngrediente != null) {
-			try {
+		String idIngredienteStr = request.getParameter("idIngrediente");
+		Integer idIngrediente = null;
+
+		try {
+			if (idIngredienteStr != null && !idIngredienteStr.isEmpty()) {
+				idIngrediente = Integer.parseInt(idIngredienteStr);
 				request.setAttribute("idIngrediente", idIngrediente);
-				RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/Nutriente/crearNutriente.jsp");
-				dispatcher.forward(request, response);
-			} catch (NumberFormatException e) {
-				// Manejo del caso donde idReceta no es un número válido
-				// Aquí puedes redirigir a una página de error o mostrar un mensaje adecuado
-				response.sendError(HttpServletResponse.SC_BAD_REQUEST, "ID de receta inválido.");
 			}
-		} else {
-			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/Nutriente/crearNutriente.jsp");
-			dispatcher.forward(request, response);
+		} catch (NumberFormatException e) {
+			// Manejo del caso donde idIngrediente no es un número válido
+			response.sendError(HttpServletResponse.SC_BAD_REQUEST, "ID de ingrediente inválido.");
+			return;
 		}
+
+		// Redirigir siempre a crearNutriente.jsp
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/Nutriente/crearNutriente.jsp");
+		dispatcher.forward(request, response);
 	}
 }

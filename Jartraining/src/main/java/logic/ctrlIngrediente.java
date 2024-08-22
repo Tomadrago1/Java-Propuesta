@@ -37,13 +37,12 @@ public class ctrlIngrediente {
         return di.getNutrientesIngrediente(idIngrediente);
     }
 
-    public boolean modificarCantidadNutrienteIngrediente(int idNutriente, int idIngrediente, double cantidad,
-            String unidadMedida) {
-        return di.modificarCantidadNutrienteIngrediente(idNutriente, idIngrediente, cantidad, unidadMedida);
+    public boolean modificarCantidadNutrienteIngrediente(int idNutriente, int idIngrediente, double cantidad) {
+        return di.modificarCantidadNutrienteIngrediente(idNutriente, idIngrediente, cantidad);
     }
 
-    public boolean addNutrienteIngrediente(int idNutriente, int idIngrediente, double cantidad, String unidadMedida) {
-        return di.addNutrienteIngrediente(idNutriente, idIngrediente, cantidad, unidadMedida);
+    public boolean addNutrienteIngrediente(int idNutriente, int idIngrediente, double cantidad) {
+        return di.addNutrienteIngrediente(idNutriente, idIngrediente, cantidad);
     }
 
     public boolean borrarNutrienteIngrediente(int idNutriente, int idIngrediente) {

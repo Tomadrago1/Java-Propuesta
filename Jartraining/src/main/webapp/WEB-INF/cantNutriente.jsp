@@ -34,16 +34,8 @@
                 <input type="text" id="descripcion" name="descripcion" value="<%=nutriente.getDescripcion()%>" readonly>
             </div>
             <div class="form-group">
-            <label for="cantidad">Cantidad:</label>
+            <label for="cantidad ">Cantidad cada 100 gramos:</label>
             <input type="number" id="cantidad" name="cantidad" step="0.01" value="<%= (cantidad != null) ? cantidad : "" %>" required>
-			</div>
-			<div class="form-group">
-        <label for="unidadMedida">Unidad de Medida:</label>
-        <select id="unidadMedida" name="unidadMedida" required>
-            <option value="GRAMOS" <%= ("GRAMOS".equals(unidadMedida) ? "selected" : "") %>>GRAMOS</option>
-            <option value="KG" <%= ("KG".equals(unidadMedida) ? "selected" : "") %>>KG</option>
-            <option value="UNIDADES" <%= ("UNIDADES".equals(unidadMedida) ? "selected" : "") %>>UNIDADES</option>
-        </select>
 			</div>
             <div class="form-group">
                 <input type="submit" value="Actualizar">
