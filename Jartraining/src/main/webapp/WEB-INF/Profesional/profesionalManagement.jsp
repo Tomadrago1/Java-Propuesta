@@ -24,7 +24,6 @@
             <table>
                 <thead>
                     <tr>
-                        <th>Id</th>
                         <th>Nombre</th>
                         <th>Apellido</th>
                         <th>Profesion</th>
@@ -38,7 +37,6 @@
                     if (prof.getEstado()) { // Muestra solo si el estado es true (o 1)
                     %>
                     <tr>
-                        <td><%=prof.getIdProfesional()%></td>
                         <td><%=prof.getNombre()%></td>
                         <td><%=prof.getApellido()%></td>
                         <td><%=prof.getProfesion()%></td>

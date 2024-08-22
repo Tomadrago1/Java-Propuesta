@@ -42,7 +42,6 @@
                 <select id="unidadMedida" name="unidadMedida" required>
                     <option value="GRAMOS" <%= ("GRAMOS".equals(unidadMedida) ? "selected" : "") %>>GRAMOS</option>
                     <option value="KG" <%= ("KG".equals(unidadMedida) ? "selected" : "") %>>KG</option>
-                    <option value="UNIDADES" <%= ("UNIDADES".equals(unidadMedida) ? "selected" : "") %>>UNIDADES</option>
                 </select>
 			</div>
             <div class="form-group">
