@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 package servletRutina;
 
 import java.io.IOException;
@@ -28,35 +27,4 @@ public class editarRutina extends HttpServlet {
         RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/Rutina/editarRutina.jsp");
         dispatcher.forward(request, response);
     }
-=======
-package servletRutina;
-
-import java.io.IOException;
-import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.RequestDispatcher;
-import entities.*;
-import logic.ctrlRutina;
-
-@WebServlet("/editarRutina")
-public class editarRutina extends HttpServlet {
-    private static final long serialVersionUID = 1L;
-
-    public editarRutina() {
-        super();
-    }
-
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        int idRutina = Integer.parseInt(request.getParameter("id"));
-        ctrlRutina ctrl = new ctrlRutina();
-        Rutina rut = ctrl.getOne(idRutina);
-
-        request.setAttribute("rutina", rut);
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/Rutina/editarRutina.jsp");
-        dispatcher.forward(request, response);
-    }
->>>>>>> 2a7a2cddb7c46cdba58517d715cf07559706d21c
 }

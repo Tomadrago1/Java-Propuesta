@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 package servletUsuario;
 
 import java.io.IOException;
@@ -55,61 +54,3 @@ public class EliminarUsuario extends HttpServlet {
 	}
 
 }
-=======
-package servletUsuario;
-
-import java.io.IOException;
-import java.util.LinkedList;
-import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
-import entities.Usuario;
-import logic.ctrlUsuario;
-
-/**
- * Servlet implementation class EliminarUsuario
- */
-@WebServlet("/EliminarUsuario")
-public class EliminarUsuario extends HttpServlet {
-	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public EliminarUsuario() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
-
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
-	}
-
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-    		ctrlUsuario ctrl = new ctrlUsuario();
-		    int id = Integer.parseInt(request.getParameter("id"));
-		    
-		    
-		    boolean success = ctrl.eliminar(id); // Llama al método para eliminar el usuario
-		    if (success) {
-	        	LinkedList<Usuario> usuarios = ctrl.getAll();
-	        	request.setAttribute("listaUsuarios", usuarios);
-	        	request.getRequestDispatcher("WEB-INF/Usuario/UserManagement.jsp").forward(request, response);
-		    } else {
-		        response.getWriter().append("Error al eliminar el usuario."); // Mensaje de error
-		    }
-		
-	}
-
-}
->>>>>>> 2a7a2cddb7c46cdba58517d715cf07559706d21c
