@@ -70,6 +70,10 @@ LinkedList<Map<String, Object>> li = (LinkedList<Map<String, Object>>)request.ge
                 </tbody>
             </table>
             <div style="text-align: right; margin-top: 20px; margin-bottom:20px; padding: 0 20px;">
+                <form action="verMacrosReceta" method="post" style="display:inline;">
+                    <input type="hidden" name="idReceta" value="<%=r.getId()%>">
+                    <input type="submit" value="Ver macronutrientes" class="action-btn create-btn">
+                </form>
                 <form action="agregarIngrediente" method="post" style="display:inline;">
                     <input type="hidden" name="idReceta" value="<%=r.getId()%>">
                     <input type="submit" value="Agregar Ingrediente" class="action-btn create-btn">

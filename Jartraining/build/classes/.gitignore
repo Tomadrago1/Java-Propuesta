@@ -1,0 +1,13 @@
+/data/
+/entities/
+/logic/
+/servlet/
+/servletEjercicio/
+/servletIngrediente/
+/servletNutriente/
+/servletNutrienteIngrediente/
+/servletProfesional/
+/servletReceta/
+/servletRecetaIngrediente/
+/servletRutina/
+/servletUsuario/

@@ -336,4 +336,48 @@ public class DaoReceta {
 		}
 	}
 
+	public LinkedList<Map<String, Object>> getNutrientesReceta(int idReceta) {
+		PreparedStatement stmt = null;
+		ResultSet rs = null;
+		LinkedList<Map<String, Object>> nutrientes = new LinkedList<>();
+		try {
+			stmt = DbConnector.getInstancia().getConn().prepareStatement(
+					"SELECT n.id AS id_nutriente, n.nombre AS nombre_nutriente, n.descripcion, " +
+							"SUM(ni.cantidad * CASE WHEN ir.unidad_medida = 'kg' THEN (ir.cantidad_porcion * 1000 / 100) " +
+							"WHEN ir.unidad_medida = 'gramos' THEN (ir.cantidad_porcion / 100) ELSE 0 END) AS cantidad_total_nutriente "
+							+
+							"FROM INGREDIENTE_RECETA ir " +
+							"JOIN NUTRIENTE_INGREDIENTE ni ON ir.id_ingrediente = ni.id_ingrediente " +
+							"JOIN NUTRIENTE n ON ni.id_nutriente = n.id " +
+							"WHERE ir.id_receta = ? " +
+							"GROUP BY n.id, n.nombre, n.descripcion;");
+			stmt.setInt(1, idReceta);
+			rs = stmt.executeQuery();
+			if (rs != null) {
+				while (rs.next()) {
+					Map<String, Object> nutriente = new HashMap<>();
+					nutriente.put("id", rs.getInt("id_nutriente"));
+					nutriente.put("nombre", rs.getString("nombre_nutriente"));
+					nutriente.put("descripcion", rs.getString("descripcion"));
+					nutriente.put("cantidad", rs.getDouble("cantidad_total_nutriente"));
+					nutrientes.add(nutriente);
+				}
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (rs != null) {
+					rs.close();
+				}
+				if (stmt != null) {
+					stmt.close();
+				}
+				DbConnector.getInstancia().releaseConn();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return nutrientes;
+	}
 }

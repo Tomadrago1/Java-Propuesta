@@ -51,7 +51,7 @@
                   <% } %>
               </tbody>
             </table>
-            <div style="text-align: right; margin-top: 20px;">
+            <div style="text-align: right; margin-top: 20px; padding: 0 20px;">
               <form action="crearNutriente" method="post" style="display:inline;">
                 <input type="hidden" name="idIngrediente" value="<%=idIngrediente%>">
                 <input type="submit" value="Crear Nutriente" class="action-btn create-btn">
