@@ -6,7 +6,7 @@ import data.DaoUsuario;
 import entities.Usuario;
 
 public class ctrlUsuario {
-    private DaoUsuario du;
+    private static DaoUsuario du;
 
     public ctrlUsuario() {
         du = new DaoUsuario();

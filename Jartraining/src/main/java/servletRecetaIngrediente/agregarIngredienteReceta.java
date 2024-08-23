@@ -45,6 +45,6 @@ public class agregarIngredienteReceta extends HttpServlet {
 		Ingrediente ing = ctrlI.getById(idIngrediente);
 		request.setAttribute("idReceta", idReceta);
 		request.setAttribute("Ingrediente", ing);
-    	request.getRequestDispatcher("WEB-INF/cantIngrediente.jsp").forward(request, response);
+		request.getRequestDispatcher("WEB-INF/cantIngrediente.jsp").forward(request, response);
     }
 }

@@ -168,4 +168,43 @@ public class DaoEjercicio {
 		}
 	}
 	
+	public LinkedList<Ejercicio> getEjerciciosByRutina(int idRutina) {
+		PreparedStatement stmt=null;
+		ResultSet rs=null;
+		LinkedList<Ejercicio> ejercicios = new LinkedList<>();
+		
+		try {
+			stmt= DbConnector.getInstancia().getConn().prepareStatement(
+					"select e.* from ejercicio e "
+					+ "inner join rutina_ejercicio re on e.id = re.id_ejercicio "
+					+ "where re.id_rutina = ?"
+					);
+			stmt.setInt(1, idRutina);
+			rs= stmt.executeQuery();
+
+			if(rs!=null) {
+				while(rs.next()) {
+					Ejercicio e =new Ejercicio();
+					e.setId(rs.getInt("id"));
+					e.setNombre(rs.getString("nombre"));
+					e.setDescripcion(rs.getString("descripcion"));
+					ejercicios.add(e);
+				}
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+			
+		} finally {
+			try {
+				if(rs!=null) {rs.close();}
+				if(stmt!=null) {stmt.close();}
+				DbConnector.getInstancia().releaseConn();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		
+		return ejercicios;
+	}
 }
