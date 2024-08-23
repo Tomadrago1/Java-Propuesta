@@ -37,7 +37,7 @@ public class crearReceta extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/crearReceta.jsp");
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/Receta/crearReceta.jsp");
         dispatcher.forward(request, response);
 	}
 

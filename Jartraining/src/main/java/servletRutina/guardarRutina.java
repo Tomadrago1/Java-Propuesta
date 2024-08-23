@@ -59,6 +59,6 @@ public class guardarRutina extends HttpServlet {
 
 		request.setAttribute("listaRutinas", rutinas);
 		//request.setAttribute("rutina", nombreRutina);
-    	request.getRequestDispatcher("WEB-INF/rutinaManagement.jsp").forward(request, response);
+    	request.getRequestDispatcher("WEB-INF/Rutina/rutinaManagement.jsp").forward(request, response);
     }
 }

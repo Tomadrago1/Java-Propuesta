@@ -49,7 +49,7 @@ public class actualizarIngrediente extends HttpServlet {
 		if (success) {
 			LinkedList<Ingrediente> ingredientes = ctrl.getAll();
 			request.setAttribute("ingredientes", ingredientes);
-			request.getRequestDispatcher("WEB-INF/ingredienteManagement.jsp").forward(request, response);
+			request.getRequestDispatcher("WEB-INF/Ingrediente/ingredienteManagement.jsp").forward(request, response);
 		} else {
 			response.getWriter().append("Error al actualizar el usuario.");
 		}

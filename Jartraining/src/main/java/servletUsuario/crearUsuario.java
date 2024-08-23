@@ -27,7 +27,7 @@ public class crearUsuario extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/crearUsuario.jsp");
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/Usuario/crearUsuario.jsp");
         dispatcher.forward(request, response);
 	}
 
@@ -36,7 +36,7 @@ public class crearUsuario extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/crearUsuario.jsp");
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/Usuario/crearUsuario.jsp");
         dispatcher.forward(request, response);
 	}
 

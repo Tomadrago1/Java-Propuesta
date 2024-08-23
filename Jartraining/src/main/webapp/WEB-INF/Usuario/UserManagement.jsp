@@ -24,7 +24,6 @@
             <table>
                 <thead>
                     <tr>
-                        <th>Id</th>
                         <th>Nombre</th>
                         <th>Apellido</th>
                         <th>Email</th>
@@ -38,7 +37,6 @@
                     if (usu.getEstado()) { // Muestra solo si el estado es true (o 1)
                     %>
                     <tr>
-                        <td><%=usu.getIdUsuario()%></td>
                         <td><%=usu.getNombre()%></td>
                         <td><%=usu.getApellido()%></td>
                         <td><%=usu.getEmail()%></td>

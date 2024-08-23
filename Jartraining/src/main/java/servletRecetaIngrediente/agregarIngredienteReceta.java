@@ -11,24 +11,24 @@ import javax.servlet.http.HttpServletResponse;
 import entities.Ingrediente;
 import logic.ctrlIngrediente;
 
-
 /**
  * Servlet implementation class agregarIngredienteReceta
  */
 @WebServlet("/agregarIngredienteReceta")
 public class agregarIngredienteReceta extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public agregarIngredienteReceta() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#HttpServlet()
+	 */
+	public agregarIngredienteReceta() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
@@ -36,7 +36,8 @@ public class agregarIngredienteReceta extends HttpServlet {
 	}
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int idReceta = Integer.parseInt(request.getParameter("idReceta"));
@@ -47,4 +48,4 @@ public class agregarIngredienteReceta extends HttpServlet {
 		request.setAttribute("Ingrediente", ing);
 		request.getRequestDispatcher("WEB-INF/cantIngrediente.jsp").forward(request, response);
     }
-}
+	}

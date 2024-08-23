@@ -23,6 +23,7 @@
             <table>
                 <thead>
                     <tr>
+                        <th></th>
                         <th>Nombre</th>
                         <th>Descripción</th>
                         <th>Editar Ingrediente</th>
@@ -32,6 +33,12 @@
                 <tbody>
                     <% for (Ingrediente ing : li) { %>
                     <tr>
+                        <td>
+                            <form action="verMasIngrediente" method="post" style="display:inline;">
+                                <input type="hidden" name="id" value="<%=ing.getId()%>">
+                                <input type="submit" value="Ver Más" class="action-btn edit-btn">
+                            </form>
+                        </td>
                         <td><%=ing.getNombre()%></td>
                         <td><%=ing.getDesc()%></td>
                         <td>

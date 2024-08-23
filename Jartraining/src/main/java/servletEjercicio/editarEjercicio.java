@@ -21,14 +21,15 @@ public class editarEjercicio extends HttpServlet {
         super();
     }
 
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
         int idEjercicio = Integer.parseInt(request.getParameter("id"));
 
         ctrlEjercicios ctrl = new ctrlEjercicios();
         Ejercicio ej = ctrl.getOne(idEjercicio);
-        
+
         request.setAttribute("ejercicio", ej);
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/editarEjercicio.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("WEB-INF/Ejercicio/editarEjercicio.jsp");
         dispatcher.forward(request, response);
     }
 }

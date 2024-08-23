@@ -40,8 +40,6 @@ public class actualizarEjercicioRutina extends HttpServlet {
             }
             
         } catch (NumberFormatException e) {
-            System.out.println("series: " + series);
-            System.out.println("repes: " + repes);
             response.getWriter()
                     .append("Error: Invalid number format. Please ensure series and repetitions are valid integers.");
             return;

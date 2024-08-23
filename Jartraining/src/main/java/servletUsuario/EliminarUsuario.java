@@ -46,7 +46,7 @@ public class EliminarUsuario extends HttpServlet {
 		    if (success) {
 	        	LinkedList<Usuario> usuarios = ctrl.getAll();
 	        	request.setAttribute("listaUsuarios", usuarios);
-	        	request.getRequestDispatcher("WEB-INF/UserManagement.jsp").forward(request, response);
+	        	request.getRequestDispatcher("WEB-INF/Usuario/UserManagement.jsp").forward(request, response);
 		    } else {
 		        response.getWriter().append("Error al eliminar el usuario."); // Mensaje de error
 		    }

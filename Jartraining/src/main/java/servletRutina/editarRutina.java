@@ -24,7 +24,7 @@ public class editarRutina extends HttpServlet {
         Rutina rut = ctrl.getOne(idRutina);
 
         request.setAttribute("rutina", rut);
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/editarRutina.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/Rutina/editarRutina.jsp");
         dispatcher.forward(request, response);
     }
 }

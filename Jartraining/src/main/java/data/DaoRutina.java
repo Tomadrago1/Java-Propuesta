@@ -192,7 +192,7 @@ public class DaoRutina {
 
 		try {
 			stmt = DbConnector.getInstancia().getConn().prepareStatement(
-					"SELECT eje.id, eje.nombre, eje.descripcion, re.series_aproximadas, re.repeticiones_aproximadas re.tiempo_aproximado FROM rutina_ejercicio AS re INNER JOIN ejercicio AS eje ON re.id_ejercicio = eje.id WHERE id_rutina = ?");
+					"SELECT eje.id, eje.nombre, eje.descripcion, re.series_aproximadas, re.repeticiones_aproximadas, re.tiempo_aproximado FROM rutina_ejercicio AS re INNER JOIN ejercicio AS eje ON re.id_ejercicio = eje.id WHERE id_rutina = ?");
 			stmt.setInt(1, id);
 			rs = stmt.executeQuery();
 
