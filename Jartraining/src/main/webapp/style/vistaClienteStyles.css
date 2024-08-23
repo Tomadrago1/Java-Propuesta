@@ -1,0 +1,33 @@
+body {
+    font-family: 'Arial', sans-serif; /* Tipo de letra general */
+    background-color: #f4f4f4; /* Color de fondo */
+    margin: 0;
+    padding: 20px; /* Espaciado interno */
+}
+
+h1 {
+    text-align: center; /* Centrar el título */
+    color: #333; /* Color del texto */
+}
+
+.button-container {
+    display: flex; /* Usar flexbox para el diseño */
+    flex-direction: column; /* Disposición vertical */
+    align-items: center; /* Centrar los elementos */
+    gap: 15px; /* Espaciado entre los botones */
+}
+
+.button {
+    padding: 10px 20px; /* Espaciado interno */
+    background-color: #4CAF50; /* Color de fondo */
+    color: white; /* Color del texto */
+    text-align: center; /* Centrar el texto */
+    text-decoration: none; /* Sin subrayado */
+    border-radius: 5px; /* Bordes redondeados */
+    transition: background-color 0.3s; /* Efecto de transición */
+    font-size: 16px; /* Tamaño de fuente */
+}
+
+.button:hover {
+    background-color: #45a049; /* Color de fondo al pasar el ratón */
+}
