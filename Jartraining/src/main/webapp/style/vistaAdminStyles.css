@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 body {
     font-family: Arial, sans-serif;
     /*background-color: rgb(28, 33, 41);*/
@@ -89,4 +90,97 @@ h2 {
 
 
 
+=======
+body {
+    font-family: Arial, sans-serif;
+    /*background-color: rgb(28, 33, 41);*/
+    background-color: #ffffff;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.super-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    flex-grow: 1;
+    margin-bottom: 50px;
+}
+
+.admin-container {
+    background-color: #E3E3E3;
+    padding: 10px 30px 30px 30px;
+    border-radius: 10px;
+    border: 2px solid #1d3461;
+    /* Borde claro */
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.7);
+    text-align: center;
+    width: 100%;
+    max-width: 800px;
+    transition: transform 0.3s ease, background-color 0.3s ease, border-color 0.3s ease;
+    /* Transición más suave */
+}
+
+.Juanfra{
+    width: 100px;
+    height: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+}
+
+img{
+    width: 42vh;
+    height: auto;
+    object-fit: cover;
+    margin: 12vh 0 0 0;
+}
+
+h1 {
+    margin-bottom: 20px;
+    color: #000001;
+    font-size: 32px;
+    letter-spacing: 1px;
+}
+
+h2 {
+    margin-bottom: 20px;
+    color: #000001;
+    font-size: 24px;
+    letter-spacing: 0.5px;
+}
+
+.admin-btn {
+    display: block;
+    width: 100%;
+    margin: 10px 0;
+    padding: 15px;
+    font-size: 18px;
+    font-weight: bold;
+    color: #ffffff;
+    background-color: #5688C7;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    text-decoration: none;
+    box-shadow: 8px 8px 15px rgba(0, 0, 0, 0.3), -8px -8px 15px rgba(255, 255, 255, 0.1);
+    transition: background-color 0.3s, transform 0.3s, box-shadow 0.3s;
+}
+
+.admin-btn:hover {
+    background-color: #1d3461;
+    transform: translateY(-3px);
+    box-shadow: 8px 8px 20px rgba(0, 0, 0, 0.5), -8px -8px 20px rgba(255, 255, 255, 0.1);
+}
+
+
+
+
+>>>>>>> 2a7a2cddb7c46cdba58517d715cf07559706d21c
 /*362c28 vd*/
