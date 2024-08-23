@@ -21,11 +21,13 @@ public class editarEjercicioRutina extends HttpServlet {
         int idEjercicio = Integer.parseInt(request.getParameter("id_eje"));
         int series = Integer.parseInt(request.getParameter("series"));
         int repes = Integer.parseInt(request.getParameter("repes"));
+        String tiempo = request.getParameter("tiempo");
         
         request.setAttribute("id_rut", idRutina);
         request.setAttribute("id_eje", idEjercicio);
         request.setAttribute("series", series);
         request.setAttribute("repes", repes);
+        request.setAttribute("tiempo", tiempo);
         RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/editarEjercicioRutina.jsp");
         dispatcher.forward(request, response);
     }

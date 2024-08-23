@@ -28,14 +28,24 @@
             </head>
 
             <body>
-                <% int id_eje=(int) request.getAttribute("id_eje"); int id_rut=(int) request.getAttribute("id_rut");
-                    Integer series=null; Integer repes=null; try { series=(int) request.getAttribute("series");
-                    repes=(int) request.getAttribute("repes"); } catch (Exception e) {} %>
+                <% 
+                int id_eje=(int) request.getAttribute("id_eje");
+                int id_rut=(int) request.getAttribute("id_rut");
+                Integer series=null;
+                Integer repes=null; 
+                String tiempo=null;
+                try { 
+                    series= (int) request.getAttribute("series");
+                    repes = (Integer) request.getAttribute("repes");
+                    tiempo= (String) request.getAttribute("tiempo");
+                } catch (Exception e) {} 
+                %>
                     <div class="container">
                         <h1>Editar Series y Repeticiones</h1>
                         <form action="actualizarEjercicioRutina" method="post" oninput="validateInputs()">
                             <input type="hidden" name="id_eje" value="<%=id_eje%>">
                             <input type="hidden" name="id_rut" value="<%=id_rut%>">
+                            <input type="hidden" name="metodo" value="modificar">
                             <div class="form-group">
                                 <label for="nombre">Series:</label>
                                 <input type="text" id="series" name="series"
@@ -43,11 +53,13 @@
                             </div>
                             <div class="form-group">
                                 <label for="repeticiones">Repeticiones:</label>
-                                <input type="text" id="repes" name="repes" value="<%=(repes != null) ? repes : ""%>">
+                                <input type="text" id="repes" name="repes" 
+                                    value="<%=(repes != null && repes != 0) ? repes : ""%>">
                             </div>
                             <div class="form-group">
                                 <label for="tiempo">Tiempo:</label>
-                                <input type="text" id="tiempo" name="tiempo">
+                                <input type="text" id="tiempo" name="tiempo" 
+                                    value="<%=(tiempo != null) ? tiempo : ""%>">
                             </div>
                             <div class="form-group">
                                 <input type="submit" id="submitBtn" value="Actualizar">

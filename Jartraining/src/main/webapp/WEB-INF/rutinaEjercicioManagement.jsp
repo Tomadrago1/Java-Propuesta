@@ -61,25 +61,19 @@
                                                 <td class="actions">
                                                     <form action="editarEjercicioRutina" method="post"
                                                         class="inline-form">
-                                                        <input type="hidden" name="id_rut" value="<%= eje.get(" id_rut")
-                                                            %>">
+                                                        <input type="hidden" name="id_rut" value="<%= eje.get("id_rut")%>">
                                                         <input type="hidden" name="id_eje" value="<%= eje.get("id_eje")%>">
-                                                        <input type="hidden" name="series" value="<%= eje.get(" series")
-                                                            %>">
-                                                        <input type="hidden" name="repes" value="<%= eje.get(" repes")
-                                                            %>">
-                                                        <input type="hidden" name="tiempo" value="<%= eje.get(" tiempo")
-                                                            %>">
+                                                        <input type="hidden" name="series" value="<%= eje.get("series")%>">
+                                                        <input type="hidden" name="repes" value="<%= eje.get("repes")%>">
+                                                        <input type="hidden" name="tiempo" value="<%= eje.get("tiempo")%>">
                                                         <input type="submit" value="Editar" class="action-btn edit-btn">
                                                     </form>
                                                 </td>
                                                 <td>
                                                     <form action="quitarEjercicioRutina" method="post"
                                                         class="inline-form">
-                                                        <input type="hidden" name="id_rut" value="<%= eje.get(" id_rut")
-                                                            %>">
-                                                        <input type="hidden" name="id_eje" value="<%= eje.get(" id_eje")
-                                                            %>">
+                                                        <input type="hidden" name="id_rut" value="<%= eje.get("id_rut")%>">
+                                                        <input type="hidden" name="id_eje" value="<%= eje.get("id_eje") %>">
                                                         <input type="submit" value="Quitar de la rutina"
                                                             class="action-btn delete-btn"
                                                             onclick="return confirm('¿Estás seguro de que deseas quitar este ejercicio?');">

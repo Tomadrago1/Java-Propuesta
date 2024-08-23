@@ -24,7 +24,8 @@ public class actualizarEjercicioRutina extends HttpServlet {
         Integer repes = null;
         String tiempo = request.getParameter("tiempo");
         String metodo = request.getParameter("metodo");
-
+            
+        System.out.println("Tiempo: " + tiempo);
         try {
             // Check if the 'series' parameter is not empty before parsing
             String seriesParam = request.getParameter("series");
