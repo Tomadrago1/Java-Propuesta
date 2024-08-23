@@ -39,13 +39,15 @@
                     repes = (Integer) request.getAttribute("repes");
                     tiempo= (String) request.getAttribute("tiempo");
                 } catch (Exception e) {} 
+                String metodo;
+                if(series != null) {metodo = "modificar";} else {metodo = "crear";}
                 %>
                     <div class="container">
                         <h1>Editar Series y Repeticiones</h1>
                         <form action="actualizarEjercicioRutina" method="post" oninput="validateInputs()">
                             <input type="hidden" name="id_eje" value="<%=id_eje%>">
                             <input type="hidden" name="id_rut" value="<%=id_rut%>">
-                            <input type="hidden" name="metodo" value="modificar">
+                            <input type="hidden" name="metodo" value="<%=metodo%>">
                             <div class="form-group">
                                 <label for="nombre">Series:</label>
                                 <input type="text" id="series" name="series"

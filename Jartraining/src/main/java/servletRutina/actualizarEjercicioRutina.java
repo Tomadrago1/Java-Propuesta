@@ -24,25 +24,22 @@ public class actualizarEjercicioRutina extends HttpServlet {
         Integer repes = null;
         String tiempo = request.getParameter("tiempo");
         String metodo = request.getParameter("metodo");
-            
-        System.out.println("Tiempo: " + tiempo);
+        
         try {
             // Check if the 'series' parameter is not empty before parsing
             String seriesParam = request.getParameter("series");
-            if (seriesParam != null && !seriesParam.isEmpty()) {
+            if (!seriesParam.equals("")) {
                 series = Integer.parseInt(seriesParam);
             }
 
             // Check if the 'repes' parameter is not empty before parsing
             String repesParam = request.getParameter("repes");
-            System.out.println(repesParam);
-            if (repesParam != null && !repesParam.isEmpty()) {
+            if (!repesParam.equals("")) {
                 repes = Integer.parseInt(repesParam);
             }
             
         } catch (NumberFormatException e) {
-            response.getWriter()
-                    .append("Error: Invalid number format. Please ensure series and repetitions are valid integers.");
+            response.getWriter().append(e.getMessage());
             return;
         }
 

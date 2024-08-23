@@ -266,7 +266,7 @@ public class DaoRutina {
 		PreparedStatement stmt = null;
 		try {
 			stmt = DbConnector.getInstancia().getConn().prepareStatement(
-					"INSERT INTO rutina_ejercicio (id_rutina, id_ejercicio, repeticiones_aproximadas, series_aproximadas, tiempo_aproximado) VALUES (?, ?, ?, ?,?);");
+					"INSERT INTO rutina_ejercicio (id_rutina, id_ejercicio, repeticiones_aproximadas, series_aproximadas, tiempo_aproximado) VALUES (?, ?, ?, ?, ?);");
 			stmt.setInt(1, id_rut);
 			stmt.setInt(2, id_eje);
 			if (repes == null) {
