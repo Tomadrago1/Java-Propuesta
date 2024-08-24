@@ -24,6 +24,7 @@
             <input type="submit" class="admin-btn" value="Agendar Consulta con Profesional">
         </form>
         <form action="verRecetasRecomendadas" method="post">
+            <input type="hidden" name="idUsuario" value="<%=u.getIdUsuario()%>">
             <input type="submit" class="admin-btn" value="Ver Recetas Recomendadas">
         </form>
     </div>

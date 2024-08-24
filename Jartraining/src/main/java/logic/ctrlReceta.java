@@ -52,4 +52,7 @@ public class ctrlReceta {
     public LinkedList<Map<String, Object>> getNutrientesConCantidad(int idReceta) {
         return dr.getNutrientesReceta(idReceta);
     }
+    public LinkedList<Receta> getRecetasRecomendadas(int idUsuario) {
+        return dr.getRecetasRecomendadas(idUsuario);
+    }
 }
