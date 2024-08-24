@@ -18,4 +18,8 @@ public class ctrlEjercicios {
 	public Ejercicio getOne(int idEjercicio) {
 		return de.getOne(idEjercicio);
 	}
+
+	public LinkedList<Ejercicio> getEjerciciosByRutina(int idRutina) {
+		return de.getEjerciciosByRutina(idRutina);
+	}
 }

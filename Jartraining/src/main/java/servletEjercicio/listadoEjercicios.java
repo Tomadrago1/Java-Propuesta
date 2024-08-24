@@ -45,8 +45,8 @@ public class listadoEjercicios extends HttpServlet {
 
 		ctrlEjercicios ctrl = new ctrlEjercicios();
 		LinkedList<Ejercicio> ejercicios = ctrl.getAll();
-		request.setAttribute("listaEjercicios", ejercicios);
-		request.getRequestDispatcher("WEB-INF/Ejercicio/ejercicioManagement.jsp").forward(request, response);
+    request.setAttribute("listaEjercicios", ejercicios);
+    request.getRequestDispatcher("WEB-INF/Ejercicio/ejercicioManagement.jsp").forward(request, response);
 	}
 
 }

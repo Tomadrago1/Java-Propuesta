@@ -53,7 +53,7 @@ public class DaoUsuario {
 		ResultSet rs=null;
 		try {
 			stmt=DbConnector.getInstancia().getConn().prepareStatement(
-					"select id,nombre,apellido,email,nombre_usuario,tipo_usu,estado from Usuario where nombre_usuario=? and contrasena=?"
+					"select id,nombre,apellido,email,nombre_usuario,tipo_usu,estado from Usuario where nombre_usuario=? and contrasena=? and estado=1"
 					);
 			stmt.setString(1, usu.getNombreUsuario());
 			stmt.setString(2, usu.getPassword());

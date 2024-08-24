@@ -47,5 +47,5 @@ public class agregarIngredienteReceta extends HttpServlet {
 		request.setAttribute("idReceta", idReceta);
 		request.setAttribute("Ingrediente", ing);
 		request.getRequestDispatcher("WEB-INF/cantIngrediente.jsp").forward(request, response);
+    }
 	}
-}
