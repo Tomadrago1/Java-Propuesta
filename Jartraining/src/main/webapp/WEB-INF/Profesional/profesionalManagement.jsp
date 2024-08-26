@@ -43,13 +43,13 @@
                         <td><%=prof.getNombreUsuario()%></td>      
                         <td>
                         	<form action="editarProfesional" method="post" style="display:inline;">
-                                <input type="hidden" name="id" value="<%=prof.getIdProfesional()%>">
-                                <input type="submit" value="Editar" class="action-btn edit-btn">
+                                <input type="hidden" name="id" value="<%=prof.getIdUsuario()%>">
+                                <input type="submit" value="Editar" class="actionf-btn edit-btn">
                             </form>
                          </td>
                         <td>
                             <form action="EliminarProfesional" method="post" style="display:inline;">
-                                <input type="hidden" name="id" value="<%=prof.getIdProfesional()%>">
+                                <input type="hidden" name="id" value="<%=prof.getIdUsuario()%>">
                                 <input type="submit" value="Borrar" class="action-btn delete-btn" onclick="return confirm('¿Estás seguro de que deseas eliminar este profesional?');">
                             </form>
                         </td>

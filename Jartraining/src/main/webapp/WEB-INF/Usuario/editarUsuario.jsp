@@ -39,7 +39,16 @@
                 <input type="text" id="tipoUsuario" name="tipoUsuario" value="<%=usuario.getTipoUsu()%>">
             </div>
             <div class="form-group">
-                <input type="submit" value="Actualizar">
+                <label for="password">Contraseña:</label>
+                <input type="password" id="password" name="password" required>
+            </div>
+            <div class="form-group">
+                <label for="confirm_password">Repetir Contraseña:</label>
+                <input type="password" id="confirm_password" name="confirm_password" required>
+            </div>
+            <div id="error-message" style="color: red; display: none;">Las contraseñas no coinciden.</div>
+            <div class="form-group">
+                <input type="submit" onclick="return validatePassword()" value="Actualizar"></input>
             </div>
         </form>
         <a href="index.html" style="color: red">Volver</a>

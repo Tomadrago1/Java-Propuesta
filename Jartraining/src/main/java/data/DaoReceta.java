@@ -27,7 +27,7 @@ public class DaoReceta {
 					r.setNivelDificultad(rs.getString("r.nivel_dificultad"));
 					if (rs.getObject("p.id") != null) {
 						p.setNombre(rs.getString("p.nombre"));
-						p.setIdProfesional(rs.getInt("p.id"));
+						p.setIdUsuario(rs.getInt("p.id"));
 						p.setApellido(rs.getString("p.apellido"));
 						p.setProfesion(rs.getString("p.profesion"));
 					} else {
@@ -77,7 +77,7 @@ public class DaoReceta {
 				// Verificar si el id del profesional es válido
 				if (rs.getObject("p.id") != null) {
 					p.setNombre(rs.getString("p.nombre"));
-					p.setIdProfesional(rs.getInt("p.id"));
+					p.setIdUsuario(rs.getInt("p.id"));
 					p.setApellido(rs.getString("p.apellido"));
 					p.setProfesion(rs.getString("p.profesion"));
 					r.setProfesional(p);
@@ -399,7 +399,7 @@ public class DaoReceta {
 					r.setNivelDificultad(rs.getString("rec.nivel_dificultad"));
 					if (rs.getObject("p.id") != null) {
 						p.setNombre(rs.getString("p.nombre"));
-						p.setIdProfesional(rs.getInt("p.id"));
+						p.setIdUsuario(rs.getInt("p.id"));
 						p.setApellido(rs.getString("p.apellido"));
 						p.setProfesion(rs.getString("p.profesion"));
 					} else {

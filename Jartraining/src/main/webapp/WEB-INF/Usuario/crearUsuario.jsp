@@ -7,6 +7,20 @@
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="style/crear-editar.css">
+    <script>
+        function validatePassword() {
+            var password = document.getElementById("password").value;
+            var confirmPassword = document.getElementById("confirm_password").value;
+
+            if (password !== confirmPassword) {
+                document.getElementById("error-message").style.display = "block";
+                return false;
+            } else {
+                document.getElementById("error-message").style.display = "none";
+                return true;
+            }
+        }
+    </script>
     <title>Crear Usuario</title>
 </head>
 <body>
@@ -38,7 +52,12 @@
                 <input type="password" id="password" name="password" required>
             </div>
             <div class="form-group">
-                <input type="submit" value="Crear">
+                <label for="confirm_password">Repetir Contraseña:</label>
+                <input type="password" id="confirm_password" name="confirm_password" required>
+            </div>
+            <div id="error-message" style="color: red; display: none;">Las contraseñas no coinciden.</div>
+            <div class="form-group">
+                <input type="submit" onclick="return validatePassword()" value="Crear"></input>
             </div>
         </form>
         <a href="index.html" style="color: red">Volver</a>

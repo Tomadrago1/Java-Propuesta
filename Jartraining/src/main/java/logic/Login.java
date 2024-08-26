@@ -41,9 +41,10 @@ public class Login {
 		du.addUsuario(u);
 	}
 
-	public boolean modificar(int id, String nombre, String apellido, String email, String nombreUsuario, int tipoUsu) {
+	public boolean modificar(int id, String nombre, String apellido, String email, String nombreUsuario, int tipoUsu,
+			String password) {
 		// Obtiene todos los usuarios utilizando DaoProfesional
-		return du.modificarUser(id, nombre, apellido, email, nombreUsuario, tipoUsu);
+		return du.modificarUser(id, nombre, apellido, email, nombreUsuario, tipoUsu, password);
 	}
 
 	public Profesional getProfesionalById(int id) {

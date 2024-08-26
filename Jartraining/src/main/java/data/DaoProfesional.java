@@ -18,7 +18,7 @@ public class DaoProfesional {
 			if (rs != null) {
 				while (rs.next()) {
 					Profesional p = new Profesional();
-					p.setIdProfesional(rs.getInt("id"));
+					p.setIdUsuario(rs.getInt("id"));
 					p.setNombre(rs.getString("nombre"));
 					p.setApellido(rs.getString("apellido"));
 					p.setProfesion(rs.getString("profesion"));
@@ -60,7 +60,7 @@ public class DaoProfesional {
 			rs = stmt.executeQuery();
 			if (rs != null && rs.next()) {
 				p = new Profesional();
-				p.setIdProfesional(rs.getInt("id_usuario"));
+				p.setIdUsuario(rs.getInt("id_usuario"));
 				p.setNombre(rs.getString("nombre"));
 				p.setApellido(rs.getString("apellido"));
 				p.setProfesion(rs.getString("email"));
@@ -97,7 +97,7 @@ public class DaoProfesional {
 			rs = stmt.executeQuery();
 			if (rs != null && rs.next()) {
 				p = new Profesional();
-				p.setIdProfesional(rs.getInt("id"));
+				p.setIdUsuario(rs.getInt("id"));
 				p.setNombre(rs.getString("nombre"));
 				p.setApellido(rs.getString("apellido"));
 				p.setProfesion(rs.getString("profesion"));
@@ -192,7 +192,7 @@ public class DaoProfesional {
 
 			keyResultSet = stmt.getGeneratedKeys();
 			if (keyResultSet != null && keyResultSet.next()) {
-				p.setIdProfesional(keyResultSet.getInt(1));
+				p.setIdUsuario(keyResultSet.getInt(1));
 				;
 			}
 
