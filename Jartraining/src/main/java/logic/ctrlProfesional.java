@@ -12,9 +12,9 @@ public class ctrlProfesional {
         dp = new DaoProfesional();
     }
 
-    public boolean modificar(int id, String nombre, String apellido, String profesion) {
-        // Obtiene todos los profesionales utilizando DaoProfesional
-        return dp.modificarProfesional(id, nombre, apellido, profesion);
+    public boolean modificar(int id, String nombre, String apellido, String profesion, String nombreUsuario,
+            String password, String email) {
+        return dp.modificarProfesional(id, nombre, apellido, profesion, nombreUsuario, password, email);
     }
 
     public boolean eliminarProfesional(int id) {

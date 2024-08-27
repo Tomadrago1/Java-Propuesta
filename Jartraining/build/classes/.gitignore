@@ -3,15 +3,11 @@
 /logic/
 /servlet/
 /servletEjercicio/
-/servletEntrenamiento/
 /servletIngrediente/
 /servletNutriente/
 /servletNutrienteIngrediente/
 /servletProfesional/
 /servletReceta/
 /servletRecetaIngrediente/
-/servletRecetaUsuario/
 /servletRutina/
-/servletRutinaUsuario/
 /servletUsuario/
-/consultaUsuario/
