@@ -27,7 +27,7 @@ public class DaoReceta {
 					r.setNivelDificultad(rs.getString("r.nivel_dificultad"));
 					if (rs.getObject("p.id") != null) {
 						p.setNombre(rs.getString("p.nombre"));
-						p.setIdProfesional(rs.getInt("p.id"));
+						p.setIdUsuario(rs.getInt("p.id"));
 						p.setApellido(rs.getString("p.apellido"));
 						p.setProfesion(rs.getString("p.profesion"));
 					} else {
@@ -77,7 +77,7 @@ public class DaoReceta {
 				// Verificar si el id del profesional es válido
 				if (rs.getObject("p.id") != null) {
 					p.setNombre(rs.getString("p.nombre"));
-					p.setIdProfesional(rs.getInt("p.id"));
+					p.setIdUsuario(rs.getInt("p.id"));
 					p.setApellido(rs.getString("p.apellido"));
 					p.setProfesion(rs.getString("p.profesion"));
 					r.setProfesional(p);
@@ -379,5 +379,51 @@ public class DaoReceta {
 			}
 		}
 		return nutrientes;
+	}
+	public LinkedList<Receta> getRecetasRecomendadas(int idUsuario) {
+		PreparedStatement stmt = null;
+		ResultSet rs = null;
+		LinkedList<Receta> recetas = new LinkedList<>();
+		try {
+			stmt = DbConnector.getInstancia().getConn().prepareStatement(
+					"SELECT rec.id, rec.nombre, rec.descripcion, rec.nivel_dificultad, p.nombre, p.id, p.apellido, p.profesion FROM receta rec LEFT JOIN profesional p ON rec.id_profesional = p.id WHERE NOT EXISTS ( SELECT 1 FROM necesidad ne INNER JOIN nutriente n ON ne.id_nutriente = n.id INNER JOIN ingrediente_receta ir ON rec.id = ir.id_receta INNER JOIN nutriente_ingrediente ni ON ni.id_ingrediente = ir.id_ingrediente WHERE ne.id_usuario = ? AND ne.fecha = CURDATE() AND n.id = ni.id_nutriente GROUP BY rec.id, n.id HAVING SUM( ni.cantidad * CASE WHEN ir.unidad_medida = 'kg' THEN (ir.cantidad_porcion * 1000 / 100) WHEN ir.unidad_medida = 'gramos' THEN (ir.cantidad_porcion / 100) ELSE 0 END ) NOT BETWEEN MAX(ne.cantidad_min) AND MAX(ne.cantidad_max) ) GROUP BY rec.id, rec.nombre, rec.descripcion, rec.nivel_dificultad, p.nombre, p.id, p.apellido, p.profesion;");
+			stmt.setInt(1, idUsuario);
+			rs = stmt.executeQuery();
+			if (rs != null) {
+				while (rs.next()) {
+					Receta r = new Receta();
+					Profesional p = new Profesional();
+					r.setId(rs.getInt("rec.id"));
+					r.setNombre(rs.getString("rec.nombre"));
+					r.setDesc(rs.getString("rec.descripcion"));
+					r.setNivelDificultad(rs.getString("rec.nivel_dificultad"));
+					if (rs.getObject("p.id") != null) {
+						p.setNombre(rs.getString("p.nombre"));
+						p.setIdUsuario(rs.getInt("p.id"));
+						p.setApellido(rs.getString("p.apellido"));
+						p.setProfesion(rs.getString("p.profesion"));
+					} else {
+						p = null;
+					}
+					r.setProfesional(p);
+					recetas.add(r);
+				}
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (rs != null) {
+					rs.close();
+				}
+				if (stmt != null) {
+					stmt.close();
+				}
+				DbConnector.getInstancia().releaseConn();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return recetas;
 	}
 }

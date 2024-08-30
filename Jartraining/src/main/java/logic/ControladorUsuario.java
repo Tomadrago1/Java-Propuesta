@@ -30,7 +30,8 @@ public class ControladorUsuario {
 		du.addUsuario(u);
 	}
 
-	public boolean modificar(int id, String nombre, String apellido, String email, String nombreUsuario, int tipoUsu) {
-		return du.modificarUser(id, nombre, apellido, email, nombreUsuario, tipoUsu);
+	public boolean modificar(int id, String nombre, String apellido, String email, String nombreUsuario, int tipoUsu,
+			String password) {
+		return du.modificarUser(id, nombre, apellido, email, nombreUsuario, tipoUsu, password);
 	}
 }

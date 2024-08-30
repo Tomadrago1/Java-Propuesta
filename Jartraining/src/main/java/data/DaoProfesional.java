@@ -13,17 +13,19 @@ public class DaoProfesional {
 
 		try {
 			stmt = DbConnector.getInstancia().getConn().createStatement();
-			rs = stmt.executeQuery("select id,nombre,apellido,profesion,estado from Profesional"); /* nombre_usuario */
-			// intencionalmente no se recupera la password
+			rs = stmt.executeQuery(
+					"select id,nombre,apellido,profesion,estado,nombre_usuario,profesion,tipo_usu from Profesional");
 			if (rs != null) {
 				while (rs.next()) {
 					Profesional p = new Profesional();
-					p.setIdProfesional(rs.getInt("id"));
+					p.setIdUsuario(rs.getInt("id"));
 					p.setNombre(rs.getString("nombre"));
 					p.setApellido(rs.getString("apellido"));
 					p.setProfesion(rs.getString("profesion"));
-					/* p.setNombreUsuario(rs.getString("nombre_usuario")); */
+					p.setNombreUsuario(rs.getString("nombre_usuario"));
 					p.setEstado(rs.getBoolean("estado"));
+					p.setNombreUsuario(rs.getString("nombre_usuario"));
+					p.setTipoUsu(rs.getInt("tipo_usu"));
 					profesionales.add(p);
 				}
 			}
@@ -54,18 +56,20 @@ public class DaoProfesional {
 		ResultSet rs = null;
 		try {
 			stmt = DbConnector.getInstancia().getConn().prepareStatement(
-					"select id_profesional,nombre,apellido,nombre_usuario,estado from Profesional where nombre_usuario=? and contraseña=?");
+					"select id_profesional,nombre,apellido,nombre_usuario,estado,tipo_usu,profesion from Profesional where nombre_usuario=? and contrasena=?");
 			stmt.setString(1, prof.getNombreUsuario());
 			stmt.setString(2, prof.getPassword());
 			rs = stmt.executeQuery();
 			if (rs != null && rs.next()) {
 				p = new Profesional();
-				p.setIdProfesional(rs.getInt("id_usuario"));
+				p.setIdUsuario(rs.getInt("id"));
 				p.setNombre(rs.getString("nombre"));
 				p.setApellido(rs.getString("apellido"));
-				p.setProfesion(rs.getString("email"));
+				p.setProfesion(rs.getString("profesion"));
 				p.setNombreUsuario(rs.getString("nombre_usuario"));
 				p.setEstado(rs.getBoolean("estado"));
+				p.setNombreUsuario(rs.getString("nombre_usuario"));
+				p.setTipoUsu(rs.getInt("tipo_usu"));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -91,18 +95,19 @@ public class DaoProfesional {
 		ResultSet rs = null;
 		try {
 			stmt = DbConnector.getInstancia().getConn().prepareStatement(
-					"select id,nombre,apellido,profesion,estado from Profesional where id=?" /* nombre_usuario */
-			);
+					"select id,nombre,apellido,profesion,estado,nombre_usuario,profesion,tipo_usu from Profesional where id=?");
 			stmt.setInt(1, id);
 			rs = stmt.executeQuery();
 			if (rs != null && rs.next()) {
 				p = new Profesional();
-				p.setIdProfesional(rs.getInt("id"));
+				p.setIdUsuario(rs.getInt("id"));
 				p.setNombre(rs.getString("nombre"));
 				p.setApellido(rs.getString("apellido"));
 				p.setProfesion(rs.getString("profesion"));
-				/* p.setNombreUsuario(rs.getString("nombre_usuario")); */
+				p.setNombreUsuario(rs.getString("nombre_usuario"));
 				p.setEstado(rs.getBoolean("estado"));
+				p.setNombreUsuario(rs.getString("nombre_usuario"));
+				p.setTipoUsu(rs.getInt("tipo_usu"));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -123,16 +128,17 @@ public class DaoProfesional {
 	}
 
 	public boolean modificarProfesional(int id, String nombre, String apellido,
-			String profesion/* String nombreUsuario */) {
+			String profesion, String nombreUsuario, String password, String email) {
 		PreparedStatement stmt = null;
 		try {
 			stmt = DbConnector.getInstancia().getConn().prepareStatement(
-					"UPDATE profesional SET nombre = ?, apellido = ?, profesion = ? WHERE id = ?");/* nombre_usuario = ? */
+					"UPDATE profesional SET nombre = ?, apellido = ?, profesion = ?, email = ?, contrasena = ? WHERE id = ?");
 			stmt.setString(1, nombre);
 			stmt.setString(2, apellido);
 			stmt.setString(3, profesion);
-			/* stmt.setString(4, nombreUsuario); */
-			stmt.setInt(4, id);
+			stmt.setString(4, email);
+			stmt.setString(5, password);
+			stmt.setInt(6, id);
 
 			int filasActualizadas = stmt.executeUpdate();
 			return filasActualizadas > 0; // Retornar true si se actualizó al menos una fila
@@ -178,21 +184,21 @@ public class DaoProfesional {
 		ResultSet keyResultSet = null;
 		try {
 			stmt = DbConnector.getInstancia().getConn().prepareStatement(
-					"insert into Profesional(nombre, apellido, profesion, estado) values(?,?,?,?)", /*
-																																													 * nombre_usuario, contrasena
-																																													 */
+					"insert into Profesional(nombre, apellido, profesion, estado, nombre_usuario, contrasena, tipo_usu, email) values(?,?,?,?,?,?,?,?)",
 					PreparedStatement.RETURN_GENERATED_KEYS);
 			stmt.setString(1, p.getNombre());
 			stmt.setString(2, p.getApellido());
 			stmt.setString(3, p.getProfesion());
-			/* stmt.setString(4, p.getNombreUsuario()); */
-			/* stmt.setString(4, p.getPassword()); */
 			stmt.setBoolean(4, p.getEstado());
+			stmt.setString(5, p.getNombreUsuario());
+			stmt.setString(6, p.getPassword());
+			stmt.setInt(7, p.getTipoUsu());
+			stmt.setString(8, p.getEmail());
 			stmt.executeUpdate();
 
 			keyResultSet = stmt.getGeneratedKeys();
 			if (keyResultSet != null && keyResultSet.next()) {
-				p.setIdProfesional(keyResultSet.getInt(1));
+				p.setIdUsuario(keyResultSet.getInt(1));
 				;
 			}
 

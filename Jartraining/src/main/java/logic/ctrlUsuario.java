@@ -13,9 +13,9 @@ public class ctrlUsuario {
     }
 
     public Usuario getById(int id) {
-    	return du.getUserById(id);
+        return du.getUserById(id);
     }
-    
+
     public Usuario validate(Usuario u) {
         return du.getByUser(u);
     }
@@ -27,13 +27,14 @@ public class ctrlUsuario {
     public void add(Usuario u) {
         du.addUsuario(u);
     }
-    
+
     public boolean eliminar(int id) {
-    	return du.eliminarUsuario(id);
+        return du.eliminarUsuario(id);
     }
-    
-    public boolean modificar(int id, String nombre, String apellido, String email, String nombreUsuario, int tipoUsu) {
+
+    public boolean modificar(int id, String nombre, String apellido, String email, String nombreUsuario, int tipoUsu,
+            String password) {
         // Obtiene todos los usuarios utilizando DaoProfesional
-        return du.modificarUser(id, nombre, apellido, email, nombreUsuario, tipoUsu);
+        return du.modificarUser(id, nombre, apellido, email, nombreUsuario, tipoUsu, password);
     }
 }

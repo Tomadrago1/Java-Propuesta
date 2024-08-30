@@ -16,7 +16,7 @@
     <div class="container">
         <h1>Editar Profesional</h1>
         <form action="actualizarProfesional" method="post">
-            <input type="hidden" name="id" value="<%=profesional.getIdProfesional()%>">
+            <input type="hidden" name="id" value="<%=profesional.getIdUsuario()%>">
             <div class="form-group">
                 <label for="nombre">Nombre:</label>
                 <input type="text" id="nombre" name="nombre" value="<%=profesional.getNombre()%>">
@@ -29,10 +29,10 @@
                 <label for="email">Profesion:</label>
                 <input type="text" id="profesion" name="profesion" value="<%=profesional.getProfesion()%>">
             </div>
-            <%--<div class="form-group">
+            <div class="form-group">
                 <label for="nombreUsuario">Nombre de Usuario:</label>
                 <input type="text" id="nombreUsuario" name="nombreUsuario" value="<%=profesional.getNombreUsuario()%>">
-            </div>--%>
+            </div>
             <div class="form-group">
                 <input type="submit" value="Actualizar">
             </div>

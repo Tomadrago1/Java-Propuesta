@@ -51,17 +51,6 @@ public class Receta {
     public void setNivelDificultad(String nivelDificultad) {
         this.nivelDificultad = nivelDificultad;
     }
-    
-    @Override
-    public String toString() {
-        return "Receta{" +
-                "id=" + id +
-                ", profesional=" + (profesional != null ? profesional.getNombre() + " " + profesional.getApellido() : "Sin profesional") +
-                ", nombre='" + nombre + '\'' +
-                ", desc='" + desc + '\'' +
-                ", nivelDificultad='" + nivelDificultad + '\'' +
-                '}';
-    }
 }
 
 
