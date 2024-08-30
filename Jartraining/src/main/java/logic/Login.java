@@ -3,17 +3,13 @@ package logic;
 import java.util.LinkedList;
 
 import data.DaoUsuario;
-import data.DaoProfesional;
 import entities.Usuario;
-import entities.Profesional;
 
 public class Login {
 	private DaoUsuario du;
-	private DaoProfesional dp;
 
 	public Login() {
 		du = new DaoUsuario();
-		dp = new DaoProfesional();
 	}
 
 	public Usuario validate(Usuario u) {
