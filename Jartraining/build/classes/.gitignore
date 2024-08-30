@@ -1,23 +1,4 @@
 /data/
+/servletNutrienteIngrediente/
 /entities/
 /logic/
-/servlet/
-/servletEjercicio/
-<<<<<<< HEAD
-/servletEntrenamiento/
-/servletIngrediente/
-/servletNutriente/
-=======
-/servletIngrediente/
-/servletNutriente/
-/servletNutrienteIngrediente/
->>>>>>> 6adcb8656ca780f56af18c896d8e10a1c6db48df
-/servletProfesional/
-/servletReceta/
-/servletRecetaIngrediente/
-/servletRutina/
-<<<<<<< HEAD
-/servletRutinaUsuario/
-=======
->>>>>>> 6adcb8656ca780f56af18c896d8e10a1c6db48df
-/servletUsuario/
