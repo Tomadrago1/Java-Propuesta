@@ -227,24 +227,41 @@ public class DaoIngrediente {
 		}
 	}
 
-	public LinkedList<Map<String, Object>> getNutrientesIngrediente(int idIngrediente) {
+	public LinkedList<NutrienteIngrediente> getNutrientesIngrediente(int idIngrediente) {
 		PreparedStatement stmt = null;
 		ResultSet rs = null;
-		LinkedList<Map<String, Object>> nutrientes = new LinkedList<>();
+		// cambiar LinkedList<Map> Por una clase nueva que tenga de atributos las 2 clases y atributos extras
+		LinkedList<NutrienteIngrediente> nutrientes = new LinkedList<>();
 		try {
 			stmt = DbConnector.getInstancia().getConn().prepareStatement(
-					"select n.id,n.nombre,n.descripcion,ni.cantidad,ni.unidad_medida from nutriente_ingrediente ni inner join nutriente n on ni.id_nutriente=n.id where ni.id_ingrediente=?");
+					"SELECT \n" + //
+												"    ni.cantidad, ni.id_nutriente, n.nombre AS nombre_nutriente, n.descripcion AS descripcion_nutriente, ni.id_ingrediente, i.nombre AS nombre_ingrediente, i.descripcion AS descripcion_ingrediente\n" + //
+												"FROM\n" + //
+												"    nutriente_ingrediente ni\n" + //
+												"        INNER JOIN\n" + //
+												"    nutriente n ON ni.id_nutriente = n.id\n" + //
+												"\t\tINNER JOIN\n" + //
+												"\tingrediente i ON i.id = ni.id_ingrediente where ni.id_ingrediente = ?");
 			stmt.setInt(1, idIngrediente);
 			rs = stmt.executeQuery();
 			if (rs != null) {
 				while (rs.next()) {
-					Map<String, Object> nutriente = new HashMap<>();
-					nutriente.put("id", rs.getInt("n.id"));
-					nutriente.put("nombre", rs.getString("n.nombre"));
-					nutriente.put("descripcion", rs.getString("n.descripcion"));
-					nutriente.put("cantidad", rs.getDouble("ni.cantidad"));
-					nutriente.put("unidad_medida", rs.getString("ni.unidad_medida"));
-					nutrientes.add(nutriente);
+					NutrienteIngrediente ni = new NutrienteIngrediente();
+
+					Nutriente n = new Nutriente();
+					n.setId_nutriente(rs.getInt("id_nutriente"));
+					n.setNombre(rs.getString("nombre_nutriente"));
+					n.setDescripcion(rs.getString("descripcion_nutriente"));
+					ni.setNutriente(n);
+
+					Ingrediente i = new Ingrediente();
+					i.setId(rs.getInt("id_ingrediente"));
+					i.setNombre(rs.getString("nombre_ingrediente"));
+					i.setDesc(rs.getString("descripcion_ingrediente"));
+					ni.setIngrediente(i);
+					
+					ni.setCantidad(rs.getDouble("cantidad"));
+					nutrientes.add(ni);
 				}
 			}
 		} catch (SQLException e) {
