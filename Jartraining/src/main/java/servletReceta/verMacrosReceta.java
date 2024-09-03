@@ -3,7 +3,6 @@ package servletReceta;
 import java.io.IOException;
 
 import java.util.LinkedList;
-import java.util.Map;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -14,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import entities.Receta;
 import logic.ctrlReceta;
+import entities.NutrienteReceta;
 
 @WebServlet("/verMacrosReceta")
 public class verMacrosReceta extends HttpServlet {
@@ -46,7 +46,7 @@ public class verMacrosReceta extends HttpServlet {
     int idReceta = Integer.parseInt(request.getParameter("idReceta"));
     ctrlReceta ctrl = new ctrlReceta();
     Receta receta = ctrl.getById(idReceta);
-    LinkedList<Map<String, Object>> nutrientesConCantidad = ctrl.getNutrientesConCantidad(idReceta);
+    LinkedList<NutrienteReceta> nutrientesConCantidad = ctrl.getNutrientesConCantidad(idReceta);
     request.setAttribute("ListaNutrientes", nutrientesConCantidad);
     request.setAttribute("Receta", receta);
     RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/macronutrientes.jsp");

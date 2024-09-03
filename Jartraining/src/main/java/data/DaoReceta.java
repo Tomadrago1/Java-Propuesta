@@ -321,10 +321,10 @@ public class DaoReceta {
 		}
 	}
 
-	public LinkedList<Map<String, Object>> getNutrientesReceta(int idReceta) {
+	public LinkedList<NutrienteReceta> getNutrientesReceta(int idReceta) {
 		PreparedStatement stmt = null;
 		ResultSet rs = null;
-		LinkedList<Map<String, Object>> nutrientes = new LinkedList<>();
+		LinkedList<NutrienteReceta> nutrientes = new LinkedList<>();
 		try {
 			stmt = DbConnector.getInstancia().getConn().prepareStatement(
 					"SELECT n.id AS id_nutriente, n.nombre AS nombre_nutriente, n.descripcion, " +
@@ -340,12 +340,17 @@ public class DaoReceta {
 			rs = stmt.executeQuery();
 			if (rs != null) {
 				while (rs.next()) {
-					Map<String, Object> nutriente = new HashMap<>();
-					nutriente.put("id", rs.getInt("id_nutriente"));
-					nutriente.put("nombre", rs.getString("nombre_nutriente"));
-					nutriente.put("descripcion", rs.getString("descripcion"));
-					nutriente.put("cantidad", rs.getDouble("cantidad_total_nutriente"));
-					nutrientes.add(nutriente);
+					Nutriente nutriente = new Nutriente();
+					Receta receta = new Receta();
+					NutrienteReceta nr = new NutrienteReceta();
+					nutriente.setId_nutriente(rs.getInt("id_nutriente"));
+					nutriente.setNombre(rs.getString("nombre_nutriente"));
+					nutriente.setDescripcion(rs.getString("descripcion"));
+					nr.setNutriente(nutriente);
+					receta.setId(idReceta);
+					nr.setReceta(receta);
+					nr.setCantidad(rs.getDouble("cantidad_total_nutriente"));
+					nutrientes.add(nr);
 				}
 			}
 		} catch (SQLException e) {

@@ -1,10 +1,10 @@
 package logic;
 
 import java.util.LinkedList;
-import java.util.Map;
 import data.DaoReceta;
 import entities.IngredienteReceta;
 import entities.Receta;
+import entities.NutrienteReceta;
 
 public class ctrlReceta {
     private DaoReceta dr;
@@ -50,7 +50,7 @@ public class ctrlReceta {
         return dr.modificarCantidadIngredienteReceta(idReceta, idIngrediente, cantidad, unidadMedida);
     };
 
-    public LinkedList<Map<String, Object>> getNutrientesConCantidad(int idReceta) {
+    public LinkedList<NutrienteReceta> getNutrientesConCantidad(int idReceta) {
         return dr.getNutrientesReceta(idReceta);
     }
     public LinkedList<Receta> getRecetasRecomendadas(int idUsuario) {
