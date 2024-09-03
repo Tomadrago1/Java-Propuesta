@@ -12,7 +12,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import entities.Usuario;
 import entities.Profesional;
-import logic.ctrlProfesional;
 import logic.ctrlUsuario;
 
 /**
@@ -54,11 +53,12 @@ public class GuardarUsuario extends HttpServlet {
         String password = request.getParameter("password");
         String tipoUsuarioString = request.getParameter("tipoUsuario");
         String profesion = request.getParameter("profesion");
-        int tipoUsuario = 0;
         ctrlUsuario ctrl = new ctrlUsuario();
-        Usuario nuevoUsuario = new Usuario();
+        Usuario nuevoUsuario;
+        int tipoUsuario;
         switch (tipoUsuarioString) {
             case "administrador":
+                nuevoUsuario = new Usuario();
                 tipoUsuario = 1;
                 nuevoUsuario.setNombre(nombre);
                 nuevoUsuario.setApellido(apellido);
@@ -67,9 +67,10 @@ public class GuardarUsuario extends HttpServlet {
                 nuevoUsuario.setTipoUsu(tipoUsuario);
                 nuevoUsuario.setPassword(password);
                 nuevoUsuario.setEstado(true);
-                ctrl.add(nuevoUsuario);
+                ctrl.addUsuario(nuevoUsuario);
                 break;
             case "cliente":
+                nuevoUsuario = new Usuario();
                 tipoUsuario = 3;
                 nuevoUsuario.setNombre(nombre);
                 nuevoUsuario.setApellido(apellido);
@@ -78,7 +79,7 @@ public class GuardarUsuario extends HttpServlet {
                 nuevoUsuario.setTipoUsu(tipoUsuario);
                 nuevoUsuario.setPassword(password);
                 nuevoUsuario.setEstado(true);
-                ctrl.add(nuevoUsuario);
+                ctrl.addUsuario(nuevoUsuario);
                 break;
             case "profesional":
                 tipoUsuario = 2;
@@ -91,12 +92,9 @@ public class GuardarUsuario extends HttpServlet {
                 nuevoProfesional.setPassword(password);
                 nuevoProfesional.setEstado(true);
                 nuevoProfesional.setProfesion(profesion);
-                ctrlProfesional ctrlP = new ctrlProfesional();
-                ctrlP.add(nuevoProfesional);
+                ctrl.addProfesional(nuevoProfesional);
                 break;
             default:
-                // Manejar caso de valor no esperado o nulo
-                tipoUsuario = -1; // Puedes usar otro valor o manejarlo de acuerdo a tu lógica
                 break;
         }
 

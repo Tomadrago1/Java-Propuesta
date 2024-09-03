@@ -41,7 +41,7 @@ public class eliminarRutinaUsuario extends HttpServlet {
 
       ctrlUsuario ctrlU = new ctrlUsuario();
 
-      Usuario u = ctrlU.getById(id_usu);
+      Usuario u = ctrlU.getUserById(id_usu);
       LinkedList<Rutina> rutinas = ctrlR.getRutinaByUsuario(id_usu);
 
       request.setAttribute("rutinas", rutinas);

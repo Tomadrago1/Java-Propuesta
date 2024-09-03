@@ -23,7 +23,7 @@ public class misRutinas extends HttpServlet {
     ctrlRutina ctrlRutina = new ctrlRutina();
     ctrlUsuario ctrlU = new ctrlUsuario();
 
-    Usuario u = ctrlU.getById(id_usuario);
+    Usuario u = ctrlU.getUserById(id_usuario);
     LinkedList<Rutina> rutinas = ctrlRutina.getRutinaByUsuario(id_usuario);
 
     request.setAttribute("rutinas", rutinas);

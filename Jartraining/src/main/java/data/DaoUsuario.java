@@ -15,7 +15,7 @@ public class DaoUsuario {
 
 		try {
 			stmt = DbConnector.getInstancia().getConn().createStatement();
-			rs = stmt.executeQuery("select id,nombre,apellido,email,nombre_usuario,tipo_usu,estado from Cliente");
+			rs = stmt.executeQuery("select id,nombre,apellido,email,nombre_usuario,tipo_usu,estado from Usuario");
 			// intencionalmente no se recupera la password
 			if (rs != null) {
 				while (rs.next()) {
@@ -57,7 +57,7 @@ public class DaoUsuario {
 		ResultSet rs = null;
 		try {
 			stmt = DbConnector.getInstancia().getConn().prepareStatement(
-					"select id,nombre,apellido,email,nombre_usuario,tipo_usu,estado from Cliente where nombre_usuario=? and contrasena=? and estado=1");
+					"select id,nombre,apellido,email,nombre_usuario,tipo_usu,estado from usuario where nombre_usuario=? and contrasena=? and estado=1");
 			stmt.setString(1, usu.getNombreUsuario());
 			stmt.setString(2, usu.getPassword());
 			rs = stmt.executeQuery();
@@ -96,7 +96,7 @@ public class DaoUsuario {
 		ResultSet rs = null;
 		try {
 			stmt = DbConnector.getInstancia().getConn().prepareStatement(
-					"select id,nombre,apellido,email,nombre_usuario,tipo_usu,estado from cliente where id=?");
+					"select id,nombre,apellido,email,nombre_usuario,tipo_usu,estado from usuario where id=?");
 			stmt.setInt(1, id);
 			rs = stmt.executeQuery();
 			if (rs != null && rs.next()) {
@@ -133,7 +133,7 @@ public class DaoUsuario {
 		PreparedStatement stmt = null;
 		try {
 			stmt = DbConnector.getInstancia().getConn().prepareStatement(
-					"UPDATE cliente SET nombre = ?, apellido = ?, email = ?, nombre_usuario = ?, tipo_usu = ?, contrasena= ? WHERE id = ?");
+					"UPDATE usuario SET nombre = ?, apellido = ?, email = ?, nombre_usuario = ?, tipo_usu = ?, contrasena= ? WHERE id = ?");
 			stmt.setString(1, nombre);
 			stmt.setString(2, apellido);
 			stmt.setString(3, email);
@@ -162,7 +162,7 @@ public class DaoUsuario {
 	public boolean eliminarUsuario(int id) {
 		PreparedStatement stmt = null;
 		try {
-			stmt = DbConnector.getInstancia().getConn().prepareStatement("UPDATE cliente SET estado= 0 WHERE id = ?");
+			stmt = DbConnector.getInstancia().getConn().prepareStatement("UPDATE usuario SET estado= 0 WHERE id = ?");
 			stmt.setInt(1, id);
 			int filasBorradas = stmt.executeUpdate();
 			return filasBorradas > 0; // Devuelve true si se eliminó al menos una fila
@@ -186,7 +186,7 @@ public class DaoUsuario {
 		ResultSet keyResultSet = null;
 		try {
 			stmt = DbConnector.getInstancia().getConn().prepareStatement(
-					"insert into cliente(nombre, apellido, email, nombre_usuario, contrasena, tipo_usu, estado) values(?,?,?,?,?,?,?)",
+					"insert into usuario(nombre, apellido, email, nombre_usuario, contrasena, tipo_usu, estado) values(?,?,?,?,?,?,?)",
 					PreparedStatement.RETURN_GENERATED_KEYS);
 			stmt.setString(1, u.getNombre());
 			stmt.setString(2, u.getApellido());

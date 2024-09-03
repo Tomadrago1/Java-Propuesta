@@ -7,6 +7,31 @@
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="style/crear-editar.css">
+    <script>
+        function validatePassword() {
+            var password = document.getElementById("password").value;
+            var confirmPassword = document.getElementById("confirm_password").value;
+
+            if (password !== confirmPassword) {
+                document.getElementById("error-message").style.display = "block";
+                return false;
+            } else {
+                document.getElementById("error-message").style.display = "none";
+                return true;
+            }
+        }
+
+        function toggleProfesionField() {
+            var tipoUsuario = document.getElementById("tipoUsuario").value;
+            var profesionField = document.getElementById("profesionField");
+
+            if (tipoUsuario === "profesional") {
+                profesionField.style.display = "block";
+            } else {
+                profesionField.style.display = "none";
+            }
+        }
+    </script>
     <title>Editar Usuario</title>
 	
 </head>

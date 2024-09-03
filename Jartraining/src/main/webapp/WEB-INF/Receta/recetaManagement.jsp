@@ -71,7 +71,7 @@
                         </td>
                     </tr>
                     <% 
-                    } // Fin del loop
+                    }
                     %>
                 </tbody>
             </table>

@@ -32,7 +32,7 @@ public class ActualizarUsuarioServlet extends HttpServlet {
         int tipo_usuario = Integer.parseInt(request.getParameter("tipoUsuario"));
         String password = request.getParameter("password");
         ctrlUsuario ctrl = new ctrlUsuario();
-        Boolean success = ctrl.modificar(id, nombre, apellido, email, nombreUsuario, tipo_usuario, password);
+        Boolean success = ctrl.modificarUsuario(id, nombre, apellido, email, nombreUsuario, tipo_usuario, password);
 
         if (success) {
             LinkedList<Usuario> usuarios = ctrl.getAll();

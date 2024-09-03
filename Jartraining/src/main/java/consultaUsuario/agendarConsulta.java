@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import entities.Profesional;
-import logic.ctrlProfesional;
+import logic.ctrlUsuario;
 
 /**
  * Servlet implementation class editarNutriente
@@ -42,8 +42,8 @@ public class agendarConsulta extends HttpServlet {
    *      response)
    */
   protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-    ctrlProfesional ctrlP = new ctrlProfesional();
-    LinkedList<Profesional> profesinales = ctrlP.getAll();
+    ctrlUsuario ctrl = new ctrlUsuario();
+    LinkedList<Profesional> profesinales = ctrl.getAllProfesionales();
     request.setAttribute("profesionales", profesinales);
     RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/agendarConsulta.jsp");
     dispatcher.forward(request, response);

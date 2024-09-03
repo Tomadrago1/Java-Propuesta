@@ -10,7 +10,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import entities.Profesional;
-import logic.ctrlProfesional;
+import entities.Usuario;
+import logic.ctrlUsuario;
 
 /**
  * Servlet implementation class actualizarProfesional
@@ -50,14 +51,13 @@ public class actualizarProfesional extends HttpServlet {
         String nombreUsuario = request.getParameter("nombreUsuario");
         String password = request.getParameter("password");
         String email = request.getParameter("email");
-
-        ctrlProfesional ctrl = new ctrlProfesional();
-        Boolean success = ctrl.modificar(id, nombre, apellido, profesion, nombreUsuario, password, email);
+        ctrlUsuario ctrl = new ctrlUsuario();
+        Boolean success = ctrl.modificarProfesional(id, nombre, apellido, profesion, nombreUsuario, password, email);
 
         if (success) {
-            LinkedList<Profesional> profesionales = ctrl.getAll();
-            request.setAttribute("listaProfesionales", profesionales);
-            request.getRequestDispatcher("WEB-INF/Profesional/profesionalManagement.jsp").forward(request, response);
+            LinkedList<Usuario> usuarios = ctrl.getAll();
+            request.setAttribute("listaUsuarios", usuarios);
+            request.getRequestDispatcher("WEB-INF/Usuario/UserManagement.jsp").forward(request, response);
         } else {
             response.getWriter().append("Error al actualizar el usuario.");
         }

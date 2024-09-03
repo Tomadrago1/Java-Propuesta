@@ -16,7 +16,7 @@ public class DaoReceta {
 		try {
 			stmt = DbConnector.getInstancia().getConn().createStatement();
 			rs = stmt.executeQuery(
-					"select r.id,r.nombre,r.descripcion,r.nivel_dificultad,p.nombre,p.apellido,p.id,p.profesion from Receta r left join Profesional p on p.id=r.id_profesional");
+					"select r.id,r.nombre,r.descripcion,r.nivel_dificultad,u.nombre,u.apellido,u.id,u.profesion,u.tipo_usu from Receta r left join usuario u on u.id=r.id_profesional");
 			if (rs != null) {
 				while (rs.next()) {
 					Receta r = new Receta();
@@ -25,11 +25,11 @@ public class DaoReceta {
 					r.setNombre(rs.getString("r.nombre"));
 					r.setDesc(rs.getString("r.descripcion"));
 					r.setNivelDificultad(rs.getString("r.nivel_dificultad"));
-					if (rs.getObject("p.id") != null) {
-						p.setNombre(rs.getString("p.nombre"));
-						p.setIdUsuario(rs.getInt("p.id"));
-						p.setApellido(rs.getString("p.apellido"));
-						p.setProfesion(rs.getString("p.profesion"));
+					if (rs.getInt("u.tipo_usu") == 2) {
+						p.setNombre(rs.getString("u.nombre"));
+						p.setIdUsuario(rs.getInt("u.id"));
+						p.setApellido(rs.getString("u.apellido"));
+						p.setProfesion(rs.getString("u.profesion"));
 					} else {
 						p = null;
 					}
@@ -62,8 +62,8 @@ public class DaoReceta {
 		ResultSet rs = null;
 		try {
 			stmt = DbConnector.getInstancia().getConn().prepareStatement(
-					"select r.id, r.nombre, r.descripcion, r.nivel_dificultad, p.nombre, p.apellido, p.id, p.profesion " +
-							"from Receta r left join Profesional p on r.id_profesional = p.id where r.id = ?");
+					"select r.id, r.nombre, r.descripcion, r.nivel_dificultad, u.nombre, u.apellido, u.id, u.profesion " +
+							"from Receta r left join Usuario u on r.id_profesional = u.id where r.id = ?");
 			stmt.setInt(1, id);
 			rs = stmt.executeQuery();
 			if (rs != null && rs.next()) {
@@ -75,11 +75,11 @@ public class DaoReceta {
 				r.setNivelDificultad(rs.getString("r.nivel_dificultad"));
 
 				// Verificar si el id del profesional es válido
-				if (rs.getObject("p.id") != null) {
-					p.setNombre(rs.getString("p.nombre"));
-					p.setIdUsuario(rs.getInt("p.id"));
-					p.setApellido(rs.getString("p.apellido"));
-					p.setProfesion(rs.getString("p.profesion"));
+				if (rs.getObject("u.id") != null) {
+					p.setNombre(rs.getString("u.nombre"));
+					p.setIdUsuario(rs.getInt("u.id"));
+					p.setApellido(rs.getString("u.apellido"));
+					p.setProfesion(rs.getString("u.profesion"));
 					r.setProfesional(p);
 				} else {
 					r.setProfesional(null); // Explicitamente asignar null si no hay profesional
@@ -169,59 +169,37 @@ public class DaoReceta {
 	}
 
 	public boolean eliminarReceta(int idReceta) {
-		PreparedStatement stmt1 = null;
-		PreparedStatement stmt2 = null;
-		PreparedStatement stmt3 = null;
-		Connection conn = null;
 		boolean result = false;
 
-		try {
-			conn = DbConnector.getInstancia().getConn();
+		try (Connection conn = DbConnector.getInstancia().getConn()) {
 			conn.setAutoCommit(false); // Iniciar la transacción
 
-			// Elimina las relaciones en las tablas intermedias
-			stmt1 = conn.prepareStatement("DELETE FROM ingrediente_receta WHERE id_receta = ?");
-			stmt1.setInt(1, idReceta);
-			stmt1.executeUpdate();
+			try (PreparedStatement stmt1 = conn.prepareStatement("DELETE FROM ingrediente_receta WHERE id_receta = ?");
+					PreparedStatement stmt2 = conn.prepareStatement("DELETE FROM Receta WHERE id = ?")) {
 
-			stmt2 = conn.prepareStatement("DELETE FROM nutriente_receta WHERE id_receta = ?");
-			stmt2.setInt(1, idReceta);
-			stmt2.executeUpdate();
+				// Elimina las relaciones en las tablas intermedias
+				stmt1.setInt(1, idReceta);
+				stmt1.executeUpdate();
 
-			// Elimina la receta en la tabla principal
-			stmt3 = conn.prepareStatement("DELETE FROM Receta WHERE id = ?");
-			stmt3.setInt(1, idReceta);
-			stmt3.executeUpdate();
+				// Elimina la receta en la tabla principal
+				stmt2.setInt(1, idReceta);
+				stmt2.executeUpdate();
 
-			// Confirma la transacción
-			conn.commit();
-			result = true;
+				// Confirma la transacción
+				conn.commit();
+				result = true;
+
+			} catch (SQLException e) {
+				e.printStackTrace();
+				conn.rollback(); // Revertir en caso de error
+			} finally {
+				conn.setAutoCommit(true); // Restablecer el modo de autocommit
+			}
 
 		} catch (SQLException e) {
 			e.printStackTrace();
-			if (conn != null) {
-				try {
-					// Revertir en caso de error
-					conn.rollback();
-				} catch (SQLException ex) {
-					ex.printStackTrace();
-				}
-			}
-		} finally {
-			try {
-				if (stmt1 != null)
-					stmt1.close();
-				if (stmt2 != null)
-					stmt2.close();
-				if (stmt3 != null)
-					stmt3.close();
-				if (conn != null)
-					conn.setAutoCommit(true); // Restablecer el modo de autocommit
-				DbConnector.getInstancia().releaseConn();
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
 		}
+
 		return result;
 	}
 
@@ -380,6 +358,7 @@ public class DaoReceta {
 		}
 		return nutrientes;
 	}
+
 	public LinkedList<Receta> getRecetasRecomendadas(int idUsuario) {
 		PreparedStatement stmt = null;
 		ResultSet rs = null;

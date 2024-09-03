@@ -14,7 +14,7 @@ public class DaoProfesional {
 		try {
 			stmt = DbConnector.getInstancia().getConn().createStatement();
 			rs = stmt.executeQuery(
-					"select id,nombre,apellido,profesion,estado,nombre_usuario,profesion,tipo_usu from Profesional");
+					"select id,nombre,apellido,profesion,estado,nombre_usuario,email,tipo_usu from Usuario where tipo_usu=2");
 			if (rs != null) {
 				while (rs.next()) {
 					Profesional p = new Profesional();
@@ -24,7 +24,7 @@ public class DaoProfesional {
 					p.setProfesion(rs.getString("profesion"));
 					p.setNombreUsuario(rs.getString("nombre_usuario"));
 					p.setEstado(rs.getBoolean("estado"));
-					p.setNombreUsuario(rs.getString("nombre_usuario"));
+					p.setEmail(rs.getString("email"));
 					p.setTipoUsu(rs.getInt("tipo_usu"));
 					profesionales.add(p);
 				}
@@ -95,7 +95,7 @@ public class DaoProfesional {
 		ResultSet rs = null;
 		try {
 			stmt = DbConnector.getInstancia().getConn().prepareStatement(
-					"select id,nombre,apellido,profesion,estado,nombre_usuario,profesion,tipo_usu from Profesional where id=?");
+					"select id,nombre,apellido,profesion,estado,nombre_usuario,profesion,tipo_usu,email from Usuario where id=?");
 			stmt.setInt(1, id);
 			rs = stmt.executeQuery();
 			if (rs != null && rs.next()) {
@@ -104,6 +104,7 @@ public class DaoProfesional {
 				p.setNombre(rs.getString("nombre"));
 				p.setApellido(rs.getString("apellido"));
 				p.setProfesion(rs.getString("profesion"));
+				p.setEmail(rs.getString("email"));
 				p.setNombreUsuario(rs.getString("nombre_usuario"));
 				p.setEstado(rs.getBoolean("estado"));
 				p.setNombreUsuario(rs.getString("nombre_usuario"));
@@ -132,13 +133,14 @@ public class DaoProfesional {
 		PreparedStatement stmt = null;
 		try {
 			stmt = DbConnector.getInstancia().getConn().prepareStatement(
-					"UPDATE profesional SET nombre = ?, apellido = ?, profesion = ?, email = ?, contrasena = ? WHERE id = ?");
+					"UPDATE usuario SET nombre = ?, apellido = ?, profesion = ?, email = ?, contrasena = ?, nombre_usuario= ? WHERE id = ?");
 			stmt.setString(1, nombre);
 			stmt.setString(2, apellido);
 			stmt.setString(3, profesion);
 			stmt.setString(4, email);
 			stmt.setString(5, password);
-			stmt.setInt(6, id);
+			stmt.setString(6, nombreUsuario);
+			stmt.setInt(7, id);
 
 			int filasActualizadas = stmt.executeUpdate();
 			return filasActualizadas > 0; // Retornar true si se actualizó al menos una fila
@@ -157,34 +159,12 @@ public class DaoProfesional {
 		}
 	}
 
-	public boolean eliminarProfesional(int id) {
-		PreparedStatement stmt = null;
-		try {
-			stmt = DbConnector.getInstancia().getConn().prepareStatement("UPDATE profesional SET estado= 0 WHERE id = ?");
-			stmt.setInt(1, id);
-			int filasBorradas = stmt.executeUpdate();
-			return filasBorradas > 0; // Devuelve true si se eliminó al menos una fila
-		} catch (SQLException e) {
-			e.printStackTrace();
-			return false; // Devuelve false si ocurrió un error
-		} finally {
-			try {
-				if (stmt != null) {
-					stmt.close();
-				}
-				DbConnector.getInstancia().releaseConn();
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-		}
-	}
-
 	public void addProfesional(Profesional p) {
 		PreparedStatement stmt = null;
 		ResultSet keyResultSet = null;
 		try {
 			stmt = DbConnector.getInstancia().getConn().prepareStatement(
-					"insert into Profesional(nombre, apellido, profesion, estado, nombre_usuario, contrasena, tipo_usu, email) values(?,?,?,?,?,?,?,?)",
+					"insert into Usuario(nombre, apellido, profesion, estado, nombre_usuario, contrasena, tipo_usu, email) values(?,?,?,?,?,?,?,?)",
 					PreparedStatement.RETURN_GENERATED_KEYS);
 			stmt.setString(1, p.getNombre());
 			stmt.setString(2, p.getApellido());

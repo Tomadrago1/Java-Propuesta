@@ -12,7 +12,6 @@
 <body>
 <%
     Receta receta = (Receta)request.getAttribute("receta");
-    Profesional profesional = receta.getProfesional();  // Obtiene el profesional asociado, si existe
 %>
     <div class="container">
         <h1>Editar Receta</h1>

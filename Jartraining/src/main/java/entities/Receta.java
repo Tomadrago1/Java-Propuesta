@@ -7,10 +7,6 @@ public class Receta {
     private String desc;
     private String nivelDificultad;
 
-    // Constructor vacío
-    public Receta() {
-    }
-
     // Getters y Setters
     public int getId() {
         return id;
@@ -52,6 +48,3 @@ public class Receta {
         this.nivelDificultad = nivelDificultad;
     }
 }
-
-
-
