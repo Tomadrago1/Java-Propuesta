@@ -1,6 +1,9 @@
 /data/
+/servletNutrienteIngrediente/
 /entities/
 /logic/
+<<<<<<< HEAD
+=======
 /servlet/
 /servletEjercicio/
 /servletIngrediente/
@@ -11,3 +14,6 @@
 /servletRecetaIngrediente/
 /servletRutina/
 /servletUsuario/
+>>>>>>> e1f529c69bf758dc3721044d2bb9ef06822d4a5e
+/servletEntrenamiento/
+/servletRutinaUsuario/

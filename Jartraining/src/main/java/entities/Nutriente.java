@@ -1,16 +1,16 @@
 package entities;
 
 public class Nutriente {
-    private int id_nutriente;
+    private int id;
     private String nombre;
     private String descripcion;
 
     public int getId_nutriente() {
-        return id_nutriente;
+        return id;
     }
 
     public void setId_nutriente(int id_nutriente) {
-        this.id_nutriente = id_nutriente;
+        this.id = id_nutriente;
     }
 
     public String getNombre() {

@@ -5,6 +5,7 @@ import java.util.Map;
 
 import data.DaoIngrediente;
 import entities.Ingrediente;
+import entities.NutrienteIngrediente;
 
 public class ctrlIngrediente {
     private DaoIngrediente di;
@@ -33,7 +34,7 @@ public class ctrlIngrediente {
         return di.modificarIngrediente(id, nombre, descripcion);
     }
 
-    public LinkedList<Map<String, Object>> getNutrientesConCantidad(int idIngrediente) {
+    public LinkedList<NutrienteIngrediente> getNutrientesConCantidad(int idIngrediente) {
         return di.getNutrientesIngrediente(idIngrediente);
     }
 

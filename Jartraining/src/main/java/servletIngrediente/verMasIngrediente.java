@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 import logic.ctrlIngrediente;
 
 import entities.Ingrediente;
+import entities.NutrienteIngrediente;
 
 @WebServlet("/verMasIngrediente")
 public class verMasIngrediente extends HttpServlet {
@@ -47,7 +48,7 @@ public class verMasIngrediente extends HttpServlet {
     int idIngrediente = Integer.parseInt(request.getParameter("id"));
     ctrlIngrediente ctrl = new ctrlIngrediente();
     Ingrediente ingrediente = ctrl.getById(idIngrediente);
-    LinkedList<Map<String, Object>> nutrientesConCantidad = ctrl.getNutrientesConCantidad(idIngrediente);
+    LinkedList<NutrienteIngrediente> nutrientesConCantidad = ctrl.getNutrientesConCantidad(idIngrediente);
     request.setAttribute("ListaNutrientes", nutrientesConCantidad);
     request.setAttribute("Ingrediente", ingrediente);
     RequestDispatcher dispatcher = request.getRequestDispatcher("WEB-INF/ingrediente.jsp");
