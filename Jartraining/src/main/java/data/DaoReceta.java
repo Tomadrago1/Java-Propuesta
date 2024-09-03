@@ -103,24 +103,31 @@ public class DaoReceta {
 		return r;
 	}
 
-	public LinkedList<Map<String, Object>> getIngredientesReceta(int idReceta) {
+	public LinkedList<IngredienteReceta> getIngredientesReceta(int idReceta) {
 		PreparedStatement stmt = null;
 		ResultSet rs = null;
-		LinkedList<Map<String, Object>> ingredientes = new LinkedList<>();
+		LinkedList<IngredienteReceta> ingredientes = new LinkedList<>();
 		try {
 			stmt = DbConnector.getInstancia().getConn().prepareStatement(
-					"select i.id,i.nombre,i.descripcion,ir.cantidad_porcion,ir.unidad_medida from Receta r inner join ingrediente_receta ir on r.id=ir.id_receta inner join ingrediente i on ir.id_ingrediente=i.id where r.id=?");
+					"select i.id,i.nombre,i.descripcion,ir.cantidad_porcion,ir.unidad_medida,r.nombre,r.descripcion,r.id from Receta r inner join ingrediente_receta ir on r.id=ir.id_receta inner join ingrediente i on ir.id_ingrediente=i.id where r.id=?");
 			stmt.setInt(1, idReceta);
 			rs = stmt.executeQuery();
 			if (rs != null) {
 				while (rs.next()) {
-					Map<String, Object> ingrediente = new HashMap<>();
-					ingrediente.put("id", rs.getInt("i.id"));
-					ingrediente.put("nombre", rs.getString("i.nombre"));
-					ingrediente.put("descripcion", rs.getString("i.descripcion"));
-					ingrediente.put("cantidad", rs.getDouble("ir.cantidad_porcion"));
-					ingrediente.put("unidad", rs.getString("ir.unidad_medida"));
-					ingredientes.add(ingrediente);
+					Receta receta = new Receta();
+					Ingrediente ingrediente = new Ingrediente();
+					IngredienteReceta ir = new IngredienteReceta();
+					ingrediente.setId(rs.getInt("i.id"));
+					ingrediente.setNombre(rs.getString("i.nombre"));
+					ingrediente.setDesc(rs.getString("i.descripcion"));
+					ir.setIngrediente(ingrediente);
+					receta.setId(rs.getInt("r.id"));
+					receta.setNombre(rs.getString("r.nombre"));
+					receta.setDesc(rs.getString("r.descripcion"));
+					ir.setReceta(receta);
+					ir.setCantidad(rs.getDouble("ir.cantidad_porcion"));
+					ir.setUnidad_medida(rs.getString("ir.unidad_medida"));
+					ingredientes.add(ir);
 				}
 			}
 		} catch (SQLException e) {
@@ -365,7 +372,7 @@ public class DaoReceta {
 		LinkedList<Receta> recetas = new LinkedList<>();
 		try {
 			stmt = DbConnector.getInstancia().getConn().prepareStatement(
-					"SELECT rec.id, rec.nombre, rec.descripcion, rec.nivel_dificultad, p.nombre, p.id, p.apellido, p.profesion FROM receta rec LEFT JOIN profesional p ON rec.id_profesional = p.id WHERE NOT EXISTS ( SELECT 1 FROM necesidad ne INNER JOIN nutriente n ON ne.id_nutriente = n.id INNER JOIN ingrediente_receta ir ON rec.id = ir.id_receta INNER JOIN nutriente_ingrediente ni ON ni.id_ingrediente = ir.id_ingrediente WHERE ne.id_usuario = ? AND ne.fecha = CURDATE() AND n.id = ni.id_nutriente GROUP BY rec.id, n.id HAVING SUM( ni.cantidad * CASE WHEN ir.unidad_medida = 'kg' THEN (ir.cantidad_porcion * 1000 / 100) WHEN ir.unidad_medida = 'gramos' THEN (ir.cantidad_porcion / 100) ELSE 0 END ) NOT BETWEEN MAX(ne.cantidad_min) AND MAX(ne.cantidad_max) ) GROUP BY rec.id, rec.nombre, rec.descripcion, rec.nivel_dificultad, p.nombre, p.id, p.apellido, p.profesion;");
+					"SELECT rec.id, rec.nombre, rec.descripcion, rec.nivel_dificultad, u.nombre, u.id, u.apellido, u.profesion FROM receta rec LEFT JOIN usuario u ON rec.id_profesional = u.id WHERE EXISTS( SELECT 1 FROM necesidad ne INNER JOIN nutriente n ON ne.id_nutriente = n.id INNER JOIN ingrediente_receta ir ON rec.id = ir.id_receta INNER JOIN nutriente_ingrediente ni ON ni.id_ingrediente = ir.id_ingrediente WHERE ne.id_usuario = ? AND ne.fecha = CURDATE() AND n.id = ni.id_nutriente GROUP BY rec.id , n.id HAVING SUM(ni.cantidad * CASE WHEN ir.unidad_medida = 'kg' THEN (ir.cantidad_porcion * 1000 / 100) WHEN ir.unidad_medida = 'gramos' THEN (ir.cantidad_porcion / 100) ELSE 0 END) BETWEEN MAX(ne.cantidad_min) AND MAX(ne.cantidad_max)) GROUP BY rec.id , rec.nombre , rec.descripcion , rec.nivel_dificultad , u.nombre , u.id , u.apellido , u.profesion;");
 			stmt.setInt(1, idUsuario);
 			rs = stmt.executeQuery();
 			if (rs != null) {
@@ -376,11 +383,11 @@ public class DaoReceta {
 					r.setNombre(rs.getString("rec.nombre"));
 					r.setDesc(rs.getString("rec.descripcion"));
 					r.setNivelDificultad(rs.getString("rec.nivel_dificultad"));
-					if (rs.getObject("p.id") != null) {
-						p.setNombre(rs.getString("p.nombre"));
-						p.setIdUsuario(rs.getInt("p.id"));
-						p.setApellido(rs.getString("p.apellido"));
-						p.setProfesion(rs.getString("p.profesion"));
+					if (rs.getObject("u.id") != null) {
+						p.setNombre(rs.getString("u.nombre"));
+						p.setIdUsuario(rs.getInt("u.id"));
+						p.setApellido(rs.getString("u.apellido"));
+						p.setProfesion(rs.getString("u.profesion"));
 					} else {
 						p = null;
 					}

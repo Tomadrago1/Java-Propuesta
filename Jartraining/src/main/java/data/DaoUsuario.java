@@ -15,19 +15,32 @@ public class DaoUsuario {
 
 		try {
 			stmt = DbConnector.getInstancia().getConn().createStatement();
-			rs = stmt.executeQuery("select id,nombre,apellido,email,nombre_usuario,tipo_usu,estado from Usuario");
+			rs = stmt.executeQuery("select id,nombre,apellido,email,nombre_usuario,tipo_usu,estado,profesion from Usuario");
 			// intencionalmente no se recupera la password
 			if (rs != null) {
 				while (rs.next()) {
-					Usuario u = new Usuario();
-					u.setIdUsuario(rs.getInt("id"));
-					u.setNombre(rs.getString("nombre"));
-					u.setApellido(rs.getString("apellido"));
-					u.setEmail(rs.getString("email"));
-					u.setNombreUsuario(rs.getString("nombre_usuario"));
-					u.setTipoUsu(rs.getInt("tipo_usu"));
-					u.setEstado(rs.getBoolean("estado"));
-					usuarios.add(u);
+					if (rs.getInt("tipo_usu") == 2) {
+						Profesional p = new Profesional();
+						p.setIdUsuario(rs.getInt("id"));
+						p.setNombre(rs.getString("nombre"));
+						p.setApellido(rs.getString("apellido"));
+						p.setEmail(rs.getString("email"));
+						p.setNombreUsuario(rs.getString("nombre_usuario"));
+						p.setTipoUsu(rs.getInt("tipo_usu"));
+						p.setProfesion(rs.getString("profesion"));
+						p.setEstado(rs.getBoolean("estado"));
+						usuarios.add(p);
+					} else {
+						Usuario u = new Usuario();
+						u.setIdUsuario(rs.getInt("id"));
+						u.setNombre(rs.getString("nombre"));
+						u.setApellido(rs.getString("apellido"));
+						u.setEmail(rs.getString("email"));
+						u.setNombreUsuario(rs.getString("nombre_usuario"));
+						u.setTipoUsu(rs.getInt("tipo_usu"));
+						u.setEstado(rs.getBoolean("estado"));
+						usuarios.add(u);
+					}
 				}
 			}
 

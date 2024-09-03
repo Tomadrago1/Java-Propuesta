@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import entities.IngredienteReceta;
 import entities.Receta;
 import logic.ctrlReceta;
 
@@ -51,7 +52,7 @@ public class guardarIngredienteReceta extends HttpServlet {
 		Receta receta = ctrlR.getById(idReceta);
 		boolean success = ctrlR.modificarCantidadIngredienteReceta(idReceta, idIngrediente, cantidad, unidadMedida);
 		if (success) {
-			LinkedList<Map<String, Object>> ingredientesConCantidad = ctrlR.getIngredientesConCantidad(idReceta);
+			LinkedList<IngredienteReceta> ingredientesConCantidad = ctrlR.getIngredientesConCantidad(idReceta);
 			request.setAttribute("ListaIngredientes", ingredientesConCantidad);
 			request.setAttribute("Receta", receta);
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/receta.jsp");
@@ -59,7 +60,7 @@ public class guardarIngredienteReceta extends HttpServlet {
 		} else {
 			success = ctrlR.addIngredienteReceta(idReceta, idIngrediente, cantidad, unidadMedida);
 			if (success) {
-				LinkedList<Map<String, Object>> ingredientesConCantidad = ctrlR.getIngredientesConCantidad(idReceta);
+				LinkedList<IngredienteReceta> ingredientesConCantidad = ctrlR.getIngredientesConCantidad(idReceta);
 				request.setAttribute("ListaIngredientes", ingredientesConCantidad);
 				request.setAttribute("Receta", receta);
 				RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/receta.jsp");

@@ -230,18 +230,20 @@ public class DaoIngrediente {
 	public LinkedList<NutrienteIngrediente> getNutrientesIngrediente(int idIngrediente) {
 		PreparedStatement stmt = null;
 		ResultSet rs = null;
-		// cambiar LinkedList<Map> Por una clase nueva que tenga de atributos las 2 clases y atributos extras
+		// cambiar LinkedList<Map> Por una clase nueva que tenga de atributos las 2
+		// clases y atributos extras
 		LinkedList<NutrienteIngrediente> nutrientes = new LinkedList<>();
 		try {
 			stmt = DbConnector.getInstancia().getConn().prepareStatement(
 					"SELECT \n" + //
-												"    ni.cantidad, ni.id_nutriente, n.nombre AS nombre_nutriente, n.descripcion AS descripcion_nutriente, ni.id_ingrediente, i.nombre AS nombre_ingrediente, i.descripcion AS descripcion_ingrediente\n" + //
-												"FROM\n" + //
-												"    nutriente_ingrediente ni\n" + //
-												"        INNER JOIN\n" + //
-												"    nutriente n ON ni.id_nutriente = n.id\n" + //
-												"\t\tINNER JOIN\n" + //
-												"\tingrediente i ON i.id = ni.id_ingrediente where ni.id_ingrediente = ?");
+							"    ni.cantidad,ni.unidad_medida, ni.id_nutriente, n.nombre AS nombre_nutriente, n.descripcion AS descripcion_nutriente, ni.id_ingrediente, i.nombre AS nombre_ingrediente, i.descripcion AS descripcion_ingrediente\n"
+							+ //
+							"FROM\n" + //
+							"    nutriente_ingrediente ni\n" + //
+							"        INNER JOIN\n" + //
+							"    nutriente n ON ni.id_nutriente = n.id\n" + //
+							"\t\tINNER JOIN\n" + //
+							"\tingrediente i ON i.id = ni.id_ingrediente where ni.id_ingrediente = ?");
 			stmt.setInt(1, idIngrediente);
 			rs = stmt.executeQuery();
 			if (rs != null) {
@@ -259,8 +261,9 @@ public class DaoIngrediente {
 					i.setNombre(rs.getString("nombre_ingrediente"));
 					i.setDesc(rs.getString("descripcion_ingrediente"));
 					ni.setIngrediente(i);
-					
+
 					ni.setCantidad(rs.getDouble("cantidad"));
+					ni.setUnidad_medida(rs.getString("unidad_medida"));
 					nutrientes.add(ni);
 				}
 			}

@@ -3,6 +3,7 @@ package logic;
 import java.util.LinkedList;
 import java.util.Map;
 import data.DaoReceta;
+import entities.IngredienteReceta;
 import entities.Receta;
 
 public class ctrlReceta {
@@ -20,7 +21,7 @@ public class ctrlReceta {
         return dr.getAll();
     }
 
-    public LinkedList<Map<String, Object>> getIngredientesConCantidad(int idReceta) {
+    public LinkedList<IngredienteReceta> getIngredientesConCantidad(int idReceta) {
         return dr.getIngredientesReceta(idReceta);
     }
 

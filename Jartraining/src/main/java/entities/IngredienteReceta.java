@@ -1,20 +1,12 @@
 package entities;
 
-public class NutrienteIngrediente {
-  private Nutriente nutriente;
+public class IngredienteReceta {
   private Ingrediente ingrediente;
+  private Receta receta;
   private double cantidad;
   private String unidad_medida;
 
-  public NutrienteIngrediente() {
-  }
-
-  public Nutriente getNutriente() {
-    return nutriente;
-  }
-
-  public void setNutriente(Nutriente nutriente) {
-    this.nutriente = nutriente;
+  public IngredienteReceta() {
   }
 
   public Ingrediente getIngrediente() {
@@ -23,6 +15,14 @@ public class NutrienteIngrediente {
 
   public void setIngrediente(Ingrediente ingrediente) {
     this.ingrediente = ingrediente;
+  }
+
+  public Receta getReceta() {
+    return receta;
+  }
+
+  public void setReceta(Receta receta) {
+    this.receta = receta;
   }
 
   public double getCantidad() {

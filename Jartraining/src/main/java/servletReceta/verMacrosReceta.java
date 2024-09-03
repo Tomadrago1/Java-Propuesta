@@ -47,7 +47,6 @@ public class verMacrosReceta extends HttpServlet {
     ctrlReceta ctrl = new ctrlReceta();
     Receta receta = ctrl.getById(idReceta);
     LinkedList<Map<String, Object>> nutrientesConCantidad = ctrl.getNutrientesConCantidad(idReceta);
-    System.out.println(nutrientesConCantidad);
     request.setAttribute("ListaNutrientes", nutrientesConCantidad);
     request.setAttribute("Receta", receta);
     RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/macronutrientes.jsp");

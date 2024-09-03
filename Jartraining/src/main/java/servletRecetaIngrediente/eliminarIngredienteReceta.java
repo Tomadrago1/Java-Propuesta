@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import entities.IngredienteReceta;
 import entities.Receta;
 import logic.ctrlReceta;
 
@@ -49,7 +50,7 @@ public class eliminarIngredienteReceta extends HttpServlet {
 		boolean success = ctrlR.borrarIngredienteReceta(idReceta, idIngrediente);
 		if (success) {
 			Receta receta = ctrlR.getById(idReceta);
-			LinkedList<Map<String, Object>> ingredientesConCantidad = ctrlR.getIngredientesConCantidad(idReceta);
+			LinkedList<IngredienteReceta> ingredientesConCantidad = ctrlR.getIngredientesConCantidad(idReceta);
 			request.setAttribute("ListaIngredientes", ingredientesConCantidad);
 			request.setAttribute("Receta", receta);
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/receta.jsp");

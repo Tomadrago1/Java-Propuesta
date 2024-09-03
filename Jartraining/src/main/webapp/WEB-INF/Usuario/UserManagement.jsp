@@ -1,5 +1,6 @@
 <%@page import="java.util.LinkedList"%>
 <%@page import="entities.Usuario"%>
+<%@page import="entities.Profesional" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -29,6 +30,7 @@
                         <th>Email</th>
                         <th>Nombre de Usuario</th>
                         <th>Tipo Usuario</th>
+                        <th>Profesion</th>
                         <th>Editar usuario</th>
                         <th>Baja usuario</th>
                     </tr>
@@ -43,29 +45,34 @@
                         <td><%=usu.getEmail()%></td>
                         <td><%=usu.getNombreUsuario()%></td>
 						<td>
-						    <%
-						        int tipoUsuario = usu.getTipoUsu();
-						        String tipoUsuarioStr = "";
-						        
-						        switch (tipoUsuario) {
-						            case 1:
-						                tipoUsuarioStr = "Admin";
-						                break;
-						            case 2:
-						                tipoUsuarioStr = "Profesional";
-						                break;
-						            case 3:
-						                tipoUsuarioStr = "Cliente";
-						                break;
-						            default:
-						                tipoUsuarioStr = "Desconocido";
-						                break;
-						        }
-						    %>
-						    <%= tipoUsuarioStr %>
+                        <%
+                            int tipoUsuario = usu.getTipoUsu();
+                            String tipoUsuarioStr = "";
+                            
+                            switch (tipoUsuario) {
+                                case 1:
+                                    tipoUsuarioStr = "Admin";
+                                    break;
+                                case 2:
+                                    tipoUsuarioStr = "Profesional";
+                                    break;
+                                case 3:
+                                    tipoUsuarioStr = "Cliente";
+                                    break;
+                                default:
+                                    tipoUsuarioStr = "Desconocido";
+                                    break;
+                            }
+                        %>
+                        <%= tipoUsuarioStr %>
 						</td>
                         <td>
-                        	<form action="editarUsuario" method="post" style="display:inline;">
+                            <% String profesion="-" ; if (usu instanceof Profesional) {
+                                profesion=((Profesional)usu).getProfesion();} %>
+                                <%= profesion !=null ? profesion : "-" %>
+                        </td>
+                        <td>
+                            <form action="editarUsuario" method="post" style="display:inline;">
                                 <input type="hidden" name="id" value="<%=usu.getIdUsuario()%>">
                                 <input type="hidden" name="tipo_usu" value="<%=usu.getTipoUsu()%>">
                                 <input type="submit" value="Editar" class="action-btn edit-btn">
@@ -84,9 +91,9 @@
                 </tbody>
             </table>
             <div style="text-align: right; margin-top: 20px; margin-bottom:20px; padding: 0 20px;">
-	            <form action="crearUsuario" method="post" style="display:inline;">
-	            	<input type="submit" value="Crear Usuario" class="action-btn create-btn">
-	            </form>
+                <form action="crearUsuario" method="post" style="display:inline;">
+                    <input type="submit" value="Crear Usuario" class="action-btn create-btn">
+                </form>
             </div>
         </div>
         <a href="index.html" style="color: red">Volver</a>
