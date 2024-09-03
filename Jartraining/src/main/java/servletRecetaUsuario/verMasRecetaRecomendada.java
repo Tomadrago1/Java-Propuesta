@@ -3,7 +3,6 @@ package servletRecetaUsuario;
 import java.io.IOException;
 
 import java.util.LinkedList;
-import java.util.Map;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
