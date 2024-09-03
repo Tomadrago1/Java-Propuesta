@@ -1,17 +1,24 @@
 /consultaUsuario/
 /data/
+/servletNutrienteIngrediente/
 /entities/
 /logic/
+<<<<<<< HEAD
+=======
 /servlet/
 /servletEjercicio/
-/servletEntrenamiento/
 /servletIngrediente/
 /servletNutriente/
 /servletNutrienteIngrediente/
 /servletProfesional/
 /servletReceta/
 /servletRecetaIngrediente/
-/servletRecetaUsuario/
 /servletRutina/
-/servletRutinaUsuario/
 /servletUsuario/
+<<<<<<< HEAD
+=======
+>>>>>>> e1f529c69bf758dc3721044d2bb9ef06822d4a5e
+/servletEntrenamiento/
+/servletRutinaUsuario/
+>>>>>>> 9d4218b30223ec45cc3ef4ac9c0d064a0cde8259
+/servletRecetaUsuario/

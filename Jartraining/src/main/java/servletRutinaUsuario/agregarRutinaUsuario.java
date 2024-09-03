@@ -51,7 +51,7 @@ public class agregarRutinaUsuario extends HttpServlet {
     ctrlUsuario ctrlU = new ctrlUsuario();
     ctrlR.agregarRutinaUsuario(id_rut, id_usu);
 
-    Usuario u = ctrlU.getById(id_usu);
+    Usuario u = ctrlU.getUserById(id_usu);
     LinkedList<Rutina> rutinas = ctrlR.getRutinaByUsuario(id_usu);
 
     request.setAttribute("rutinas", rutinas);

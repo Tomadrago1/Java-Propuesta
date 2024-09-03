@@ -57,7 +57,7 @@ public class DaoUsuario {
 		ResultSet rs = null;
 		try {
 			stmt = DbConnector.getInstancia().getConn().prepareStatement(
-					"select id,nombre,apellido,email,nombre_usuario,tipo_usu,estado from Usuario where nombre_usuario=? and contrasena=? and estado=1");
+					"select id,nombre,apellido,email,nombre_usuario,tipo_usu,estado from usuario where nombre_usuario=? and contrasena=? and estado=1");
 			stmt.setString(1, usu.getNombreUsuario());
 			stmt.setString(2, usu.getPassword());
 			rs = stmt.executeQuery();
@@ -96,7 +96,7 @@ public class DaoUsuario {
 		ResultSet rs = null;
 		try {
 			stmt = DbConnector.getInstancia().getConn().prepareStatement(
-					"select id,nombre,apellido,email,nombre_usuario,tipo_usu,estado from Usuario where id=?");
+					"select id,nombre,apellido,email,nombre_usuario,tipo_usu,estado from usuario where id=?");
 			stmt.setInt(1, id);
 			rs = stmt.executeQuery();
 			if (rs != null && rs.next()) {
@@ -186,7 +186,7 @@ public class DaoUsuario {
 		ResultSet keyResultSet = null;
 		try {
 			stmt = DbConnector.getInstancia().getConn().prepareStatement(
-					"insert into Usuario(nombre, apellido, email, nombre_usuario, contrasena, tipo_usu, estado) values(?,?,?,?,?,?,?)",
+					"insert into usuario(nombre, apellido, email, nombre_usuario, contrasena, tipo_usu, estado) values(?,?,?,?,?,?,?)",
 					PreparedStatement.RETURN_GENERATED_KEYS);
 			stmt.setString(1, u.getNombre());
 			stmt.setString(2, u.getApellido());

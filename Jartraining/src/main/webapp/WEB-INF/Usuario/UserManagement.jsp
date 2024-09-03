@@ -27,7 +27,8 @@
                         <th>Nombre</th>
                         <th>Apellido</th>
                         <th>Email</th>
-                        <th>Nombre de Usuario</th>         
+                        <th>Nombre de Usuario</th>
+                        <th>Tipo Usuario</th>
                         <th>Editar usuario</th>
                         <th>Baja usuario</th>
                     </tr>
@@ -40,10 +41,33 @@
                         <td><%=usu.getNombre()%></td>
                         <td><%=usu.getApellido()%></td>
                         <td><%=usu.getEmail()%></td>
-                        <td><%=usu.getNombreUsuario()%></td>  
+                        <td><%=usu.getNombreUsuario()%></td>
+						<td>
+						    <%
+						        int tipoUsuario = usu.getTipoUsu();
+						        String tipoUsuarioStr = "";
+						        
+						        switch (tipoUsuario) {
+						            case 1:
+						                tipoUsuarioStr = "Admin";
+						                break;
+						            case 2:
+						                tipoUsuarioStr = "Profesional";
+						                break;
+						            case 3:
+						                tipoUsuarioStr = "Cliente";
+						                break;
+						            default:
+						                tipoUsuarioStr = "Desconocido";
+						                break;
+						        }
+						    %>
+						    <%= tipoUsuarioStr %>
+						</td>
                         <td>
                         	<form action="editarUsuario" method="post" style="display:inline;">
                                 <input type="hidden" name="id" value="<%=usu.getIdUsuario()%>">
+                                <input type="hidden" name="tipo_usu" value="<%=usu.getTipoUsu()%>">
                                 <input type="submit" value="Editar" class="action-btn edit-btn">
                             </form>
                         </td>

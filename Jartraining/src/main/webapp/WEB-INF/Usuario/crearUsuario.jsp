@@ -1,9 +1,6 @@
-<%@page import="entities.Usuario"%>
-<%@page import="data.DaoUsuario"%>
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="style/crear-editar.css">
@@ -20,9 +17,21 @@
                 return true;
             }
         }
+
+        function toggleProfesionField() {
+            var tipoUsuario = document.getElementById("tipoUsuario").value;
+            var profesionField = document.getElementById("profesionField");
+
+            if (tipoUsuario === "profesional") {
+                profesionField.style.display = "block";
+            } else {
+                profesionField.style.display = "none";
+            }
+        }
     </script>
     <title>Crear Usuario</title>
 </head>
+
 <body>
     <div class="container">
         <h1>Crear Usuario</h1>
@@ -45,7 +54,16 @@
             </div>
             <div class="form-group">
                 <label for="tipoUsuario">Tipo de Usuario:</label>
-                <input type="text" id="tipoUsuario" name="tipoUsuario" required>
+                <select id="tipoUsuario" name="tipoUsuario" required onchange="toggleProfesionField()">
+                    <option value="">Seleccione un tipo de usuario</option>
+                    <option value="administrador">Administrador</option>
+                    <option value="cliente">Cliente</option>
+                    <option value="profesional">Profesional</option>
+                </select>
+            </div>
+            <div class="form-group" id="profesionField" style="display: none;">
+                <label for="profesion">Profesion:</label>
+                <input type="text" id="profesion" name="profesion">
             </div>
             <div class="form-group">
                 <label for="password">Contraseña:</label>
@@ -63,4 +81,5 @@
         <a href="index.html" style="color: red">Volver</a>
     </div>
 </body>
+
 </html>

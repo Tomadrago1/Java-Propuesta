@@ -18,17 +18,18 @@ import logic.ctrlReceta;
 @WebServlet("/verRecetas")
 public class verRecetas extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public verRecetas() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#HttpServlet()
+	 */
+	public verRecetas() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
@@ -36,13 +37,14 @@ public class verRecetas extends HttpServlet {
 	}
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		ctrlReceta ctrl = new ctrlReceta();
 		LinkedList<Receta> recetas = ctrl.getAll();
-        request.setAttribute("listaRecetas", recetas);
-        request.getRequestDispatcher("WEB-INF/Receta/recetaManagement.jsp").forward(request, response);
+		request.setAttribute("listaRecetas", recetas);
+		request.getRequestDispatcher("WEB-INF/Receta/recetaManagement.jsp").forward(request, response);
 	}
 }
