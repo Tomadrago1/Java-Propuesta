@@ -1,6 +1,8 @@
-package servletReceta;
+package servletMedidaUsuario;
 
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 import java.util.LinkedList;
 
 import javax.servlet.ServletException;
@@ -9,20 +11,20 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import entities.Receta;
-import logic.ctrlReceta;
+import entities.Medida;
+import logic.ctrlMedida;
 
 /**
  * Servlet implementation class guardarReceta
  */
-@WebServlet("/guardarReceta")
-public class guardarReceta extends HttpServlet {
+@WebServlet("/guardarMedida")
+public class guardarMedida extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public guardarReceta() {
+    public guardarMedida() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -44,20 +46,20 @@ public class guardarReceta extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         // TODO Auto-generated method stub
-        String nombre = request.getParameter("nombre");
-        String apellido = request.getParameter("desc");
-        String profesion = request.getParameter("nivelDificultad");
-        Receta nuevoReceta = new Receta();
-        nuevoReceta.setNombre(nombre);
-        nuevoReceta.setDesc(apellido);
-        nuevoReceta.setNivelDificultad(profesion);
-        nuevoReceta.setProfesional(null);
-
-        ctrlReceta ctrl = new ctrlReceta();
-        ctrl.add(nuevoReceta);
-        LinkedList<Receta> recetas = ctrl.getAll();
-        request.setAttribute("listaRecetas", recetas);
-        request.getRequestDispatcher("WEB-INF/Receta/recetaManagement.jsp").forward(request, response);
+        Double peso = Double.parseDouble(request.getParameter("peso"));
+        Double altura = Double.parseDouble(request.getParameter("altura"));
+        LocalDate fecha = LocalDate.parse(request.getParameter("fecha"));
+        int id = Integer.parseInt(request.getParameter("id_usuario"));
+        Medida nuevaMedida = new Medida();
+        nuevaMedida.setId_usuario(id);
+        nuevaMedida.setPeso(peso);
+        nuevaMedida.setAltura(altura);
+        nuevaMedida.setFecha(fecha);
+        ctrlMedida ctrl = new ctrlMedida();
+        ctrl.add(nuevaMedida);
+        LinkedList<Medida> medidas = ctrl.getByUsuario(id);
+        request.setAttribute("listaMedidas", medidas);
+        request.getRequestDispatcher("WEB-INF/medidasManagement.jsp").forward(request, response);
     }
 
 }

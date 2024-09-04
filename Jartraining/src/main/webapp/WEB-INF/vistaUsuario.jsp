@@ -15,10 +15,11 @@
     <h1>Bienvenido/a <%= u.getNombre() + " " + u.getApellido() %></h1>
     <div class="admin-container">
         <form action="misRutinas" method="get">
-            <input type = "hidden" name="id_usuario" value="<%= u.getIdUsuario() %>">
+            <input type = "hidden" name="id" value="<%= u.getIdUsuario() %>">
             <input type="submit" class="admin-btn" value="Mis Rutinas">
         </form>
         <form action="misMedidas" method="post">
+            <input type="hidden" name="id_usuario" value="<%= u.getIdUsuario() %>">
             <input type="submit" class="admin-btn" value="Mis Medidas">
         </form>
         <form action="agendarConsulta" method="post">
