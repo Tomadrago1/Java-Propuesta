@@ -415,4 +415,42 @@ public class DaoReceta {
 		}
 		return recetas;
 	}
+
+	public LinkedList<Receta> getByProf(int idProfesional) {
+		LinkedList<Receta> recetas = new LinkedList<>();
+		String sql = "SELECT r.id, r.nombre, r.descripcion, r.nivel_dificultad, " +
+				"u.nombre AS nombre_prof, u.apellido, u.id AS id_prof, u.profesion " +
+				"FROM Receta r " +
+				"LEFT JOIN usuario u ON u.id = r.id_profesional " +
+				"WHERE r.id_profesional = ?";
+
+		try (PreparedStatement stmt = DbConnector.getInstancia().getConn().prepareStatement(sql)) {
+			stmt.setInt(1, idProfesional);
+
+			try (ResultSet rs = stmt.executeQuery()) {
+				while (rs.next()) {
+					Receta receta = new Receta();
+					Profesional profesional = new Profesional();
+
+					receta.setId(rs.getInt("r.id"));
+					receta.setNombre(rs.getString("r.nombre"));
+					receta.setDesc(rs.getString("r.descripcion"));
+					receta.setNivelDificultad(rs.getString("r.nivel_dificultad"));
+
+					profesional.setNombre(rs.getString("nombre_prof"));
+					profesional.setIdUsuario(rs.getInt("id_prof"));
+					profesional.setApellido(rs.getString("u.apellido"));
+					profesional.setProfesion(rs.getString("u.profesion"));
+
+					receta.setProfesional(profesional);
+					recetas.add(receta);
+				}
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			DbConnector.getInstancia().releaseConn();
+		}
+		return recetas;
+	}
 }

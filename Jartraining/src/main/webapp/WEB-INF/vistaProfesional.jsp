@@ -14,9 +14,18 @@
 <body>
     <h1>Bienvenido <%= u.getNombre() + " " + u.getApellido() %></h1>
     <div class="button-container">
-        <a href="crearReceta" class="button">Crear Receta</a>
-        <a href="misConsultas" class="button">Mis Consultas</a>
-        <a href="misRecetas" class="button">Mis recetas</a>
+        <form action="crearReceta" method="post" style="display:inline;">
+            <button type="submit" class="button">Crear Receta</button>
+        </form>
+
+        <form action="misConsultas" method="post" style="display:inline;">
+            <button type="submit" class="button">Mis Consultas</button>
+        </form>
+
+        <form action="misRecetas" method="post" style="display:inline;">
+            <input type="hidden" name="idProfesional" value="<%= u.getIdUsuario() %>">
+            <button type="submit" class="button">Mis Recetas</button>
+        </form>
     </div>
 </body>
 </html>

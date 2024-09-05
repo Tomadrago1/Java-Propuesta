@@ -56,4 +56,8 @@ public class ctrlReceta {
     public LinkedList<Receta> getRecetasRecomendadas(int idUsuario) {
         return dr.getRecetasRecomendadas(idUsuario);
     }
+
+    public LinkedList<Receta> getByProf(int idProfesional) {
+        return dr.getByProf(idProfesional);
+    }
 }
