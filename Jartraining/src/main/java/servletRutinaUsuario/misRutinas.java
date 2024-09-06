@@ -18,7 +18,7 @@ public class misRutinas extends HttpServlet {
 
   protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-    int id_usuario = Integer.parseInt(request.getParameter("id_usuario"));
+    int id_usuario = Integer.parseInt(request.getParameter("id"));
 
     ctrlRutina ctrlRutina = new ctrlRutina();
     ctrlUsuario ctrlU = new ctrlUsuario();
