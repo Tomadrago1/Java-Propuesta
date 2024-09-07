@@ -39,14 +39,16 @@
                         <td><%=m.getAltura()%></td>
                         <td><%=m.getFecha()%></td>  
                         <td>
-                            <form action="crearMedida" method="post" style="display:inline;">
-                                <input type="hidden" name="id" value="<%=m.getId_usuario()%>">
+                            <form action="editarMedida" method="post" style="display:inline;">
+                                <input type="hidden" name="id_usuario" value="<%=m.getId_usuario()%>">
+                                <input type="hidden" name="fecha" value="<%=m.getFecha()%>">
                                 <input type="submit" value="Editar" class="action-btn edit-btn">
                             </form>
                         </td>
                         <td>
                             <form action="EliminarMedida" method="post" style="display:inline;">
-                                <input type="hidden" name="id" value="<%=m.getId_usuario()%>">
+                                <input type="hidden" name="id_usuario" value="<%=m.getId_usuario()%>">
+                                <input type="hidden" name="fecha" value="<%=m.getFecha()%>">
                                 <input type="submit" value="Borrar" class="action-btn delete-btn" onclick="return confirm('¿Estás seguro de que deseas eliminar este usuario?');">
                             </form>
                         </td>

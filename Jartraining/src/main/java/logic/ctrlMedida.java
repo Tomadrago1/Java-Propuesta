@@ -1,5 +1,6 @@
 package logic;
 
+import java.time.LocalDate;
 import java.util.LinkedList;
 
 import data.DaoMedida;
@@ -18,6 +19,18 @@ public class ctrlMedida {
 
     public void add(Medida m) {
         dm.addMedida(m);
+    }
+
+    public Medida getByUsuarioFecha(int id, LocalDate fecha) {
+        return dm.getByUsuarioFecha(id, fecha);
+    }
+
+    public void modificarMedida(Medida m) {
+        dm.modificarMedida(m);
+    }
+
+    public void delete(int id, LocalDate fecha) {
+        dm.delete(id, fecha);
     }
     /*
      * public Medida validate(Medida u) {
