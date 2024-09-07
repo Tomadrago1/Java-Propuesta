@@ -1,7 +1,9 @@
 package data;
 
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.LinkedList;
 
 import entities.Entrenamiento;
 
@@ -41,5 +43,43 @@ public class DaoEntrenamiento {
         e.printStackTrace();
       }
     }
+  }
+
+  public LinkedList<Entrenamiento> getEntrenamientosByUsuario(int idUsuario) {
+    PreparedStatement stmt = null;
+    LinkedList<Entrenamiento> entrenamientos = new LinkedList<Entrenamiento>();
+    try {
+      stmt = DbConnector.getInstancia().getConn().prepareStatement(
+          "select * from entrenamiento where id_usuario = ? order by fecha_entrenamiento desc");
+      stmt.setInt(1, idUsuario);
+      if (stmt.execute()) {
+        Entrenamiento ent = null;
+        ResultSet rs = stmt.getResultSet();
+        while (rs.next()) {
+          ent = new Entrenamiento();
+          ent.setIdUsuario(rs.getInt("id_usuario"));
+          ent.setIdRutina(rs.getInt("id_rutina"));
+          ent.setIdEjercicio(rs.getInt("id_ejercicio"));
+          ent.setFecha(rs.getDate("fecha_entrenamiento").toLocalDate());
+          ent.setSeries(rs.getInt("serie"));
+          ent.setRepes(rs.getInt("repeticion"));
+          ent.setTiempo(rs.getString("tiempo"));
+          ent.setPeso(rs.getDouble("peso"));
+          entrenamientos.add(ent);
+        }
+      }
+    } catch (SQLException e) {
+      e.printStackTrace();
+    } finally {
+      try {
+        if (stmt != null) {
+          stmt.close();
+        }
+        DbConnector.getInstancia().releaseConn();
+      } catch (SQLException e) {
+        e.printStackTrace();
+      }
+    }
+    return entrenamientos;
   }
 }

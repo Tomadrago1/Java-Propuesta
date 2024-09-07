@@ -23,6 +23,9 @@ public class Entrenamiento {
     this.peso = peso;
   }
 
+  public Entrenamiento() {
+  }
+
   public int getIdEjercicio() {
     return idEjercicio;
   }

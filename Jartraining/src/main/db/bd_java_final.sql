@@ -68,21 +68,21 @@ CREATE TABLE EJERCICIO (
     descripcion VARCHAR(255)
 );
 
-CREATE TABLE ENTRENAMIENTO (
-    id_usuario INT,
-    id_rutina INT,
-    id_ejercicio INT,
-    fecha_entrenamiento DATE,
-    serie INT,
-    repeticion INT,
-    orden INT,
-    tiempo TIME,
-    peso DECIMAL(5, 2),
-    PRIMARY KEY (id_rutina, id_ejercicio, fecha_entrenamiento),
-    FOREIGN KEY (id_rutina) REFERENCES RUTINA(id) ON DELETE CASCADE,
-    FOREIGN KEY (id_ejercicio) REFERENCES EJERCICIO(id) ON DELETE CASCADE,
-    FOREIGN KEY (id_usuario) REFERENCES usuario(id) ON DELETE CASCADE
-);
+CREATE TABLE `entrenamiento` (
+  `id_usuario` int DEFAULT NULL,
+  `id_rutina` int NOT NULL,
+  `id_ejercicio` int NOT NULL,
+  `fecha_entrenamiento` date NOT NULL,
+  `serie` int NOT NULL,
+  `repeticion` int DEFAULT NULL,
+  `tiempo` varchar(25) DEFAULT NULL,
+  `peso` decimal(5,2) DEFAULT NULL,
+  PRIMARY KEY (`id_rutina`,`id_ejercicio`,`fecha_entrenamiento`),
+  KEY `id_ejercicio` (`id_ejercicio`),
+  KEY `id_usuario` (`id_usuario`),
+  CONSTRAINT `entrenamiento_ibfk_1` FOREIGN KEY (`id_rutina`) REFERENCES `rutina` (`id`) ON DELETE CASCADE,
+  CONSTRAINT `entrenamiento_ibfk_2` FOREIGN KEY (`id_ejercicio`) REFERENCES `ejercicio` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci
 
 CREATE TABLE NECESIDAD (
     id_usuario INT,
