@@ -1,7 +1,7 @@
 <%@page import="java.util.LinkedList" %>
     <%@page import="entities.Ejercicio" %>
         <%@page import="entities.Rutina" %>
-            <%@page import="java.util.Map" %>
+            <%@page import="entities.EjercicioRutina" %>
                 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
                     <!DOCTYPE html>
                     <html lang="es">
@@ -14,16 +14,15 @@
                         <link rel="stylesheet" href="style/UserManagementstyles.css">
                         <title>Gestión de Ejercicios</title>
 
-                        <% LinkedList<Map<String,Object>> lu = (LinkedList<Map<String, Object>
-                                >)request.getAttribute("listaEjercicios");
-                                Rutina r = (Rutina)request.getAttribute("rutina");
-                                %>
+                        <% LinkedList<EjercicioRutina> er = (LinkedList<EjercicioRutina>)request.getAttribute("ejercicios_rutina");
+                            EjercicioRutina primerElemento = er.getFirst();
+                            Rutina rut = primerElemento.getRutina();%>
 
                     </head>
 
                     <body>
                         <div class="container">
-                            <h1>Gestión de Ejercicios de <%= r.getNombre() %>
+                            <h1>Gestión de Ejercicios de <%= rut.getNombre() %>
                             </h1>
                             <div class="table-container">
                                 <table>
@@ -39,41 +38,42 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <% for (Map<String, Object> eje : lu) { %>
+                                        <% for (EjercicioRutina eje_rut : er) { %>
+                                            <% Ejercicio eje = eje_rut.getEjercicio(); %>
                                             <tr>
                                                 <td>
-                                                    <%= eje.get("nombre") %>
+                                                    <%= eje.getNombre() %>
                                                 </td>
                                                 <td>
-                                                    <%= eje.get("descripcion") %>
+                                                    <%= eje.getDescripcion() %>
                                                 </td>
                                                 <td>
-                                                    <%= eje.get("series") !=null ? eje.get("series") : "-" %>
+                                                    <%= (eje_rut.getSeriesAproximadas()) %>
                                                 </td>
                                                 <td>
-                                                    <%= (eje.get("repes")==null || (Integer)eje.get("repes")==0) ? "-" : eje.get("repes") %>
+                                                    <%= (eje_rut.getRepesAproximadas()==null || (Integer)eje_rut.getRepesAproximadas()==0) ? "-" : eje_rut.getRepesAproximadas() %>
                                                 </td>
                                                 <td>
-                                                    <%= eje.get("tiempo") !=null &&
-                                                        !eje.get("tiempo").toString().isEmpty() ? eje.get("tiempo")
+                                                    <%= eje_rut.getTiempo() !=null &&
+                                                        !eje_rut.getTiempo().toString().isEmpty() ? eje_rut.getTiempo()
                                                         : "-" %>
                                                 </td>
                                                 <td class="actions">
                                                     <form action="editarEjercicioRutina" method="post"
                                                         class="inline-form">
-                                                        <input type="hidden" name="id_rut" value="<%= eje.get("id_rut")%>">
-                                                        <input type="hidden" name="id_eje" value="<%= eje.get("id_eje")%>">
-                                                        <input type="hidden" name="series" value="<%= eje.get("series")%>">
-                                                        <input type="hidden" name="repes" value="<%= eje.get("repes")%>">
-                                                        <input type="hidden" name="tiempo" value="<%= eje.get("tiempo")%>">
+                                                        <input type="hidden" name="id_rut" value="<%= rut.getId()%>">
+                                                        <input type="hidden" name="id_eje" value="<%= eje.getId()%>">
+                                                        <input type="hidden" name="series" value="<%= eje_rut.getSeriesAproximadas()%>">
+                                                        <input type="hidden" name="repes" value="<%= eje_rut.getRepesAproximadas()%>">
+                                                        <input type="hidden" name="tiempo" value="<%= eje_rut.getTiempo()%>">
                                                         <input type="submit" value="Editar" class="action-btn edit-btn">
                                                     </form>
                                                 </td>
                                                 <td>
                                                     <form action="quitarEjercicioRutina" method="post"
                                                         class="inline-form">
-                                                        <input type="hidden" name="id_rut" value="<%= eje.get("id_rut")%>">
-                                                        <input type="hidden" name="id_eje" value="<%= eje.get("id_eje") %>">
+                                                        <input type="hidden" name="id_rut" value="<%= rut.getId()%>">
+                                                        <input type="hidden" name="id_eje" value="<%= eje.getId() %>">
                                                         <input type="submit" value="Quitar de la rutina"
                                                             class="action-btn delete-btn"
                                                             onclick="return confirm('¿Estás seguro de que deseas quitar este ejercicio?');">
@@ -86,7 +86,7 @@
 
                                 <div class="container-create">
                                     <form action="addEjercicioRutina" method="post" class="inline-form">
-                                        <input type="hidden" name="id_rut" value="<%= r.getId() %>">
+                                        <input type="hidden" name="id_rut" value="<%= rut.getId() %>">
                                         <input type="submit" value="Añadir Ejercicio" class="action-btn create-btn">
                                     </form>
                                 </div>

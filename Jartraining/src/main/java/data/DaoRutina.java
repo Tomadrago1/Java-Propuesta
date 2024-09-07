@@ -3,9 +3,7 @@ package data;
 import entities.*;
 
 import java.sql.*;
-import java.util.HashMap;
 import java.util.LinkedList;
-import java.util.Map;
 
 public class DaoRutina {
 
@@ -185,11 +183,10 @@ public class DaoRutina {
 		}
 	}
 
-	public LinkedList<Map<String, Object>> getEjerciciosByRutina(int id) {
+	public LinkedList<EjercicioRutina> getEjerciciosByRutina(int id) {
 		PreparedStatement stmt = null;
 		ResultSet rs = null;
-		LinkedList<Map<String, Object>> ejercicios = new LinkedList<>();
-
+		LinkedList<EjercicioRutina> ejercicios = new LinkedList<>();
 		try {
 			stmt = DbConnector.getInstancia().getConn().prepareStatement(
 					"SELECT eje.id, eje.nombre, eje.descripcion, re.series_aproximadas, re.repeticiones_aproximadas, re.tiempo_aproximado FROM rutina_ejercicio AS re INNER JOIN ejercicio AS eje ON re.id_ejercicio = eje.id WHERE id_rutina = ?");
@@ -197,16 +194,21 @@ public class DaoRutina {
 			rs = stmt.executeQuery();
 
 			while (rs != null && rs.next()) {
-				Map<String, Object> ejercicio = new HashMap<>();
-				ejercicio.put("id_eje", rs.getInt("eje.id"));
-				ejercicio.put("id_rut", id);
-				ejercicio.put("nombre", rs.getString("eje.nombre"));
-				ejercicio.put("descripcion", rs.getString("eje.descripcion"));
-				ejercicio.put("series", rs.getInt("re.series_aproximadas"));
-				ejercicio.put("repes", rs.getInt("re.repeticiones_aproximadas"));
-				ejercicio.put("tiempo", rs.getString("re.tiempo_aproximado"));
-				ejercicios.add(ejercicio);
+				Ejercicio eje = new Ejercicio();
+				eje.setId(rs.getInt("eje.id"));
+				eje.setNombre(rs.getString("eje.nombre"));
+				eje.setDescripcion(rs.getString("eje.descripcion"));
 
+				EjercicioRutina ejeRut = new EjercicioRutina();
+				ejeRut.setEjercicio(eje);
+				ejeRut.setSeriesAproximadas(rs.getInt("re.series_aproximadas"));
+				ejeRut.setRepesAproximadas(rs.getInt("re.repeticiones_aproximadas"));
+				ejeRut.setTiempo(rs.getString("re.tiempo_aproximado"));
+
+				Rutina r = this.getOne(id);
+				ejeRut.setRutina(r);
+
+				ejercicios.add(ejeRut);
 			}
 		} catch (SQLException err) {
 			err.printStackTrace();

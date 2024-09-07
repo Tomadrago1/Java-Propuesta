@@ -1,10 +1,9 @@
 package logic;
 
 import java.util.LinkedList;
-import java.util.Map;
 
 import data.DaoRutina;
-
+import entities.EjercicioRutina;
 import entities.Rutina;
 
 public class ctrlRutina {
@@ -30,7 +29,7 @@ public class ctrlRutina {
     	return du.modificarRutina(id, nombre, desc);
     }
     
-    public LinkedList<Map<String, Object>> getEjerciciosByRutina(int id) {
+    public LinkedList<EjercicioRutina> getEjerciciosByRutina(int id) {
     	return du.getEjerciciosByRutina(id);
     }
     

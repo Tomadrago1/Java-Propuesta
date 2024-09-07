@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import entities.Ejercicio;
+import entities.Rutina;
 import logic.ctrlEjercicios;
 import logic.ctrlRutina;
 
@@ -36,9 +37,11 @@ public class IniciarEntrenamiento extends HttpServlet {
       seriesReps.put(ej.getId(), new Integer[] { series, repes });
     }
 
+    Rutina rutina = ctrlRut.getOne(idRutina);
+
     request.setAttribute("ejercicios", ejercicios);
     request.setAttribute("seriesReps", seriesReps);
-    request.setAttribute("id_rutina", idRutina);
+    request.setAttribute("rutina", rutina);
     request.setAttribute("id_usuario", idUsuario);
     request.getRequestDispatcher("WEB-INF/iniciarEntrenamiento.jsp").forward(request, response);
   }

@@ -4,7 +4,6 @@ import java.io.IOException;
 
 
 import java.util.LinkedList;
-import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -12,7 +11,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import entities.Rutina;
+import entities.EjercicioRutina;
 import logic.ctrlRutina;
 
 @WebServlet("/quitarEjercicioRutina")
@@ -29,10 +28,8 @@ public class quitarEjercicioRutina extends HttpServlet {
         Boolean success = ctrl.quitarEjercicioRutina(id_rut, id_eje);
 
         if (success) {
-        	LinkedList<Map<String,Object>> ejercicios = ctrl.getEjerciciosByRutina(id_rut);
-        	Rutina r = ctrl.getOne(id_rut);
-            request.setAttribute("listaEjercicios", ejercicios);
-            request.setAttribute("rutina", r);
+        	LinkedList<EjercicioRutina> ejercicios_rutina = ctrl.getEjerciciosByRutina(id_rut);
+            request.setAttribute("ejercicios_rutina", ejercicios_rutina);
             request.getRequestDispatcher("WEB-INF/rutinaEjercicioManagement.jsp").forward(request, response);
         } else {
             response.getWriter().append("Error al quitar el usuario.");

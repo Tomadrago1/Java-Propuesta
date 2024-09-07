@@ -2,6 +2,8 @@
   <%@ page import="java.util.Map" %>
     <%@ page import="entities.Ejercicio" %>
       <%@ page import="java.util.Map.Entry" %>
+        <%@ page import="entities.Rutina" %>
+          <%@ page import="entities.Entrenamiento" %>
         <!DOCTYPE html>
         <html lang="es">
 
@@ -13,19 +15,22 @@
         <% 
           LinkedList<Ejercicio> ejercicios = (LinkedList<Ejercicio>) request.getAttribute("ejercicios");
           Map<Integer, Integer[]> seriesReps = (Map<Integer, Integer[]>) request.getAttribute("seriesReps");
+          Rutina rutina = (Rutina) request.getAttribute("rutina");
+          int id_usuario = (int) request.getAttribute("id_usuario");
+
+          LinkedList<Entrenamiento> entrenamientos = new LinkedList<Entrenamiento>();
         %>
         <body>
-          <h1>Iniciar Entrenamiento</h1>
+          <h1>Entrenamiento: <%rutina.getNombre();%></h1>
           <form action="guardarEntrenamiento" method="post">
-            <input type="hidden" name="id_usuario" value="<%=request.getParameter(" id_usuario")%>">
-            <input type="hidden" name="id_rutina" value="<%=request.getParameter(" id_rutina")%>">
+            <input type="hidden" name="id_rutina" value="<%=rutina.getId()%>">
+            <input type="hidden" name="id_usuario" value="<%=id_usuario%>">
             <table>
               <thead>
                 <tr>
                   <th>Ejercicio</th>
                   <th>Series</th>
                   <th>Repeticiones</th>
-                  <th>Orden</th>
                   <th>Tiempo</th>
                   <th>Peso</th>
                 </tr>
@@ -37,14 +42,14 @@
                         <tr>
                           <td>
                             <%= ej.getNombre() %>
+                          </td> 
+                          <td>
+                          <input type="hidden" name="id_ejercicio_<%=ej.getId()%>" value="<%=ej.getId()%>">
+                          <input type="number" name="series_<%=ej.getId()%>" value="<%=approxValues[0]%>" placeholder="<%=approxValues[0]%>">
                           </td>
-                          <td><input type="number" name="series_<%=ej.getId()%>" placeholder="<%=approxValues[0]%>">
-                          </td>
-                          <td><input type="number" name="repeticiones_<%=ej.getId()%>"
-                              placeholder="<%=approxValues[1]%>"></td>
-                          <td><input type="number" name="orden_<%=ej.getId()%>" placeholder="1"></td>
-                          <td><input type="time" name="tiempo_<%=ej.getId()%>"></td>
-                          <td><input type="number" step="0.01" name="peso_<%=ej.getId()%>" placeholder="0.00"></td>
+                          <td><input type="number" name="repes_<%=ej.getId()%>" value="<%=approxValues[1]%>" placeholder="<%=approxValues[1]%>"></td>
+                          <td><input type="text" name="tiempo_<%=ej.getId()%>"></td>
+                          <td><input type="number" step="1.00" name="peso_<%=ej.getId()%>" placeholder="0.00"></td>
                         </tr>
                         <% } %>
               </tbody>

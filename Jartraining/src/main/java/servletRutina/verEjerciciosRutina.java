@@ -3,7 +3,6 @@ package servletRutina;
 import java.io.IOException;
 
 import java.util.LinkedList;
-import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -11,7 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import entities.Rutina;
+import entities.EjercicioRutina;
 import logic.ctrlRutina;
 
 /**
@@ -43,12 +42,9 @@ public class verEjerciciosRutina extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int id = Integer.parseInt(request.getParameter("id"));
 		ctrlRutina ctrl = new ctrlRutina();
-		Rutina r = new Rutina();
-		r = ctrl.getOne(id);
-		LinkedList<Map<String,Object>> ejercicios = ctrl.getEjerciciosByRutina(id);
+		LinkedList<EjercicioRutina> ejercicios = ctrl.getEjerciciosByRutina(id);
 		
-        request.setAttribute("listaEjercicios", ejercicios);
-        request.setAttribute("rutina", r);
+        request.setAttribute("ejercicios_rutina", ejercicios);
         request.getRequestDispatcher("WEB-INF/rutinaEjercicioManagement.jsp").forward(request, response);
 	}
 
