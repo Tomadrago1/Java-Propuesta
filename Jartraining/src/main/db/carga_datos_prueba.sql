@@ -81,13 +81,13 @@ VALUES
 ('Estiramiento', 'Ejercicio para mejorar la flexibilidad');
 
 -- Inserción de datos en la tabla ENTRENAMIENTO
-INSERT INTO ENTRENAMIENTO (id_usuario, id_rutina, id_ejercicio, fecha_entrenamiento, serie, repeticion, orden, tiempo, peso)
+INSERT INTO ENTRENAMIENTO (id_usuario, id_rutina, id_ejercicio, fecha_entrenamiento, serie, repeticion, tiempo, peso)
 VALUES
-(4, 1, 1, '2023-05-01', 3, 10, 1, '00:20:00', NULL),
-(4, 2, 2, '2023-05-01', 4, 8, 2, NULL, 70.0),
-(4, 2, 3, '2023-05-01', 4, 10, 3, NULL, NULL),
-(5, 3, 4, '2023-05-02', 3, 15, 1, '00:10:00', NULL),
-(5, 4, 5, '2023-05-03', 2, 20, 1, '00:30:00', NULL);
+(4, 1, 1, '2023-05-01', 3, 10, '00:20:00', NULL),
+(4, 2, 2, '2023-05-01', 4, 8, NULL, 70.0),
+(4, 2, 3, '2023-05-01', 4, 10, NULL, NULL),
+(5, 3, 4, '2023-05-02', 3, 15, '00:10:00', NULL),
+(5, 4, 5, '2023-05-03', 2, 20, '00:30:00', NULL);
 
 -- Inserción de datos en la tabla NECESIDAD
 INSERT INTO NECESIDAD (id_usuario, id_nutriente, id_profesional, fecha, cantidad_min, cantidad_max)

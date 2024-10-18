@@ -59,4 +59,8 @@ public class ctrlUsuario {
     public LinkedList<Profesional> getAllProfesionales() {
         return dp.getAll();
     }
+
+    public LinkedList<String> getAllProfesiones() {
+        return dp.getAllProfesiones();
+    }
 }

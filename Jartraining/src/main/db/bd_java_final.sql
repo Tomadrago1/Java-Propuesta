@@ -82,7 +82,7 @@ CREATE TABLE `entrenamiento` (
   KEY `id_usuario` (`id_usuario`),
   CONSTRAINT `entrenamiento_ibfk_1` FOREIGN KEY (`id_rutina`) REFERENCES `rutina` (`id`) ON DELETE CASCADE,
   CONSTRAINT `entrenamiento_ibfk_2` FOREIGN KEY (`id_ejercicio`) REFERENCES `ejercicio` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 CREATE TABLE NECESIDAD (
     id_usuario INT,
@@ -129,12 +129,13 @@ CREATE TABLE RUTINA_EJERCICIO (
 CREATE TABLE NUTRIENTE_INGREDIENTE (
     id_nutriente INT,
     id_ingrediente INT,
-    cantidad DECIMAL(5 , 2 ),
+    cantidad DECIMAL(5, 2),
     unidad_medida VARCHAR(50),
-    PRIMARY KEY (id_nutriente , id_ingrediente),
+    PRIMARY KEY (id_nutriente, id_ingrediente),
     FOREIGN KEY (id_ingrediente) REFERENCES INGREDIENTE(id) ON DELETE CASCADE,
     FOREIGN KEY (id_nutriente) REFERENCES NUTRIENTE(id) ON DELETE CASCADE
 );
+
 
 CREATE TABLE HORARIOS (
     fecha_hora_desde DATETIME,

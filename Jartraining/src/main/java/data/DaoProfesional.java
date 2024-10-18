@@ -196,4 +196,36 @@ public class DaoProfesional {
 			}
 		}
 	}
+
+	public LinkedList<String> getAllProfesiones() {
+		Statement stmt = null;
+		ResultSet rs = null;
+		LinkedList<String> profesiones = new LinkedList<>();
+
+		try {
+			stmt = DbConnector.getInstancia().getConn().createStatement();
+			rs = stmt.executeQuery("SELECT DISTINCT profesion FROM Usuario WHERE tipo_usu=2");
+			while (rs.next()) {
+				profesiones.add(rs.getString("profesion"));
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+
+		} finally {
+			try {
+				if (rs != null) {
+					rs.close();
+				}
+				if (stmt != null) {
+					stmt.close();
+				}
+				DbConnector.getInstancia().releaseConn();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+
+		return profesiones;
+	}
 }

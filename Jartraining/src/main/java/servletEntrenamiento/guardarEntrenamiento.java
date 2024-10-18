@@ -44,11 +44,6 @@ public class guardarEntrenamiento extends HttpServlet {
       String tiempoStr = request.getParameter("tiempo_" + ej.getId());
       String pesoStr = request.getParameter("peso_" + ej.getId());
 
-      System.out.println(seriesStr); 
-      System.out.println(repesStr);
-      System.out.println(tiempoStr);
-      System.out.println(pesoStr);
-
       int series = (seriesStr != null && !seriesStr.isEmpty()) ? Integer.parseInt(seriesStr) : 0;
       int repes = (repesStr != null && !repesStr.isEmpty()) ? Integer.parseInt(repesStr) : 0;
       String tiempo = (tiempoStr != null) ? tiempoStr : "";
