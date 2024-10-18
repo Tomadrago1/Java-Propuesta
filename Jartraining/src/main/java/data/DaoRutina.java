@@ -239,7 +239,7 @@ public class DaoRutina {
 				stmt.setInt(1, repes);
 			}
 			stmt.setInt(2, series);
-			if(tiempo == null) {
+			if (tiempo == null) {
 				stmt.setNull(3, Types.VARCHAR);
 			} else {
 				stmt.setString(3, tiempo);
@@ -277,7 +277,7 @@ public class DaoRutina {
 				stmt.setInt(3, repes);
 			}
 			stmt.setInt(4, series);
-			if(tiempo == null) {
+			if (tiempo == null) {
 				stmt.setNull(5, Types.VARCHAR);
 			} else {
 				stmt.setString(5, tiempo);

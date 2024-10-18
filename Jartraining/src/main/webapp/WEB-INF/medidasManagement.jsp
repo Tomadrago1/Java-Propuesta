@@ -27,7 +27,6 @@
                         <th>Peso</th>
                         <th>Altura</th>
                         <th>Fecha</th>
-                        <th>Editar medida</th>
                         <th>Borrar medida</th>	
                     </tr>
                 </thead>
@@ -38,13 +37,6 @@
                         <td><%=m.getPeso()%></td>
                         <td><%=m.getAltura()%></td>
                         <td><%=m.getFecha()%></td>  
-                        <td>
-                            <form action="editarMedida" method="post" style="display:inline;">
-                                <input type="hidden" name="id_usuario" value="<%=m.getId_usuario()%>">
-                                <input type="hidden" name="fecha" value="<%=m.getFecha()%>">
-                                <input type="submit" value="Editar" class="action-btn edit-btn">
-                            </form>
-                        </td>
                         <td>
                             <form action="EliminarMedida" method="post" style="display:inline;">
                                 <input type="hidden" name="id_usuario" value="<%=m.getId_usuario()%>">

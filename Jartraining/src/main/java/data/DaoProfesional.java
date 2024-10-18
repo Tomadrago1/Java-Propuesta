@@ -197,6 +197,7 @@ public class DaoProfesional {
 		}
 	}
 
+<<<<<<< HEAD
 	public LinkedList<String> getAllProfesiones() {
 		Statement stmt = null;
 		ResultSet rs = null;
@@ -212,6 +213,33 @@ public class DaoProfesional {
 		} catch (SQLException e) {
 			e.printStackTrace();
 
+=======
+	public LinkedList<Profesional> getProfesionalesByProfesion(String profesion) {
+		PreparedStatement stmt = null;
+		ResultSet rs = null;
+		LinkedList<Profesional> profesionales = new LinkedList<>();
+		try {
+			stmt = DbConnector.getInstancia().getConn().prepareStatement(
+					"select id,nombre,apellido,profesion,estado,nombre_usuario,email,tipo_usu from Usuario where profesion=?");
+			stmt.setString(1, profesion);
+			rs = stmt.executeQuery();
+			if (rs != null) {
+				while (rs.next()) {
+					Profesional p = new Profesional();
+					p.setIdUsuario(rs.getInt("id"));
+					p.setNombre(rs.getString("nombre"));
+					p.setApellido(rs.getString("apellido"));
+					p.setProfesion(rs.getString("profesion"));
+					p.setNombreUsuario(rs.getString("nombre_usuario"));
+					p.setEstado(rs.getBoolean("estado"));
+					p.setEmail(rs.getString("email"));
+					p.setTipoUsu(rs.getInt("tipo_usu"));
+					profesionales.add(p);
+				}
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+>>>>>>> d0cbd18b06adba142a3d99754f5dc5dc524e7337
 		} finally {
 			try {
 				if (rs != null) {
@@ -225,7 +253,11 @@ public class DaoProfesional {
 				e.printStackTrace();
 			}
 		}
+<<<<<<< HEAD
 
 		return profesiones;
+=======
+		return profesionales;
+>>>>>>> d0cbd18b06adba142a3d99754f5dc5dc524e7337
 	}
 }

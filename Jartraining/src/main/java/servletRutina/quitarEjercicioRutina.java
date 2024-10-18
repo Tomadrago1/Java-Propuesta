@@ -2,7 +2,6 @@ package servletRutina;
 
 import java.io.IOException;
 
-
 import java.util.LinkedList;
 
 import javax.servlet.ServletException;
@@ -22,13 +21,13 @@ public class quitarEjercicioRutina extends HttpServlet {
             throws ServletException, IOException {
         int id_rut = Integer.parseInt(request.getParameter("id_rut"));
         int id_eje = Integer.parseInt(request.getParameter("id_eje"));
-        
+
         ctrlRutina ctrl = new ctrlRutina();
-        
+
         Boolean success = ctrl.quitarEjercicioRutina(id_rut, id_eje);
 
         if (success) {
-        	LinkedList<EjercicioRutina> ejercicios_rutina = ctrl.getEjerciciosByRutina(id_rut);
+            LinkedList<EjercicioRutina> ejercicios_rutina = ctrl.getEjerciciosByRutina(id_rut);
             request.setAttribute("ejercicios_rutina", ejercicios_rutina);
             request.getRequestDispatcher("WEB-INF/rutinaEjercicioManagement.jsp").forward(request, response);
         } else {

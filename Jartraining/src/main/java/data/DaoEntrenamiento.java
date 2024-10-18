@@ -8,7 +8,7 @@ import java.util.LinkedList;
 import entities.Entrenamiento;
 
 public class DaoEntrenamiento {
-  
+
   public void guardarEntrenamiento(Entrenamiento ent) {
     PreparedStatement stmt = null;
     try {
