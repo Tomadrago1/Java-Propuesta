@@ -1,4 +1,4 @@
-package servletConsulta;
+/*package servletConsulta;
 
 import java.io.IOException;
 
@@ -27,4 +27,4 @@ public class seleccionarProfesion extends HttpServlet {
     request.setAttribute("profesionales", profesionales);
     request.getRequestDispatcher("WEB-INF/profesionalesConsultaLista.jsp").forward(request, response);
   }
-}
+}*/

@@ -1,4 +1,4 @@
-package servletReceta;
+package servletProfesionalReceta;
 
 import java.io.IOException;
 import java.util.LinkedList;
@@ -11,18 +11,20 @@ import javax.servlet.http.HttpServletResponse;
 
 import entities.Receta;
 import logic.ctrlReceta;
+import entities.Profesional;
+import logic.ctrlUsuario;
 
 /**
  * Servlet implementation class guardarReceta
  */
-@WebServlet("/guardarReceta")
-public class guardarReceta extends HttpServlet {
+@WebServlet("/guardarRecetaProfesional")
+public class guardarRecetaProfesional extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public guardarReceta() {
+    public guardarRecetaProfesional() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -47,17 +49,19 @@ public class guardarReceta extends HttpServlet {
         String nombre = request.getParameter("nombre");
         String apellido = request.getParameter("desc");
         String nivelDificultad = request.getParameter("nivelDificultad");
-        Receta nuevoReceta = new Receta();
-        nuevoReceta.setNombre(nombre);
-        nuevoReceta.setDesc(apellido);
-        nuevoReceta.setNivelDificultad(nivelDificultad);
-        nuevoReceta.setProfesional(null);
-
-        ctrlReceta ctrl = new ctrlReceta();
-        ctrl.add(nuevoReceta);
-        LinkedList<Receta> recetas = ctrl.getAll();
+        int id_profesional = Integer.parseInt(request.getParameter("id_profesional"));
+        ctrlUsuario ctrl = new ctrlUsuario();
+        Profesional profesional = ctrl.getProfesionalById(id_profesional);
+        Receta nuevaReceta = new Receta();
+        nuevaReceta.setNombre(nombre);
+        nuevaReceta.setDesc(apellido);
+        nuevaReceta.setNivelDificultad(nivelDificultad);
+        nuevaReceta.setProfesional(profesional);
+        ctrlReceta ctrlR = new ctrlReceta();
+        ctrlR.add(nuevaReceta);
+		LinkedList<Receta> recetas = ctrlR.getByProf(id_profesional);
         request.setAttribute("listaRecetas", recetas);
-        request.getRequestDispatcher("WEB-INF/Receta/recetaManagement.jsp").forward(request, response);
+        request.getRequestDispatcher("WEB-INF/Receta/recetaProfesionalManagement.jsp").forward(request, response);
     }
 
 }

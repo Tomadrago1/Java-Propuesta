@@ -218,7 +218,7 @@ public class DaoReceta {
 			stmt.setString(1, r.getNombre());
 			stmt.setString(2, r.getDesc());
 			stmt.setString(3, r.getNivelDificultad());
-			stmt.setObject(4, r.getProfesional());
+			stmt.setObject(4, r.getProfesional().getIdUsuario());
 			stmt.executeUpdate();
 
 			keyResultSet = stmt.getGeneratedKeys();

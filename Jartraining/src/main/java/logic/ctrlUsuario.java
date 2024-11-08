@@ -60,7 +60,7 @@ public class ctrlUsuario {
         return dp.getAll();
     }
 
-    public LinkedList<Profesional> getProfesionalesByProfesion(String profesion) {
+    /*public LinkedList<Profesional> getProfesionalesByProfesion(String profesion) {
         return dp.getProfesionalesByProfesion(profesion);
-    }
+    }*/
 }

@@ -14,7 +14,8 @@
 <body>
     <h1>Bienvenido <%= u.getNombre() + " " + u.getApellido() %></h1>
     <div class="button-container">
-        <form action="crearReceta" method="post" style="display:inline;">
+        <form action="crearRecetaProfesional" method="post" style="display:inline;">
+        	<input type="hidden" name="id_profesional" value="<%=u.getIdUsuario()%>">
             <button type="submit" class="button">Crear Receta</button>
         </form>
 
