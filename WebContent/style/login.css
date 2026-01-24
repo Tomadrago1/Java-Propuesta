@@ -1,0 +1,328 @@
+/* =====================================================
+   JAR TRAINING - LOGIN PAGE STYLES
+   Diseño moderno y profesional para gimnasio
+===================================================== */
+
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700&display=swap");
+
+/* Variables locales */
+:root {
+  --primary: #ff6b35;
+  --primary-dark: #e55a2b;
+  --primary-light: #ff8a5c;
+  --secondary: #1a1a2e;
+  --secondary-dark: #0f0f1a;
+  --accent: #ffd700;
+  --dark: #0f0f0f;
+  --white: #ffffff;
+  --gray-100: #f5f5f5;
+  --gray-300: #d4d4d4;
+  --gray-400: #a3a3a3;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Inter", sans-serif;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(135deg, #0f0f0f 0%, #1a1a2e 50%, #2d2d44 100%);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Efecto de fondo con partículas/líneas */
+body::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image:
+    radial-gradient(
+      circle at 20% 80%,
+      rgba(255, 107, 53, 0.1) 0%,
+      transparent 50%
+    ),
+    radial-gradient(
+      circle at 80% 20%,
+      rgba(255, 215, 0, 0.08) 0%,
+      transparent 50%
+    ),
+    radial-gradient(
+      circle at 40% 40%,
+      rgba(255, 107, 53, 0.05) 0%,
+      transparent 30%
+    );
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Patrón de líneas decorativas */
+body::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image:
+    linear-gradient(90deg, rgba(255, 107, 53, 0.03) 1px, transparent 1px),
+    linear-gradient(rgba(255, 107, 53, 0.03) 1px, transparent 1px);
+  background-size: 60px 60px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+#contenedor {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  min-height: 100vh;
+  padding: 2rem;
+  position: relative;
+  z-index: 1;
+}
+
+#central {
+  width: 100%;
+  max-width: 450px;
+  animation: fadeInUp 0.8s ease-out;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+#login {
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  padding: 3rem 2.5rem;
+  border-radius: 1.5rem;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow:
+    0 25px 50px -12px rgba(0, 0, 0, 0.5),
+    0 0 0 1px rgba(255, 255, 255, 0.05) inset;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Efecto de brillo superior */
+#login::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 107, 53, 0.5),
+    transparent
+  );
+}
+
+/* Logo / Icono decorativo */
+#login::after {
+  content: "💪";
+  position: absolute;
+  top: -30px;
+  right: -30px;
+  font-size: 80px;
+  opacity: 0.05;
+  transform: rotate(15deg);
+}
+
+.titulo {
+  font-family: "Montserrat", sans-serif;
+  font-size: 2rem;
+  font-weight: 800;
+  text-align: center;
+  margin-bottom: 0.5rem;
+  background: linear-gradient(135deg, var(--white) 0%, var(--gray-300) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  letter-spacing: -0.02em;
+}
+
+/* Subtítulo */
+.titulo + #loginform::before {
+  content: "Accede a tu cuenta de entrenamiento";
+  display: block;
+  text-align: center;
+  color: var(--gray-400);
+  font-size: 0.9rem;
+  margin-bottom: 2rem;
+  font-weight: 400;
+}
+
+#loginform {
+  margin-top: 1rem;
+}
+
+.input-container {
+  position: relative;
+  margin-bottom: 1.5rem;
+}
+
+.input-container input {
+  width: 100%;
+  padding: 1rem 1rem 1rem 3.25rem;
+  font-family: "Inter", sans-serif;
+  font-size: 1rem;
+  color: var(--white);
+  background: rgba(255, 255, 255, 0.08);
+  border: 2px solid rgba(255, 255, 255, 0.1);
+  border-radius: 0.75rem;
+  transition: all 0.3s ease;
+  outline: none;
+}
+
+.input-container input:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+.input-container input:focus {
+  background: rgba(255, 255, 255, 0.12);
+  border-color: var(--primary);
+  box-shadow: 0 0 0 4px rgba(255, 107, 53, 0.15);
+}
+
+.input-container input::placeholder {
+  color: var(--gray-400);
+}
+
+.input-container i {
+  position: absolute;
+  left: 1.1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--primary);
+  font-size: 1.1rem;
+  pointer-events: none;
+  transition: color 0.3s ease;
+}
+
+.input-container input:focus + i,
+.input-container:focus-within i {
+  color: var(--primary-light);
+}
+
+#loginform button {
+  width: 100%;
+  padding: 1rem 1.5rem;
+  font-family: "Montserrat", sans-serif;
+  font-size: 1rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--white);
+  background: linear-gradient(
+    135deg,
+    var(--primary) 0%,
+    var(--primary-dark) 100%
+  );
+  border: none;
+  border-radius: 0.75rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 20px rgba(255, 107, 53, 0.4);
+  position: relative;
+  overflow: hidden;
+  margin-top: 0.5rem;
+}
+
+#loginform button::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.2),
+    transparent
+  );
+  transition: left 0.5s ease;
+}
+
+#loginform button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 30px rgba(255, 107, 53, 0.5);
+}
+
+#loginform button:hover::before {
+  left: 100%;
+}
+
+#loginform button:active {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 15px rgba(255, 107, 53, 0.4);
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+  #login {
+    padding: 2.5rem 1.5rem;
+    border-radius: 1rem;
+  }
+
+  .titulo {
+    font-size: 1.75rem;
+  }
+
+  .input-container input {
+    padding: 0.875rem 0.875rem 0.875rem 3rem;
+  }
+}
+
+/* Animación de entrada para los elementos */
+.input-container {
+  animation: slideIn 0.5s ease-out forwards;
+  opacity: 0;
+}
+
+.input-container:nth-child(1) {
+  animation-delay: 0.2s;
+}
+
+.input-container:nth-child(2) {
+  animation-delay: 0.3s;
+}
+
+#loginform button {
+  animation: slideIn 0.5s ease-out 0.4s forwards;
+  opacity: 0;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}

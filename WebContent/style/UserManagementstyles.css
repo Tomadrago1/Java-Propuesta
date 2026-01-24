@@ -1,0 +1,384 @@
+/* =====================================================
+   JAR TRAINING - GESTIÓN DE USUARIOS
+   Tablas y listados modernos para administración
+===================================================== */
+
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700&display=swap");
+
+/* Variables */
+:root {
+  --primary: #ff6b35;
+  --primary-dark: #e55a2b;
+  --primary-light: #ff8a5c;
+  --secondary: #1a1a2e;
+  --secondary-dark: #0f0f1a;
+  --secondary-light: #2d2d44;
+  --accent: #ffd700;
+  --dark: #0f0f0f;
+  --white: #ffffff;
+  --gray-100: #f5f5f5;
+  --gray-200: #e5e5e5;
+  --gray-300: #d4d4d4;
+  --gray-400: #a3a3a3;
+  --gray-500: #737373;
+  --success: #10b981;
+  --success-dark: #059669;
+  --warning: #f59e0b;
+  --warning-dark: #d97706;
+  --error: #ef4444;
+  --error-dark: #dc2626;
+  --info: #3b82f6;
+  --info-dark: #2563eb;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Inter", sans-serif;
+  margin: 0;
+  padding: 2rem;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #0f0f0f 0%, #1a1a2e 50%, #2d2d44 100%);
+  position: relative;
+}
+
+/* Patrón de fondo */
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image:
+    radial-gradient(
+      circle at 10% 20%,
+      rgba(255, 107, 53, 0.08) 0%,
+      transparent 40%
+    ),
+    radial-gradient(
+      circle at 90% 80%,
+      rgba(255, 215, 0, 0.05) 0%,
+      transparent 40%
+    );
+  pointer-events: none;
+  z-index: 0;
+}
+
+body::after {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image:
+    linear-gradient(90deg, rgba(255, 107, 53, 0.02) 1px, transparent 1px),
+    linear-gradient(rgba(255, 107, 53, 0.02) 1px, transparent 1px);
+  background-size: 80px 80px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+tbody {
+  background: transparent;
+}
+
+h1 {
+  font-family: "Montserrat", sans-serif;
+  text-align: center;
+  color: var(--white);
+  font-size: 2.25rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+  position: relative;
+  z-index: 1;
+  animation: fadeIn 0.6s ease-out;
+}
+
+h1::after {
+  content: "";
+  display: block;
+  width: 80px;
+  height: 4px;
+  background: linear-gradient(90deg, var(--primary), var(--accent));
+  margin: 1rem auto 2rem;
+  border-radius: 2px;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.container {
+  width: 95%;
+  max-width: 1400px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
+}
+
+/* Contenedor de tabla */
+.div-table {
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-radius: 1.5rem;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow:
+    0 25px 50px -12px rgba(0, 0, 0, 0.4),
+    0 0 0 1px rgba(255, 255, 255, 0.05) inset;
+  overflow: hidden;
+  animation: fadeIn 0.6s ease-out 0.2s both;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  border-spacing: 0;
+  border-radius: 0;
+  box-shadow: none;
+  margin: 0;
+}
+
+/* Cabecera de tabla */
+table th {
+  background: var(--secondary);
+  padding: 1.25rem 1rem;
+  font-family: "Montserrat", sans-serif;
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--white);
+  text-align: center;
+  border-bottom: 3px solid var(--primary);
+  border: none;
+}
+
+/* Celdas */
+table td {
+  padding: 1rem;
+  color: var(--gray-200);
+  font-size: 0.95rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  border: none;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  text-align: center;
+  vertical-align: middle;
+}
+
+/* Filas */
+table tr {
+  background: rgba(255, 255, 255, 0.02);
+  transition: all 0.3s ease;
+}
+
+table tr:nth-child(even) {
+  background: rgba(255, 255, 255, 0.04);
+}
+
+table tr:hover {
+  background: rgba(255, 107, 53, 0.1);
+}
+
+/* Estilos para botones de acción */
+.action-btn {
+  font-family: "Montserrat", sans-serif;
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: none;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.35rem;
+  color: var(--white);
+}
+
+/* Botón Ver Más */
+.viewmore-btn {
+  background: linear-gradient(135deg, var(--info) 0%, var(--info-dark) 100%);
+  color: var(--white);
+  box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3);
+  border: none;
+}
+
+.viewmore-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(59, 130, 246, 0.4);
+  background: linear-gradient(135deg, var(--info) 0%, var(--info-dark) 100%);
+}
+
+.viewmore-btn:active {
+  transform: translateY(0);
+}
+
+/* Botón Crear */
+.create-btn {
+  background: linear-gradient(
+    135deg,
+    var(--success) 0%,
+    var(--success-dark) 100%
+  );
+  color: var(--white);
+  padding: 0.75rem 1.5rem;
+  font-size: 0.85rem;
+  box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);
+  border: none;
+}
+
+.create-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(16, 185, 129, 0.4);
+  background: linear-gradient(
+    135deg,
+    var(--success) 0%,
+    var(--success-dark) 100%
+  );
+}
+
+.create-btn:active {
+  transform: translateY(0);
+}
+
+/* Botón Editar */
+.edit-btn {
+  background: linear-gradient(
+    135deg,
+    var(--warning) 0%,
+    var(--warning-dark) 100%
+  );
+  color: var(--dark);
+  box-shadow: 0 4px 15px rgba(245, 158, 11, 0.3);
+  border: none;
+}
+
+.edit-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(245, 158, 11, 0.4);
+  background: linear-gradient(
+    135deg,
+    var(--warning) 0%,
+    var(--warning-dark) 100%
+  );
+}
+
+.edit-btn:active {
+  transform: translateY(0);
+}
+
+/* Botón Eliminar */
+.delete-btn {
+  background: linear-gradient(135deg, var(--error) 0%, var(--error-dark) 100%);
+  color: var(--white);
+  box-shadow: 0 4px 15px rgba(239, 68, 68, 0.3);
+  border: none;
+}
+
+.delete-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(239, 68, 68, 0.4);
+  background: linear-gradient(135deg, var(--error) 0%, var(--error-dark) 100%);
+}
+
+.delete-btn:active {
+  transform: translateY(0);
+}
+
+/* Contenedor de acciones en la tabla */
+td form {
+  display: inline-block;
+  margin: 0 0.25rem;
+}
+
+/* Link de volver */
+a[href="index.html"],
+a[style*="color: red"] {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 2rem;
+  padding: 0.75rem 1.5rem;
+  font-family: "Montserrat", sans-serif;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--gray-300) !important;
+  text-decoration: none;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 0.75rem;
+  background: rgba(255, 255, 255, 0.03);
+  transition: all 0.3s ease;
+}
+
+a[href="index.html"]:hover,
+a[style*="color: red"]:hover {
+  color: var(--primary) !important;
+  border-color: var(--primary);
+  background: rgba(255, 107, 53, 0.1);
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  body {
+    padding: 1rem;
+  }
+
+  .container {
+    width: 100%;
+  }
+
+  table th,
+  table td {
+    padding: 0.75rem 0.5rem;
+    font-size: 0.85rem;
+  }
+}
+
+@media (max-width: 768px) {
+  h1 {
+    font-size: 1.75rem;
+  }
+
+  .div-table {
+    border-radius: 1rem;
+    overflow-x: auto;
+  }
+
+  table {
+    min-width: 800px;
+  }
+
+  .action-btn {
+    padding: 0.4rem 0.75rem;
+    font-size: 0.75rem;
+  }
+}
+
+@media (max-width: 480px) {
+  h1 {
+    font-size: 1.5rem;
+  }
+
+  .create-btn {
+    width: 100%;
+    justify-content: center;
+  }
+}

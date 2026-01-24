@@ -1,0 +1,15 @@
+/* =====================================================
+   JAR TRAINING - CREAR USUARIO
+   Estilos heredados de crear-editar.css
+===================================================== */
+
+@import url("crear-editar.css");
+
+/* Estilos adicionales específicos si es necesario */
+.container {
+  max-width: 500px;
+}
+
+h1::before {
+  content: "👤 ";
+}

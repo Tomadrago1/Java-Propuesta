@@ -1,0 +1,25 @@
+# Eclipse / IDE
+.metadata/
+.recommenders/
+.settings/org.eclipse.wst.server.core.prefs
+*.tmp
+*.bak
+*.swp
+*~
+
+# Build / output
+/bin/
+/build/
+/target/
+*.class
+
+# Servers (Eclipse WTP)
+Servers/
+**/.wtpmodules
+
+# Logs
+*.log
+
+# OS
+.DS_Store
+Thumbs.db
