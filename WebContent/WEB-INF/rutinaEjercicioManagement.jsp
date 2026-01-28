@@ -91,7 +91,8 @@
                                     </form>
                                 </div>
                             </div>
-                            <a href="index.html" style="color: red">Volver</a>
+    <% request.setAttribute("pageTitle", "Gestión Rutina Ejercicio"); %>
+    <jsp:include page="header.jsp" />
                         </div>
                     </body>
 

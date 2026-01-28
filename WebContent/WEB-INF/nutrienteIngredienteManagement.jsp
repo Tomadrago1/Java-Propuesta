@@ -58,7 +58,8 @@
               </form>
             </div>
           </div>
-          <a href="index.html" style="color: red">Volver</a>
+        <% request.setAttribute("pageTitle", "Gestión Nutriente Ingrediente"); %>
+        <jsp:include page="header.jsp" />
         </div>
       </body>
 

@@ -33,7 +33,8 @@
             <input type="submit" value="Crear">
           </div>
         </form>
-        <a href="index.html" style="color: red">Volver</a>
+      <% request.setAttribute("pageTitle", "Crear Nutriente"); %>
+      <jsp:include page="../header.jsp" />
       </div>
     </body>
 

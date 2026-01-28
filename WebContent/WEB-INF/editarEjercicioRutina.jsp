@@ -68,7 +68,8 @@
                             </div>
                             <p id="errorMessage" style="color:red;"></p>
                         </form>
-                        <a href="index.html" style="color: red">Volver</a>
+    <% request.setAttribute("pageTitle", "Editar Ejercicio Rutina"); %>
+    <jsp:include page="header.jsp" />
                     </div>
             </body>
 

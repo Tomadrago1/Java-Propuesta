@@ -63,7 +63,8 @@
                 </form>
             </div>
         </div>
-        <a href="index.html" style="color: red">Volver</a>
+    <% request.setAttribute("pageTitle", "Gestión de Ingredientes"); %>
+    <jsp:include page="../header.jsp" />
     </div>
 </body>
 </html>

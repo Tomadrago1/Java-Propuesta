@@ -64,7 +64,8 @@
                 <input type="submit" value="Agregar Rutina" class="action-btn create-btn">
               </form>
             </div>
-            <a href="index.html" style="color: red">Volver</a>
+        <% request.setAttribute("pageTitle", "Mis Rutinas"); %>
+        <jsp:include page="header.jsp" />
           </div>
         </div>
       </body>

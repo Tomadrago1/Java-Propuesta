@@ -62,7 +62,8 @@
                     <input type="submit" value="Ver macronutrientes" class="action-btn create-btn">
                   </form>
                 </div>
-                <a href="index.html" style="color: red">Volver</a>
+          <% request.setAttribute("pageTitle", "Receta Recomendada"); %>
+          <jsp:include page="header.jsp" />
               </div>
           </body>
 

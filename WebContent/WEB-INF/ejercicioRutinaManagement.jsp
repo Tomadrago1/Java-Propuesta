@@ -54,7 +54,8 @@
                 </form>
             </div>
         </div>
-        <a href="index.html" style="color: red">Volver</a>
+    <% request.setAttribute("pageTitle", "Ejercicio Rutina Management"); %>
+    <jsp:include page="header.jsp" />
     </div>
 </body>
 </html>

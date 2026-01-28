@@ -48,7 +48,8 @@
                 <input type="submit" value="Actualizar">
             </div>
         </form>
-        <a href="index.html" style="color: red">Volver</a>
+    <% request.setAttribute("pageTitle", "Cantidad Ingrediente"); %>
+    <jsp:include page="header.jsp" />
     </div>
 </body>
 </html>

@@ -57,7 +57,8 @@
                 </tbody>
               </table>
             </div>
-            <a href="index.html" style="color: red">Volver</a>
+        <% request.setAttribute("pageTitle", "Gestión Recetas Usuario"); %>
+        <jsp:include page="header.jsp" />
           </div>
         </body>
 

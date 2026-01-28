@@ -10,6 +10,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="style/global.css">
     <link rel="stylesheet" href="style/UserManagementstyles.css">
     
     <%
@@ -19,10 +20,45 @@
     
 </head>
 <body>
+    <%-- Header global --%>
+    <% request.setAttribute("pageTitle", "Usuarios"); %>
+    <jsp:include page="../header.jsp" />
     <div class="container">
-        <h1>Usuarios</h1>
+        <!-- Barra de acciones y filtros (misma línea) -->
+        <div class="filters-bar">
+            <form action="crearUsuario" method="post" style="display:inline;" class="create-wrap">
+                <input type="submit" value="+ Crear Usuario" class="action-btn create-btn">
+            </form>
+            <input type="text" id="searchName" class="filter-input" placeholder="🔍 Buscar por nombre..." onkeyup="filterTable()">
+            <select id="filterTipo" class="filter-select" onchange="filterTable()">
+                <option value="">Todos los tipos</option>
+                <option value="Admin">Admin</option>
+                <option value="Profesional">Profesional</option>
+                <option value="Cliente">Cliente</option>
+            </select>
+            <select id="filterProfesion" class="filter-select" onchange="filterTable()">
+                <option value="">Todas las profesiones</option>
+                <%
+                    // Obtener profesiones únicas
+                    java.util.Set<String> profesiones = new java.util.HashSet<String>();
+                    for (Usuario usu : lu) {
+                        if (usu instanceof Profesional) {
+                            String prof = ((Profesional)usu).getProfesion();
+                            if (prof != null && !prof.isEmpty()) {
+                                profesiones.add(prof);
+                            }
+                        }
+                    }
+                    for (String prof : profesiones) {
+                %>
+                <option value="<%=prof%>"><%=prof%></option>
+                <% } %>
+            </select>
+            <button type="button" class="action-btn clear-btn" onclick="clearFilters()">Limpiar</button>
+        </div>
+        
         <div class="div-table">
-            <table>
+            <table id="usersTable">
                 <thead>
                     <tr>
                         <th>Nombre</th>
@@ -90,13 +126,44 @@
                     } %>
                 </tbody>
             </table>
-            <div style="text-align: right; margin-top: 20px; margin-bottom:20px; padding: 0 20px;">
-                <form action="crearUsuario" method="post" style="display:inline;">
-                    <input type="submit" value="Crear Usuario" class="action-btn create-btn">
-                </form>
-            </div>
         </div>
-        <a href="index.html" style="color: red">Volver</a>
+        <a href="index.html">Volver</a>
     </div>
+    
+    <script>
+        function filterTable() {
+            const searchName = document.getElementById('searchName').value.toLowerCase();
+            const filterTipo = document.getElementById('filterTipo').value;
+            const filterProfesion = document.getElementById('filterProfesion').value;
+            
+            const table = document.getElementById('usersTable');
+            const rows = table.getElementsByTagName('tbody')[0].getElementsByTagName('tr');
+            
+            for (let i = 0; i < rows.length; i++) {
+                const cells = rows[i].getElementsByTagName('td');
+                const nombre = cells[0].textContent.toLowerCase();
+                const apellido = cells[1].textContent.toLowerCase();
+                const tipoUsuario = cells[4].textContent.trim();
+                const profesion = cells[5].textContent.trim();
+                
+                const matchesName = nombre.includes(searchName) || apellido.includes(searchName);
+                const matchesTipo = filterTipo === '' || tipoUsuario === filterTipo;
+                const matchesProfesion = filterProfesion === '' || profesion === filterProfesion;
+                
+                if (matchesName && matchesTipo && matchesProfesion) {
+                    rows[i].style.display = '';
+                } else {
+                    rows[i].style.display = 'none';
+                }
+            }
+        }
+        
+        function clearFilters() {
+            document.getElementById('searchName').value = '';
+            document.getElementById('filterTipo').value = '';
+            document.getElementById('filterProfesion').value = '';
+            filterTable();
+        }
+    </script>
 </body>
 </html>

@@ -9,6 +9,7 @@
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="style/global.css">
         <link rel="stylesheet" href="style/UserManagementstyles.css">
 
         <%LinkedList<Profesional> lp = (LinkedList<Profesional>)request.getAttribute("profesionales");
@@ -43,7 +44,8 @@
               </tbody>
             </table>
           </div>
-          <a href="index.html" style="color: red">Volver</a>
+        <% request.setAttribute("pageTitle", "Agendar Consulta"); %>
+        <jsp:include page="header.jsp" />
         </div>
       </body>
 
