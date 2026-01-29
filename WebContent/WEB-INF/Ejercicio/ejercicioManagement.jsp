@@ -26,6 +26,8 @@
                     <tr>
                         <th>Nombre</th>
                         <th>Descripción</th>
+                        <th>Zona</th>
+                        <th>Tipo de Ejercicio</th>
                         <th>Editar Ejercicio</th>
                         <th>Eliminar Ejercicio</th>
                     </tr>
@@ -35,6 +37,8 @@
                     <tr>
                         <td><%=eje.getNombre()%></td>
                         <td><%=eje.getDescripcion()%></td>
+                        <td><%=eje.getZona() != null ? eje.getZona() : "-"%></td>
+                        <td><%=eje.getTipoEjercicio() != null ? eje.getTipoEjercicio() : "-"%></td>
                         <td class="actions">
                             <a href="editarEjercicio?id=<%=eje.getId()%>" class="action-btn edit-btn">Editar</a>
                         </td>

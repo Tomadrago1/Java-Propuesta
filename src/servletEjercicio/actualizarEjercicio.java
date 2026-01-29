@@ -24,9 +24,11 @@ public class actualizarEjercicio extends HttpServlet {
         int id = Integer.parseInt(request.getParameter("id"));
         String nombre = request.getParameter("nombre");
         String desc = request.getParameter("descripcion");
+        String zona = request.getParameter("zona");
+        String tipoEjercicio = request.getParameter("tipoEjercicio");
 
         ctrlEjercicios ctrl = new ctrlEjercicios();
-        Boolean success = ctrl.modificarEjercicio(id, nombre, desc);
+        Boolean success = ctrl.modificarEjercicio(id, nombre, desc, zona, tipoEjercicio);
 
         if (success) {
             LinkedList<Ejercicio> ejercicios = ctrl.getAll();

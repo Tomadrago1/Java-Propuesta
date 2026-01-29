@@ -21,6 +21,8 @@ public class DaoEjercicio {
 					e.setId(rs.getInt("id"));
 					e.setNombre(rs.getString("nombre"));
 					e.setDescripcion(rs.getString("descripcion"));
+					e.setZona(rs.getString("zona"));
+					e.setTipoEjercicio(rs.getString("tipo_ejercicio"));
 					ejercicios.add(e);
 				}
 			}
@@ -55,6 +57,8 @@ public class DaoEjercicio {
 				e.setId(rs.getInt("id"));
 				e.setNombre(rs.getString("nombre"));
 				e.setDescripcion(rs.getString("descripcion"));
+				e.setZona(rs.getString("zona"));
+				e.setTipoEjercicio(rs.getString("tipo_ejercicio"));
 			}
 		} catch (SQLException err) {
 			err.printStackTrace();
@@ -72,14 +76,16 @@ public class DaoEjercicio {
 	}
 	
 	
-	public boolean modificarEjercicio(int id, String nombre, String descripcion) {
+	public boolean modificarEjercicio(int id, String nombre, String descripcion, String zona, String tipoEjercicio) {
 	    PreparedStatement stmt = null;
 	    try {
 	        stmt = DbConnector.getInstancia().getConn().prepareStatement(
-	                "UPDATE ejercicio SET nombre = ?, descripcion = ? WHERE id = ?");
+	                "UPDATE ejercicio SET nombre = ?, descripcion = ?, zona = ?, tipo_ejercicio = ? WHERE id = ?");
 	        stmt.setString(1, nombre);
 	        stmt.setString(2, descripcion);
-	        stmt.setInt(3, id);
+	        stmt.setString(3, zona);
+	        stmt.setString(4, tipoEjercicio);
+	        stmt.setInt(5, id);
 	        
 	        int filasActualizadas = stmt.executeUpdate(); 
 	        return filasActualizadas > 0; // Retornar true si se actualizó al menos una fila
@@ -142,11 +148,13 @@ public class DaoEjercicio {
 		try {
 			stmt=DbConnector.getInstancia().getConn().
 					prepareStatement(
-							"INSERT INTO ejercicio (nombre, descripcion) VALUES(?, ?)",
+							"INSERT INTO ejercicio (nombre, descripcion, zona, tipo_ejercicio) VALUES(?, ?, ?, ?)",
 							PreparedStatement.RETURN_GENERATED_KEYS
 							);
 			stmt.setString(1, e.getNombre());
 			stmt.setString(2, e.getDescripcion());
+			stmt.setString(3, e.getZona());
+			stmt.setString(4, e.getTipoEjercicio());
 			stmt.executeUpdate();
 			
 			keyResultSet=stmt.getGeneratedKeys();
@@ -188,6 +196,8 @@ public class DaoEjercicio {
 					e.setId(rs.getInt("id"));
 					e.setNombre(rs.getString("nombre"));
 					e.setDescripcion(rs.getString("descripcion"));
+					e.setZona(rs.getString("zona"));
+					e.setTipoEjercicio(rs.getString("tipo_ejercicio"));
 					ejercicios.add(e);
 				}
 			}

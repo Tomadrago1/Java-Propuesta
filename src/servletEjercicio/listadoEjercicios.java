@@ -33,8 +33,10 @@ public class listadoEjercicios extends HttpServlet {
 	 *      response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		ctrlEjercicios ctrl = new ctrlEjercicios();
+		LinkedList<Ejercicio> ejercicios = ctrl.getAll();
+		request.setAttribute("listaEjercicios", ejercicios);
+		request.getRequestDispatcher("WEB-INF/Ejercicio/ejercicioManagement.jsp").forward(request, response);
 	}
 
 	/**
@@ -42,11 +44,7 @@ public class listadoEjercicios extends HttpServlet {
 	 *      response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-		ctrlEjercicios ctrl = new ctrlEjercicios();
-		LinkedList<Ejercicio> ejercicios = ctrl.getAll();
-    request.setAttribute("listaEjercicios", ejercicios);
-    request.getRequestDispatcher("WEB-INF/Ejercicio/ejercicioManagement.jsp").forward(request, response);
+		doGet(request, response);
 	}
 
 }

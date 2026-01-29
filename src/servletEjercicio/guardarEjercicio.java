@@ -47,16 +47,15 @@ public class guardarEjercicio extends HttpServlet {
 
         String nombre = request.getParameter("nombre");
         String descripcion = request.getParameter("descripcion");
+        String zona = request.getParameter("zona");
+        String tipoEjercicio = request.getParameter("tipoEjercicio");
 
         // Crear una instancia del Ejercicio
         Ejercicio nuevoEjercicio = new Ejercicio();
         nuevoEjercicio.setNombre(nombre);
         nuevoEjercicio.setDescripcion(descripcion);
-
-        // Instanciar el DAO y guardar el ejercicio
-        DaoEjercicio de = new DaoEjercicio();
-        de.addEjercicio(nuevoEjercicio);
-
+        nuevoEjercicio.setZona(zona);
+        nuevoEjercicio.setTipoEjercicio(tipoEjercicio);
         // Redirigir o enviar un mensaje de éxito
         ctrlEjercicios ctrl = new ctrlEjercicios();
         LinkedList<Ejercicio> ejercicios = ctrl.getAll();

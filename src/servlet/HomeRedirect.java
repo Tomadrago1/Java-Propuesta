@@ -1,12 +1,12 @@
 package servlet;
 
 import java.io.IOException;
-import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import entities.Usuario;
 
 @WebServlet("/HomeRedirect")
@@ -16,7 +16,7 @@ public class HomeRedirect extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession(false);
         if (session == null || session.getAttribute("usuario") == null) {
-            response.sendRedirect(request.getContextPath() + "/login.jsp");
+            response.sendRedirect(request.getContextPath() + "/index.html");
             return;
         }
         Usuario usuario = (Usuario) session.getAttribute("usuario");
@@ -35,7 +35,7 @@ public class HomeRedirect extends HttpServlet {
             tipo = usuario.getTipoUsu();
         }
         if (tipo == null) {
-            response.sendRedirect(request.getContextPath() + "/login.jsp");
+            response.sendRedirect(request.getContextPath() + "/index.html");
             return;
         }
         switch (tipo) {
@@ -49,7 +49,7 @@ public class HomeRedirect extends HttpServlet {
                 response.sendRedirect(request.getContextPath() + "/WEB-INF/vistaUsuario.jsp");
                 break;
             default:
-                response.sendRedirect(request.getContextPath() + "/login.jsp");
+                response.sendRedirect(request.getContextPath() + "/index.html");
         }
     }
 }

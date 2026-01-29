@@ -21,6 +21,8 @@
   --gray-300: #d4d4d4;
   --gray-400: #a3a3a3;
   --success: #10b981;
+  --warning: #f59e0b;
+  --error: #ef4444;
 }
 
 * {
@@ -31,10 +33,13 @@
 
 body {
   font-family: "Inter", sans-serif;
+  margin: 0;
+  padding: 0;
   min-height: 100vh;
   background: linear-gradient(135deg, #0f0f0f 0%, #1a1a2e 50%, #2d2d44 100%);
-  margin: 0;
-  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   position: relative;
   overflow-x: hidden;
 }
@@ -77,15 +82,17 @@ body::after {
   z-index: 0;
 }
 
-h1 {
-  font-family: "Montserrat", sans-serif;
-  text-align: center;
-  color: var(--white);
-  font-size: 2rem;
-  font-weight: 700;
-  margin-bottom: 2rem;
+.super-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  flex-grow: 1;
+  padding: 2rem;
   position: relative;
   z-index: 1;
+  width: 100%;
+  max-width: 600px;
   animation: fadeIn 0.6s ease-out;
 }
 
@@ -100,46 +107,81 @@ h1 {
   }
 }
 
-.button-container {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 1.25rem;
-  max-width: 900px;
-  margin: 0 auto;
-  padding: 2rem;
-  position: relative;
-  z-index: 1;
+h1 {
+  font-family: "Montserrat", sans-serif;
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: var(--white);
+  text-align: center;
+  margin-bottom: 2rem;
+  letter-spacing: -0.01em;
 }
 
-.button {
+h1 span {
+  color: var(--primary);
+}
+
+.admin-container {
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  padding: 2rem;
+  border-radius: 1.5rem;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow:
+    0 25px 50px -12px rgba(0, 0, 0, 0.4),
+    0 0 0 1px rgba(255, 255, 255, 0.05) inset;
+  text-align: center;
+  width: 100%;
+  max-width: 500px;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Efecto de brillo en la parte superior */
+.admin-container::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 107, 53, 0.5),
+    transparent
+  );
+}
+
+.admin-btn {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 0.75rem;
-  padding: 1.25rem 2rem;
+  width: 100%;
+  margin: 0.75rem 0;
+  padding: 1rem 1.5rem;
   font-family: "Montserrat", sans-serif;
-  font-size: 1rem;
+  font-size: 0.95rem;
   font-weight: 600;
   text-transform: uppercase;
-  letter-spacing: 0.05em;
+  letter-spacing: 0.08em;
   color: var(--white);
   background: linear-gradient(
     135deg,
     rgba(255, 255, 255, 0.08) 0%,
     rgba(255, 255, 255, 0.03) 100%
   );
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
   border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 1rem;
-  text-decoration: none;
+  border-radius: 0.75rem;
   cursor: pointer;
+  text-decoration: none;
   transition: all 0.3s ease;
   position: relative;
   overflow: hidden;
 }
 
-.button::before {
+.admin-btn::before {
   content: "";
   position: absolute;
   top: 0;
@@ -155,76 +197,110 @@ h1 {
   transition: left 0.5s ease;
 }
 
-.button:hover {
+.admin-btn:hover {
   background: linear-gradient(
     135deg,
     var(--primary) 0%,
     var(--primary-dark) 100%
   );
   border-color: var(--primary);
-  transform: translateY(-4px) scale(1.02);
+  transform: translateY(-3px) scale(1.02);
   box-shadow:
-    0 15px 35px rgba(255, 107, 53, 0.3),
+    0 10px 30px rgba(255, 107, 53, 0.3),
     0 0 0 1px rgba(255, 107, 53, 0.2);
-  color: var(--white);
 }
 
-.button:hover::before {
+.admin-btn:hover::before {
   left: 100%;
 }
 
-.button:active {
-  transform: translateY(-2px) scale(1.01);
+.admin-btn:active {
+  transform: translateY(-1px) scale(1.01);
 }
 
-/* Animación de entrada escalonada */
-.button:nth-child(1) {
-  animation: slideIn 0.4s ease-out 0.1s both;
+/* Iconos para los botones */
+.admin-btn[value="Mis Rutinas"]::after {
+  content: "📋";
+  margin-left: 0.75rem;
 }
-.button:nth-child(2) {
-  animation: slideIn 0.4s ease-out 0.2s both;
+.admin-btn[value="Mis Entrenamientos"]::after {
+  content: "🏃";
+  margin-left: 0.75rem;
 }
-.button:nth-child(3) {
-  animation: slideIn 0.4s ease-out 0.3s both;
+.admin-btn[value="Mis Medidas"]::after {
+  content: "📏";
+  margin-left: 0.75rem;
 }
-.button:nth-child(4) {
-  animation: slideIn 0.4s ease-out 0.4s both;
+.admin-btn[value="Agendar Consulta"]::after {
+  content: "📅";
+  margin-left: 0.75rem;
 }
-.button:nth-child(5) {
-  animation: slideIn 0.4s ease-out 0.5s both;
-}
-.button:nth-child(6) {
-  animation: slideIn 0.4s ease-out 0.6s both;
+.admin-btn[value="Recetas Recomendadas"]::after {
+  content: "⭐";
+  margin-left: 0.75rem;
 }
 
-@keyframes slideIn {
+/* Formularios dentro del container */
+form {
+  margin: 0;
+}
+
+/* Animación de entrada escalonada para los botones */
+form:nth-child(1) .admin-btn {
+  animation: slideInBtn 0.4s ease-out 0.1s both;
+}
+form:nth-child(2) .admin-btn {
+  animation: slideInBtn 0.4s ease-out 0.2s both;
+}
+form:nth-child(3) .admin-btn {
+  animation: slideInBtn 0.4s ease-out 0.3s both;
+}
+form:nth-child(4) .admin-btn {
+  animation: slideInBtn 0.4s ease-out 0.4s both;
+}
+form:nth-child(5) .admin-btn {
+  animation: slideInBtn 0.4s ease-out 0.5s both;
+}
+
+@keyframes slideInBtn {
   from {
     opacity: 0;
-    transform: translateY(20px);
+    transform: translateX(-20px);
   }
   to {
     opacity: 1;
-    transform: translateY(0);
+    transform: translateX(0);
   }
 }
 
 /* Responsive */
 @media (max-width: 600px) {
-  body {
+  .super-container {
     padding: 1rem;
+  }
+
+  .admin-container {
+    padding: 1.5rem;
+    border-radius: 1rem;
   }
 
   h1 {
     font-size: 1.5rem;
   }
 
-  .button-container {
-    grid-template-columns: 1fr;
-    padding: 1rem;
+  .admin-btn {
+    padding: 0.875rem 1.25rem;
+    font-size: 0.875rem;
+  }
+}
+
+@media (max-width: 400px) {
+  h1 {
+    font-size: 1.25rem;
   }
 
-  .button {
-    padding: 1rem 1.5rem;
-    font-size: 0.9rem;
+  .admin-btn {
+    padding: 0.75rem 1rem;
+    font-size: 0.8rem;
   }
 }

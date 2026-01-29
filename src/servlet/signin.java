@@ -35,7 +35,7 @@ public class signin extends HttpServlet {
 		       Usuario usu = (Usuario) request.getSession().getAttribute("usuario");
 		       if (usu == null) {
 			       // Si no está autenticado, ir al login
-			       response.sendRedirect("login.jsp");
+			       response.sendRedirect("index.html");
 			       return;
 		       }
 		       switch (usu.getTipoUsu()) {

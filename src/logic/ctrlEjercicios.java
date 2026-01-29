@@ -11,8 +11,8 @@ public class ctrlEjercicios {
 		return de.getAll();
 	}
 	
-	public boolean modificarEjercicio(int id,String nombre,String desc) {
-		return de.modificarEjercicio(id, nombre, desc);
+	public boolean modificarEjercicio(int id, String nombre, String desc, String zona, String tipoEjercicio) {
+		return de.modificarEjercicio(id, nombre, desc, zona, tipoEjercicio);
 	}
 	
 	public Ejercicio getOne(int idEjercicio) {

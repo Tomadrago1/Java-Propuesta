@@ -1,15 +1,18 @@
 package servletEntrenamiento;
 
 import java.io.IOException;
+import java.time.LocalDate;
+import java.util.LinkedHashMap;
 import java.util.LinkedList;
+import java.util.Map;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.*;
 
-import entities.Ejercicio;
 import entities.Entrenamiento;
-import logic.ctrlEjercicios;
+import entities.Rutina;
 import logic.ctrlEntrenamiento;
+import logic.ctrlRutina;
 
 @WebServlet("/misEntrenamientos")
 public class misEntrenamientos extends HttpServlet {
@@ -19,18 +22,37 @@ protected void doPost(HttpServletRequest request, HttpServletResponse response) 
   int idUsuario = Integer.parseInt(request.getParameter("id"));
   
   ctrlEntrenamiento ctrlEnt = new ctrlEntrenamiento();
-  ctrlEjercicios ctrlEje = new ctrlEjercicios();
+  ctrlRutina ctrlRut = new ctrlRutina();
   
   LinkedList<Entrenamiento> entrenamientos = ctrlEnt.getEntrenamientosByUsuario(idUsuario);
 
-  LinkedList<Ejercicio> ejercicios = new LinkedList<Ejercicio>();
-
+  // Agrupar entrenamientos por rutina y fecha
+  Map<String, EntrenamientoAgrupado> entrenamientosAgrupados = new LinkedHashMap<>();
+  
   for (Entrenamiento ent : entrenamientos) {
-    int id_eje = ent.getIdEjercicio();
-    ejercicios.add(ctrlEje.getOne(id_eje));
+    String key = ent.getIdRutina() + "_" + ent.getFecha().toString();
+    
+    if (!entrenamientosAgrupados.containsKey(key)) {
+      EntrenamientoAgrupado grupo = new EntrenamientoAgrupado();
+      grupo.idRutina = ent.getIdRutina();
+      grupo.fecha = ent.getFecha();
+      grupo.rutina = ctrlRut.getOne(ent.getIdRutina());
+      entrenamientosAgrupados.put(key, grupo);
+    }
   }
-  request.setAttribute("ejercicios", ejercicios);
-  request.setAttribute("entrenamientos", entrenamientos);
+  
+  request.setAttribute("entrenamientosAgrupados", entrenamientosAgrupados.values());
   request.getRequestDispatcher("WEB-INF/misEntrenamientos.jsp").forward(request, response);
+}
+
+protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+  doPost(request, response);
+}
+
+  // Clase interna para agrupar entrenamientos
+  public static class EntrenamientoAgrupado {
+    public int idRutina;
+    public LocalDate fecha;
+    public Rutina rutina;
   }
 }

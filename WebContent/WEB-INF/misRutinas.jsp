@@ -37,7 +37,7 @@
                       <form action="iniciarEntrenamiento" method="post" class="inline-form">
                         <input type="hidden" name="id_rut" value="<%=rut.getId()%>">
                         <input type="hidden" name="id_usu" value="<%=u.getIdUsuario()%>">
-                        <input type="submit" value="IniciarEntrenamiento" class="action-btn viewmore-btn">
+                        <input type="submit" value="Iniciar Entrenamiento" class="action-btn viewmore-btn">
                       </form>
                     </td>
                     <td>
