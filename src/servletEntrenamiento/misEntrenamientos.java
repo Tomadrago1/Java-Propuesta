@@ -2,6 +2,7 @@ package servletEntrenamiento;
 
 import java.io.IOException;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.Map;
@@ -26,16 +27,17 @@ protected void doPost(HttpServletRequest request, HttpServletResponse response) 
   
   LinkedList<Entrenamiento> entrenamientos = ctrlEnt.getEntrenamientosByUsuario(idUsuario);
 
-  // Agrupar entrenamientos por rutina y fecha
+  // Agrupar entrenamientos por rutina, fecha y hora (cada sesión es única)
   Map<String, EntrenamientoAgrupado> entrenamientosAgrupados = new LinkedHashMap<>();
   
   for (Entrenamiento ent : entrenamientos) {
-    String key = ent.getIdRutina() + "_" + ent.getFecha().toString();
+    // Usar fecha_hora para diferenciar sesiones
+    String key = ent.getIdRutina() + "_" + (ent.getFechaHora() != null ? ent.getFechaHora().toString() : "");
     
     if (!entrenamientosAgrupados.containsKey(key)) {
       EntrenamientoAgrupado grupo = new EntrenamientoAgrupado();
       grupo.idRutina = ent.getIdRutina();
-      grupo.fecha = ent.getFecha();
+      grupo.fechaHora = ent.getFechaHora();
       grupo.rutina = ctrlRut.getOne(ent.getIdRutina());
       entrenamientosAgrupados.put(key, grupo);
     }
@@ -52,7 +54,7 @@ protected void doGet(HttpServletRequest request, HttpServletResponse response) t
   // Clase interna para agrupar entrenamientos
   public static class EntrenamientoAgrupado {
     public int idRutina;
-    public LocalDate fecha;
+    public LocalDateTime fechaHora;
     public Rutina rutina;
   }
 }

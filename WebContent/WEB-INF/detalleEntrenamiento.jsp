@@ -1,8 +1,9 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ page import="java.util.LinkedList" %>
 <%@ page import="entities.Ejercicio" %>
 <%@ page import="entities.Entrenamiento" %>
 <%@ page import="entities.Rutina" %>
-<%@ page import="java.time.LocalDate" %>
+<%@ page import="java.time.LocalDateTime" %>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -13,7 +14,7 @@
     <title>Detalle de Entrenamiento</title>
     <%
         Rutina rutina = (Rutina) request.getAttribute("rutina");
-        LocalDate fecha = (LocalDate) request.getAttribute("fecha");
+        LocalDateTime fechaHora = (LocalDateTime) request.getAttribute("fechaHora");
         LinkedList<Ejercicio> ejercicios = (LinkedList<Ejercicio>) request.getAttribute("ejercicios");
         LinkedList<Entrenamiento> entrenamientos = (LinkedList<Entrenamiento>) request.getAttribute("entrenamientos");
     %>
@@ -24,8 +25,11 @@
     <jsp:include page="header.jsp" />
     
     <div class="container">
+        <% 
+        java.time.format.DateTimeFormatter formatter = java.time.format.DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        %>
         <h2 style="text-align: center; color: #fff; margin-bottom: 1rem;">
-            <%= rutina.getNombre() %> - <%= fecha %>
+            <%= rutina.getNombre() %> - <%= fechaHora != null ? fechaHora.format(formatter) : "-" %>
         </h2>
         
         <div class="div-table">

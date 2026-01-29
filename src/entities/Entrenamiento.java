@@ -1,22 +1,23 @@
 package entities;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 public class Entrenamiento {
+  private int id;
   private int idEjercicio;
   private int idRutina;
   private int idUsuario;
-  private LocalDate fecha;
+  private LocalDateTime fechaHora;
   private int series;
   private Integer repes;
   private String tiempo;
   private double peso;
 
-  public Entrenamiento(int idEjercicio, int idRutina, int idUsuario, LocalDate fecha, int series, Integer repes, String tiempo, double peso) {
+  public Entrenamiento(int idEjercicio, int idRutina, int idUsuario, LocalDateTime fechaHora, int series, Integer repes, String tiempo, double peso) {
     this.idEjercicio = idEjercicio;
     this.idRutina = idRutina;
     this.idUsuario = idUsuario;
-    this.fecha = fecha;
+    this.fechaHora = fechaHora;
     this.series = series;
     this.repes = repes;
     this.tiempo = tiempo;
@@ -24,6 +25,14 @@ public class Entrenamiento {
   }
 
   public Entrenamiento() {
+  }
+
+  public int getId() {
+    return id;
+  }
+
+  public void setId(int id) {
+    this.id = id;
   }
 
   public int getIdEjercicio() {
@@ -82,11 +91,11 @@ public class Entrenamiento {
     this.peso = peso;
   }
 
-  public LocalDate getFecha() {
-    return fecha;
+  public LocalDateTime getFechaHora() {
+    return fechaHora;
   }
 
-  public void setFecha(LocalDate fecha) {
-    this.fecha = fecha;
+  public void setFechaHora(LocalDateTime fechaHora) {
+    this.fechaHora = fechaHora;
   }
 }

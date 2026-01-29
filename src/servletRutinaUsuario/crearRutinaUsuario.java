@@ -36,8 +36,10 @@ public class crearRutinaUsuario extends HttpServlet {
     
     ctrlRutina ctrlR = new ctrlRutina();
     LinkedList<Rutina> rutinas = ctrlR.getAll();
+    LinkedList<Rutina> rutinasDelUsuario = ctrlR.getRutinaByUsuario(id_usu);
     
     request.setAttribute("rutinas", rutinas);
+    request.setAttribute("rutinasDelUsuario", rutinasDelUsuario);
     request.setAttribute("id_usu", id_usu);
     RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/rutinaUsuarioManagement.jsp");
     dispatcher.forward(request, response);

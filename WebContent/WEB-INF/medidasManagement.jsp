@@ -57,6 +57,12 @@
                 </form>
             </div>
         </div>
+        
+        <div style="text-align: center; margin-top: 1.5rem;">
+            <a href="javascript:history.back()" class="action-btn edit-btn" style="display: inline-block; text-decoration: none;">
+                Volver
+            </a>
+        </div>
     </div>
 </body>
 </html>

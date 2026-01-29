@@ -2,6 +2,7 @@ package servletEntrenamiento;
 
 import java.io.IOException;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.LinkedList;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -20,8 +21,8 @@ public class verDetalleEntrenamiento extends HttpServlet {
 
   protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     int idRutina = Integer.parseInt(request.getParameter("idRutina"));
-    String fechaStr = request.getParameter("fecha");
-    LocalDate fecha = LocalDate.parse(fechaStr);
+    String fechaHoraStr = request.getParameter("fechaHora");
+    LocalDateTime fechaHora = LocalDateTime.parse(fechaHoraStr);
     int idUsuario = Integer.parseInt(request.getParameter("idUsuario"));
     
     ctrlEntrenamiento ctrlEnt = new ctrlEntrenamiento();
@@ -31,12 +32,12 @@ public class verDetalleEntrenamiento extends HttpServlet {
     // Obtener todos los entrenamientos del usuario
     LinkedList<Entrenamiento> todosEntrenamientos = ctrlEnt.getEntrenamientosByUsuario(idUsuario);
     
-    // Filtrar por rutina y fecha
+    // Filtrar por rutina y fechaHora
     LinkedList<Entrenamiento> entrenamientos = new LinkedList<>();
     LinkedList<Ejercicio> ejercicios = new LinkedList<>();
     
     for (Entrenamiento ent : todosEntrenamientos) {
-      if (ent.getIdRutina() == idRutina && ent.getFecha().equals(fecha)) {
+      if (ent.getIdRutina() == idRutina && ent.getFechaHora() != null && ent.getFechaHora().equals(fechaHora)) {
         entrenamientos.add(ent);
         ejercicios.add(ctrlEje.getOne(ent.getIdEjercicio()));
       }
@@ -47,7 +48,7 @@ public class verDetalleEntrenamiento extends HttpServlet {
     request.setAttribute("ejercicios", ejercicios);
     request.setAttribute("entrenamientos", entrenamientos);
     request.setAttribute("rutina", rutina);
-    request.setAttribute("fecha", fecha);
+    request.setAttribute("fechaHora", fechaHora);
     request.getRequestDispatcher("WEB-INF/detalleEntrenamiento.jsp").forward(request, response);
   }
 

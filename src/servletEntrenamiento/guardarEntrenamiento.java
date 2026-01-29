@@ -1,7 +1,7 @@
 package servletEntrenamiento;
 
 import java.io.IOException;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.LinkedList;
 
 import jakarta.servlet.ServletException;
@@ -54,9 +54,9 @@ public class guardarEntrenamiento extends HttpServlet {
       String tiempo = (tiempoStr != null) ? tiempoStr : "";
       double peso = (pesoStr != null && !pesoStr.isEmpty()) ? Double.parseDouble(pesoStr) : 0.0;
 
-      LocalDate fechaActual = LocalDate.now();
+      LocalDateTime fechaHoraActual = LocalDateTime.now();
 
-      Entrenamiento ent = new Entrenamiento(ej.getId(), idRutina, idUsuario, fechaActual, series, repes, tiempo, peso);
+      Entrenamiento ent = new Entrenamiento(ej.getId(), idRutina, idUsuario, fechaHoraActual, series, repes, tiempo, peso);
       ctrlEnt.guardarEntrenamiento(ent);
 
     }
