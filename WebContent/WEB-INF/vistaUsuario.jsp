@@ -35,6 +35,16 @@ pageEncoding="UTF-8"%> <%@page import="entities.Usuario"%>
           <input type="hidden" name="idUsuario" value="<%=u.getIdUsuario()%>" />
           <input type="submit" class="admin-btn" value="Recetas Recomendadas" />
         </form>
+        <form action="logout" method="post" style="margin-top: 20px">
+          <input
+            type="submit"
+            class="admin-btn"
+            value="Cerrar Sesión"
+            style="
+              background: linear-gradient(135deg, #dc2626 0%, #991b1b 100%);
+            "
+          />
+        </form>
       </div>
     </div>
   </body>
