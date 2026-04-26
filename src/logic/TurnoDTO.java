@@ -1,17 +1,17 @@
 package logic;
 
 import java.time.LocalTime;
-import entities.Usuario;
+import entities.Consulta;
 
 public class TurnoDTO {
     private LocalTime hora;
     private String estado;
-    private Usuario cliente;
+    private Consulta consulta;
 
-    public TurnoDTO(LocalTime hora, String estado, Usuario cliente) {
+    public TurnoDTO(LocalTime hora, String estado, Consulta consulta) {
         this.hora = hora;
         this.estado = estado;
-        this.cliente = cliente;
+        this.consulta = consulta;
     }
 
     public LocalTime getHora() {
@@ -22,7 +22,7 @@ public class TurnoDTO {
         return estado;
     }
 
-    public Usuario getCliente() {
-        return cliente;
+    public Consulta getConsulta() {
+        return consulta;
     }
 }

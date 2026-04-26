@@ -48,6 +48,9 @@ pageEncoding="UTF-8"%> <%@page import="entities.Usuario"%>
           <input type="hidden" name="idUsuario" value="<%=u.getIdUsuario()%>" />
           <input type="submit" class="admin-btn" value="Recetas Recomendadas" />
         </form>
+        <form action="verHistorialNecesidades" method="get">
+          <input type="submit" class="admin-btn" value="Mi Plan Nutricional" />
+        </form>
         <form action="logout" method="post" style="margin-top: 20px">
           <input
             type="submit"

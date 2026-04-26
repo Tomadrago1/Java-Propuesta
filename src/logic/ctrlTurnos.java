@@ -81,7 +81,7 @@ public class ctrlTurnos {
                 }
 
                 if (ocupado) {
-                    agenda.add(new TurnoDTO(inicio.toLocalTime(), "Ocupado", consultaEncontrada.getCliente()));
+                    agenda.add(new TurnoDTO(inicio.toLocalTime(), "Ocupado", consultaEncontrada));
                 } else {
                     agenda.add(new TurnoDTO(inicio.toLocalTime(), "Libre", null));
                 }
@@ -98,5 +98,13 @@ public class ctrlTurnos {
     
     public boolean agregarDisponibilidad(Horario h) {
         return daoH.agregarHorario(h);
+    }
+    
+    public Consulta getConsulta(int idCliente, int idProfesional, LocalDateTime fechaConsulta) {
+        return daoC.getConsulta(idCliente, idProfesional, fechaConsulta);
+    }
+    
+    public boolean updateResultadosConsulta(Consulta c) {
+        return daoC.updateResultadosConsulta(c);
     }
 }

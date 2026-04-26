@@ -45,6 +45,7 @@
                                     <th>Hora</th>
                                     <th>Estado</th>
                                     <th>Paciente</th>
+                                    <th>Acciones</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -59,8 +60,24 @@
                                             <% } %>
                                         </td>
                                         <td>
-                                            <% if (turno.getCliente() != null) { %>
-                                                <%=turno.getCliente().getNombre()%> <%=turno.getCliente().getApellido()%>
+                                            <% if (turno.getConsulta() != null && turno.getConsulta().getCliente() != null) { %>
+                                                <%=turno.getConsulta().getCliente().getNombre()%> <%=turno.getConsulta().getCliente().getApellido()%>
+                                            <% } else { %>
+                                                -
+                                            <% } %>
+                                        </td>
+                                        <td>
+                                            <% if (turno.getEstado().equals("Ocupado") && turno.getConsulta() != null) { 
+                                                   String desc = turno.getConsulta().getDesc_resultados();
+                                                   boolean completada = (desc != null && !desc.trim().isEmpty());
+                                                   String accionTexto = completada ? "Ver consulta" : "Registrar la consulta";
+                                                   String btnClass = completada ? "viewmore-btn" : "edit-btn";
+                                            %>
+                                                <form action="registrarConsulta" method="get" style="margin: 0;">
+                                                    <input type="hidden" name="id_cliente" value="<%=turno.getConsulta().getId_cliente()%>">
+                                                    <input type="hidden" name="fecha_consulta" value="<%=turno.getConsulta().getFecha_consulta().toString()%>">
+                                                    <button type="submit" class="action-btn <%=btnClass%>" style="padding: 4px 8px; font-size: 0.75rem;"><%=accionTexto%></button>
+                                                </form>
                                             <% } else { %>
                                                 -
                                             <% } %>
