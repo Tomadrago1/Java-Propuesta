@@ -15,7 +15,7 @@ public class DaoUsuario {
 
 		try {
 			stmt = DbConnector.getInstancia().getConn().createStatement();
-			rs = stmt.executeQuery("select id,nombre,apellido,email,nombre_usuario,tipo_usu,estado,profesion from Usuario");
+			rs = stmt.executeQuery("select u.id,u.nombre,u.apellido,u.email,u.nombre_usuario,u.tipo_usu,u.estado,u.id_profesion,p.nombre as profesion from Usuario u LEFT JOIN profesion p on u.id_profesion = p.id");
 			// intencionalmente no se recupera la password
 			if (rs != null) {
 				while (rs.next()) {
@@ -29,6 +29,7 @@ public class DaoUsuario {
 						p.setTipoUsu(rs.getInt("tipo_usu"));
 						p.setProfesion(rs.getString("profesion"));
 						p.setEstado(rs.getBoolean("estado"));
+						p.setId_profesion(rs.getInt("id_profesion"));
 						usuarios.add(p);
 					} else {
 						Usuario u = new Usuario();

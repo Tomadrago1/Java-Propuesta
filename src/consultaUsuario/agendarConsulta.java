@@ -12,6 +12,8 @@ import jakarta.servlet.http.HttpServletResponse;
 
 import entities.Profesional;
 import logic.ctrlUsuario;
+import entities.Profesion;
+import logic.ctrlProfesion;
 
 /**
  * Servlet implementation class editarNutriente
@@ -42,9 +44,23 @@ public class agendarConsulta extends HttpServlet {
    *      response)
    */
   protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    ctrlProfesion ctrlP = new ctrlProfesion();
+    LinkedList<Profesion> listaProfesiones = ctrlP.getAll();
+    request.setAttribute("listaProfesiones", listaProfesiones);
+
+    String idProfesionStr = request.getParameter("id_profesion");
+    LinkedList<Profesional> profesionales = new LinkedList<>();
     ctrlUsuario ctrl = new ctrlUsuario();
-    LinkedList<Profesional> profesinales = ctrl.getAllProfesionales();
-    request.setAttribute("profesionales", profesinales);
+
+    if (idProfesionStr != null && !idProfesionStr.trim().isEmpty()) {
+        int id_profesion = Integer.parseInt(idProfesionStr);
+        profesionales = ctrl.getProfesionalesByProfesion(id_profesion);
+        request.setAttribute("idProfesionSeleccionada", id_profesion);
+    } else {
+        // You could fetch all, or leave empty to force user to choose. The user says "en lugar de mostrar un listado de todos los profesionales, debe mostrarse un listado de profesiones para que se seleccione una." So leaving empty is correct.
+    }
+    
+    request.setAttribute("profesionales", profesionales);
     RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/agendarConsulta.jsp");
     dispatcher.forward(request, response);
   }

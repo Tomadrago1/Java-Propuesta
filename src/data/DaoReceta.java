@@ -1,7 +1,11 @@
 package data;
 
 import entities.*;
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.LinkedList;
 
 public class DaoReceta {
@@ -326,8 +330,10 @@ public class DaoReceta {
 		try {
 			stmt = DbConnector.getInstancia().getConn().prepareStatement(
 					"SELECT n.id AS id_nutriente, n.nombre AS nombre_nutriente, n.descripcion, " +
-							"SUM(ni.cantidad * CASE WHEN ir.unidad_medida = 'kg' THEN (ir.cantidad_porcion * 1000 / 100) " +
-							"WHEN ir.unidad_medida = 'gramos' THEN (ir.cantidad_porcion / 100) ELSE 0 END) AS cantidad_total_nutriente "
+							"SUM(ni.cantidad * CASE WHEN TRIM(UPPER(ir.unidad_medida)) IN ('KG') THEN (ir.cantidad_porcion * 10.0) " +
+							"WHEN TRIM(UPPER(ir.unidad_medida)) IN ('GRAMOS', 'G', 'ML') THEN (ir.cantidad_porcion / 100.0) " +
+                            "WHEN TRIM(UPPER(ir.unidad_medida)) IN ('UNIDAD', 'UNIDADES') THEN (ir.cantidad_porcion) " +
+                            "ELSE (ir.cantidad_porcion / 100.0) END) AS cantidad_total_nutriente "
 							+
 							"FROM INGREDIENTE_RECETA ir " +
 							"JOIN NUTRIENTE_INGREDIENTE ni ON ir.id_ingrediente = ni.id_ingrediente " +
@@ -375,7 +381,7 @@ public class DaoReceta {
 		LinkedList<Receta> recetas = new LinkedList<>();
 		try {
 			stmt = DbConnector.getInstancia().getConn().prepareStatement(
-					"SELECT rec.id, rec.nombre, rec.descripcion, rec.nivel_dificultad, u.nombre, u.id, u.apellido, u.profesion FROM receta rec LEFT JOIN usuario u ON rec.id_profesional = u.id WHERE EXISTS( SELECT 1 FROM necesidad ne INNER JOIN nutriente n ON ne.id_nutriente = n.id INNER JOIN ingrediente_receta ir ON rec.id = ir.id_receta INNER JOIN nutriente_ingrediente ni ON ni.id_ingrediente = ir.id_ingrediente WHERE ne.id_usuario = ? AND ne.fecha = CURDATE() AND n.id = ni.id_nutriente GROUP BY rec.id , n.id HAVING SUM(ni.cantidad * CASE WHEN ir.unidad_medida = 'kg' THEN (ir.cantidad_porcion * 1000 / 100) WHEN ir.unidad_medida = 'gramos' THEN (ir.cantidad_porcion / 100) ELSE 0 END) BETWEEN MAX(ne.cantidad_min) AND MAX(ne.cantidad_max)) GROUP BY rec.id , rec.nombre , rec.descripcion , rec.nivel_dificultad , u.nombre , u.id , u.apellido , u.profesion;");
+					"SELECT rec.id, rec.nombre, rec.descripcion, rec.nivel_dificultad, u.nombre, u.id, u.apellido, u.profesion FROM receta rec LEFT JOIN usuario u ON rec.id_profesional = u.id WHERE EXISTS( SELECT 1 FROM necesidad ne INNER JOIN nutriente n ON ne.id_nutriente = n.id INNER JOIN ingrediente_receta ir ON rec.id = ir.id_receta INNER JOIN nutriente_ingrediente ni ON ni.id_ingrediente = ir.id_ingrediente WHERE ne.id_usuario = ? AND ne.fecha = CURDATE() AND n.id = ni.id_nutriente GROUP BY rec.id , n.id HAVING SUM(ni.cantidad * CASE WHEN TRIM(UPPER(ir.unidad_medida)) IN ('KG') THEN (ir.cantidad_porcion * 10.0) WHEN TRIM(UPPER(ir.unidad_medida)) IN ('GRAMOS', 'G', 'ML') THEN (ir.cantidad_porcion / 100.0) WHEN TRIM(UPPER(ir.unidad_medida)) IN ('UNIDAD', 'UNIDADES') THEN (ir.cantidad_porcion) ELSE (ir.cantidad_porcion / 100.0) END) BETWEEN MAX(ne.cantidad_min) AND MAX(ne.cantidad_max)) GROUP BY rec.id , rec.nombre , rec.descripcion , rec.nivel_dificultad , u.nombre , u.id , u.apellido , u.profesion;");
 			stmt.setInt(1, idUsuario);
 			rs = stmt.executeQuery();
 			if (rs != null) {

@@ -47,9 +47,9 @@ public class ctrlUsuario {
         return dp.getProfesionalById(id);
     }
 
-    public boolean modificarProfesional(int id, String nombre, String apellido, String profesion, String nombreUsuario,
+    public boolean modificarProfesional(int id, String nombre, String apellido, int id_profesion, String nombreUsuario,
             String password, String email) {
-        return dp.modificarProfesional(id, nombre, apellido, profesion, nombreUsuario, password, email);
+        return dp.modificarProfesional(id, nombre, apellido, id_profesion, nombreUsuario, password, email);
     }
 
     public void addProfesional(Profesional p) {
@@ -60,7 +60,7 @@ public class ctrlUsuario {
         return dp.getAll();
     }
 
-    /*public LinkedList<Profesional> getProfesionalesByProfesion(String profesion) {
-        return dp.getProfesionalesByProfesion(profesion);
-    }*/
+    public LinkedList<Profesional> getProfesionalesByProfesion(int id_profesion) {
+        return dp.getProfesionalesByProfesion(id_profesion);
+    }
 }

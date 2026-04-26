@@ -1,3 +1,6 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page import="java.util.LinkedList" %>
+<%@ page import="entities.Profesion" %>
 <!DOCTYPE html>
 <html>
 
@@ -62,8 +65,19 @@
                 </select>
             </div>
             <div class="form-group" id="profesionField" style="display: none;">
-                <label for="profesion">Profesion:</label>
-                <input type="text" id="profesion" name="profesion">
+                <label for="profesion">Profesión:</label>
+                <select id="profesion" name="profesion">
+                    <option value="">Seleccione una profesión</option>
+                    <% 
+                        LinkedList<Profesion> profesiones = (LinkedList<Profesion>) request.getAttribute("listaProfesiones");
+                        if (profesiones != null) {
+                            for (Profesion prof : profesiones) {
+                    %>
+                    <option value="<%=prof.getId_profesion()%>"><%=prof.getNombre()%></option>
+                    <%      }
+                        }
+                    %>
+                </select>
             </div>
             <div class="form-group">
                 <label for="password">Contraseña:</label>

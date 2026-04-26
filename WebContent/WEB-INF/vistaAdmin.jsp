@@ -20,6 +20,9 @@ pageEncoding="UTF-8" %> <%@page import="entities.Usuario" %>
         <form action="verUsuarios" method="post">
           <input type="submit" class="admin-btn" value="Usuarios" />
         </form>
+        <form action="verProfesiones" method="post">
+          <input type="submit" class="admin-btn" value="Profesiones" />
+        </form>
         <form action="verRecetas" method="post">
           <input type="submit" class="admin-btn" value="Recetas" />
         </form>

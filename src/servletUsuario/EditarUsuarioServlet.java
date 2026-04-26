@@ -11,6 +11,9 @@ import jakarta.servlet.RequestDispatcher;
 import entities.Usuario;
 import entities.Profesional;
 import logic.ctrlUsuario;
+import logic.ctrlProfesion;
+import entities.Profesion;
+import java.util.LinkedList;
 
 @WebServlet("/editarUsuario")
 public class EditarUsuarioServlet extends HttpServlet {
@@ -33,6 +36,11 @@ public class EditarUsuarioServlet extends HttpServlet {
         if (tipoUsuario == 2) {
             Profesional profesional = ctrl.getProfesionalById(idUsuario);
             request.setAttribute("profesional", profesional);
+            
+            logic.ctrlProfesion ctrlP = new logic.ctrlProfesion();
+            java.util.LinkedList<entities.Profesion> profesiones = ctrlP.getAll();
+            request.setAttribute("listaProfesiones", profesiones);
+            
             RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/Profesional/editarProfesional.jsp");
             dispatcher.forward(request, response);
         } else {

@@ -46,12 +46,20 @@ public class actualizarProfesional extends HttpServlet {
         int id = Integer.parseInt(request.getParameter("id"));
         String nombre = request.getParameter("nombre");
         String apellido = request.getParameter("apellido");
-        String profesion = request.getParameter("profesion");
+        String idProfesionStr = request.getParameter("profesion");
+        int id_profesion = 0;
+        if(idProfesionStr != null && !idProfesionStr.trim().isEmpty()){
+            try {
+                id_profesion = Integer.parseInt(idProfesionStr);
+            } catch(NumberFormatException e) {
+                e.printStackTrace();
+            }
+        }
         String nombreUsuario = request.getParameter("nombreUsuario");
         String password = request.getParameter("password");
         String email = request.getParameter("email");
         ctrlUsuario ctrl = new ctrlUsuario();
-        Boolean success = ctrl.modificarProfesional(id, nombre, apellido, profesion, nombreUsuario, password, email);
+        Boolean success = ctrl.modificarProfesional(id, nombre, apellido, id_profesion, nombreUsuario, password, email);
 
         if (success) {
             LinkedList<Usuario> usuarios = ctrl.getAll();

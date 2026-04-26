@@ -11,6 +11,19 @@ pageEncoding="UTF-8"%> <%@page import="entities.Usuario"%>
   <body>
     <div class="super-container">
       <h1>Bienvenido <%= u.getNombre() + " " + u.getApellido() %></h1>
+      
+      <% 
+         String mensajeExito = (String) session.getAttribute("mensajeExito");
+         if (mensajeExito != null) {
+      %>
+         <div style="background-color: #d4edda; color: #155724; padding: 15px; margin: 10px 0; border: 1px solid #c3e6cb; border-radius: 5px; text-align: center;">
+             <%= mensajeExito %>
+         </div>
+      <% 
+             session.removeAttribute("mensajeExito");
+         } 
+      %>
+      
       <div class="admin-container">
         <form action="misRutinas" method="get">
           <input type="hidden" name="id" value="<%= u.getIdUsuario() %>" />

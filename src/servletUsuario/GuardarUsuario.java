@@ -52,7 +52,15 @@ public class GuardarUsuario extends HttpServlet {
         String nombreUsuario = request.getParameter("nombreUsuario");
         String password = request.getParameter("password");
         String tipoUsuarioString = request.getParameter("tipoUsuario");
-        String profesion = request.getParameter("profesion");
+        String idProfesionStr = request.getParameter("profesion");
+        int id_profesion = 0;
+        if(idProfesionStr != null && !idProfesionStr.trim().isEmpty()){
+            try {
+                id_profesion = Integer.parseInt(idProfesionStr);
+            } catch(NumberFormatException e) {
+                e.printStackTrace();
+            }
+        }
         ctrlUsuario ctrl = new ctrlUsuario();
         Usuario nuevoUsuario;
         int tipoUsuario;
@@ -91,7 +99,7 @@ public class GuardarUsuario extends HttpServlet {
                 nuevoProfesional.setTipoUsu(tipoUsuario);
                 nuevoProfesional.setPassword(password);
                 nuevoProfesional.setEstado(true);
-                nuevoProfesional.setProfesion(profesion);
+                nuevoProfesional.setId_profesion(id_profesion);
                 ctrl.addProfesional(nuevoProfesional);
                 break;
             default:
