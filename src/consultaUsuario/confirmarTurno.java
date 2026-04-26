@@ -13,7 +13,10 @@ import jakarta.servlet.http.HttpServletResponse;
 
 import entities.Consulta;
 import entities.Usuario;
+import entities.Profesional;
 import logic.ctrlTurnos;
+import logic.ctrlUsuario;
+import logic.EmailService;
 
 @WebServlet("/confirmarTurno")
 public class confirmarTurno extends HttpServlet {
@@ -47,7 +50,21 @@ public class confirmarTurno extends HttpServlet {
         boolean success = ctrl.agendarTurno(c);
 
         if (success) {
-            // Podríamos redirigir a una vista de "Turno Confirmado" o "Mis Turnos"
+            // Enviar email de forma asíncrona (si el usuario tiene email cargado)
+            if (cliente.getEmail() != null && !cliente.getEmail().trim().isEmpty()) {
+                ctrlUsuario ctrlU = new ctrlUsuario();
+                Profesional prof = ctrlU.getProfesionalById(id_profesional);
+                String nombreProf = prof != null ? prof.getNombre() + " " + prof.getApellido() : "el profesional";
+                
+                EmailService.enviarConfirmacionTurnoAsync(
+                    cliente.getEmail(), 
+                    cliente.getNombre(), 
+                    nombreProf, 
+                    fechaStr, 
+                    horaStr
+                );
+            }
+
             request.getSession().setAttribute("mensajeExito", "¡Turno reservado con éxito para el " + fechaStr + " a las " + horaStr + "!");
             response.sendRedirect("signin");
         } else {

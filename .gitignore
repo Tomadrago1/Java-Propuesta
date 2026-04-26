@@ -23,3 +23,6 @@ Servers/
 # OS
 .DS_Store
 Thumbs.db
+
+# Credenciales locales
+config.properties
