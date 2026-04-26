@@ -9,8 +9,11 @@
     <link rel="stylesheet" href="style/UserManagementstyles.css">
 </head>
 <body>
-    <div class="container">
-        <h1>Gestionar mi Disponibilidad</h1>
+    <% request.setAttribute("pageTitle", "Gestionar Disponibilidad"); %>
+    <jsp:include page="header.jsp" />
+    
+    <div class="container" style="margin-top: 30px;">
+        <h1 style="display:none;">Gestionar mi Disponibilidad</h1>
         
         <% 
             String error = (String) session.getAttribute("errorDisponibilidad");
@@ -36,42 +39,39 @@
             } 
         %>
 
-        <div style="background-color: #f9f9f9; padding: 20px; border-radius: 5px; border: 1px solid #ddd;">
-            <p style="margin-bottom: 15px;">Carga los bloques de tiempo en los que estarás disponible para atender. El sistema automáticamente dividirá estos bloques en turnos de 30 minutos para tus pacientes.</p>
+        <div class="filters-bar" style="flex-direction: column; align-items: stretch; margin-top: 20px;">
+            <p style="margin-bottom: 20px; color: var(--gray-200); font-size: 1.05rem; text-align: center;">Carga los bloques de tiempo en los que estarás disponible para atender. El sistema automáticamente dividirá estos bloques en turnos de 30 minutos para tus pacientes.</p>
             
-            <form action="guardarDisponibilidad" method="post" style="display: flex; flex-direction: column; gap: 15px;">
-                <div>
-                    <label for="fecha" style="font-weight: bold; display: block; margin-bottom: 5px;">Fecha:</label>
-                    <input type="date" id="fecha" name="fecha" required style="padding: 8px; width: 200px; border: 1px solid #ccc; border-radius: 4px;">
+            <form action="guardarDisponibilidad" method="post" style="display: flex; flex-direction: column; gap: 20px; width: 100%; max-width: 600px; margin: 0 auto;">
+                <div class="filter-group">
+                    <label for="fecha" style="font-weight: 600; display: block; margin-bottom: 8px; color: var(--white); font-family: 'Montserrat', sans-serif;">Fecha:</label>
+                    <input type="date" id="fecha" name="fecha" required class="filter-input" style="color-scheme: dark;">
                 </div>
                 
-                <div style="display: flex; gap: 20px;">
-                    <div>
-                        <label for="horaDesde" style="font-weight: bold; display: block; margin-bottom: 5px;">Hora Inicio:</label>
+                <div style="display: flex; gap: 20px; width: 100%;">
+                    <div class="filter-group" style="flex: 1;">
+                        <label for="horaDesde" style="font-weight: 600; display: block; margin-bottom: 8px; color: var(--white); font-family: 'Montserrat', sans-serif;">Hora Inicio:</label>
                         <!-- step=1800 es para saltos de 30 minutos (30 * 60) -->
-                        <input type="time" id="horaDesde" name="horaDesde" required step="1800" style="padding: 8px; width: 150px; border: 1px solid #ccc; border-radius: 4px;">
+                        <input type="time" id="horaDesde" name="horaDesde" required step="1800" class="filter-input" style="color-scheme: dark;">
                     </div>
                     
-                    <div>
-                        <label for="horaHasta" style="font-weight: bold; display: block; margin-bottom: 5px;">Hora Fin:</label>
-                        <input type="time" id="horaHasta" name="horaHasta" required step="1800" style="padding: 8px; width: 150px; border: 1px solid #ccc; border-radius: 4px;">
+                    <div class="filter-group" style="flex: 1;">
+                        <label for="horaHasta" style="font-weight: 600; display: block; margin-bottom: 8px; color: var(--white); font-family: 'Montserrat', sans-serif;">Hora Fin:</label>
+                        <input type="time" id="horaHasta" name="horaHasta" required step="1800" class="filter-input" style="color-scheme: dark;">
                     </div>
                 </div>
                 
-                <div>
-                    <input type="submit" value="Guardar Horario" class="action-btn create-btn" style="margin-top: 10px;">
+                <div style="margin-top: 15px; text-align: center;">
+                    <input type="submit" value="GUARDAR HORARIO" class="action-btn create-btn" style="width: 100%; font-size: 1.1rem; padding: 15px;">
                 </div>
             </form>
         </div>
 
-        <div style="margin-top: 30px;">
-            <form action="vistaProfesional.jsp" method="get">
-                <input type="submit" value="Volver" class="action-btn delete-btn" style="background-color: #6c757d;">
+        <div style="margin-top: 30px; text-align: center;">
+            <form action="signin" method="get">
+                <input type="submit" value="VOLVER" class="action-btn delete-btn" style="padding: 10px 30px;">
             </form>
         </div>
-        
-    <% request.setAttribute("pageTitle", "Gestionar Disponibilidad"); %>
-    <jsp:include page="header.jsp" />
     </div>
 </body>
 </html>

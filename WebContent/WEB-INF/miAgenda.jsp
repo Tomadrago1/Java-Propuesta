@@ -15,22 +15,27 @@
     %>
 </head>
 <body>
-    <div class="container">
-        <h1>Mi Agenda de Turnos</h1>
+    <% request.setAttribute("pageTitle", "Mi Agenda"); %>
+    <jsp:include page="header.jsp" />
+    
+    <div class="container" style="margin-top: 30px;">
+        <h1 style="display:none;">Mi Agenda de Turnos</h1>
         
         <!-- Formulario para elegir fecha -->
-        <div style="margin-bottom: 20px; padding: 15px; background-color: #f9f9f9; border: 1px solid #ddd; border-radius: 5px;">
-            <form action="verMiAgenda" method="get" style="display: flex; align-items: center; gap: 15px;">
-                <label for="fecha" style="font-weight: bold;">Ver agenda del día:</label>
-                <input type="date" id="fecha" name="fecha" value="<%=fechaSeleccionada != null ? fechaSeleccionada : ""%>" required style="padding: 8px; border-radius: 4px; border: 1px solid #ccc;">
+        <div class="filters-bar" style="justify-content: center;">
+            <form action="verMiAgenda" method="get" style="display: flex; align-items: center; gap: 15px; flex-wrap: wrap;">
+                <label for="fecha" style="font-weight: 600; color: var(--white); font-family: 'Montserrat', sans-serif;">Ver agenda del día:</label>
+                <div class="filter-group" style="min-width: 200px;">
+                    <input type="date" id="fecha" name="fecha" value="<%=fechaSeleccionada != null ? fechaSeleccionada : ""%>" required class="filter-input" style="color-scheme: dark;">
+                </div>
                 <input type="submit" value="Buscar" class="action-btn create-btn">
             </form>
         </div>
 
         <!-- Mostrar Agenda -->
         <% if (fechaSeleccionada != null) { %>
-            <div style="margin-bottom: 20px;">
-                <h3>Turnos del <%=fechaSeleccionada%></h3>
+            <div style="margin-bottom: 30px;">
+                <h3 style="color: var(--white); text-align: center; margin-bottom: 15px; font-family: 'Montserrat', sans-serif;">Turnos del <%=fechaSeleccionada%></h3>
                 
                 <% if (agenda != null && !agenda.isEmpty()) { %>
                     <div class="div-table" style="margin-top: 15px;">
@@ -66,21 +71,18 @@
                         </table>
                     </div>
                 <% } else { %>
-                    <div style="padding: 15px; background-color: #fff3cd; color: #856404; border-radius: 5px; margin-top: 15px;">
+                    <div style="padding: 20px; background: rgba(245, 158, 11, 0.1); border-left: 4px solid var(--warning); color: var(--gray-100); border-radius: 5px; margin-top: 15px; text-align: center;">
                         No has cargado disponibilidad para esta fecha o no tienes turnos armados. Puedes cargarla en "Gestionar Disponibilidad".
                     </div>
                 <% } %>
             </div>
         <% } %>
         
-        <div style="margin-top: 20px;">
-            <form action="vistaProfesional.jsp" method="get">
-                <input type="submit" value="Volver" class="action-btn delete-btn" style="background-color: #6c757d;">
+        <div style="margin-top: 30px; text-align: center;">
+            <form action="signin" method="get">
+                <input type="submit" value="VOLVER" class="action-btn delete-btn" style="padding: 10px 30px;">
             </form>
         </div>
-        
-    <% request.setAttribute("pageTitle", "Mi Agenda"); %>
-    <jsp:include page="header.jsp" />
     </div>
 </body>
 </html>
