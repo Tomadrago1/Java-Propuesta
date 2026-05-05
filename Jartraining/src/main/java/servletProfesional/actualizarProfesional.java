@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import entities.Usuario;
 import logic.ctrlUsuario;
+import logic.PasswordUtil;
 
 /**
  * Servlet implementation class actualizarProfesional
@@ -49,9 +50,10 @@ public class actualizarProfesional extends HttpServlet {
         String profesion = request.getParameter("profesion");
         String nombreUsuario = request.getParameter("nombreUsuario");
         String password = request.getParameter("password");
+        String hashedPassword = PasswordUtil.hashPassword(password);
         String email = request.getParameter("email");
         ctrlUsuario ctrl = new ctrlUsuario();
-        Boolean success = ctrl.modificarProfesional(id, nombre, apellido, profesion, nombreUsuario, password, email);
+        Boolean success = ctrl.modificarProfesional(id, nombre, apellido, profesion, nombreUsuario, hashedPassword, email);
 
         if (success) {
             LinkedList<Usuario> usuarios = ctrl.getAll();

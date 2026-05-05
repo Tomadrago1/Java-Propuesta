@@ -1,11 +1,14 @@
 -- Inserción de datos en la tabla USUARIO
+-- Las contraseñas están hasheadas con SHA-256
+-- 'a' -> ca978112ca1bbdcafac231b39a23dc4da786eff8147c4e72b9807785afee48bb
+-- 'password123' -> ef92b778bafe771e89245b89ecbc08a44a4e166c06659911881f383d4473e94f
 INSERT INTO USUARIO (nombre, apellido, email, contrasena, estado, nombre_usuario, tipo_usu, profesion)
 VALUES
-('Admin', 'Admin', 'admin@admin.com', 'a', 1, 'admin', 1, NULL),
-('Juan', 'Perez', 'juanp@correo.com', 'password123', 1, 'juanp', 2, 'Nutricionista'),
-('Ana', 'Lopez', 'anal@correo.com', 'password123', 1, 'anal', 2, 'Entrenador Personal'),
-('User', 'User', 'user@user.com', 'a', 1, 'user', 3, NULL),
-('Maria', 'Rodriguez', 'mariar@correo.com', 'password123', 1, 'mariar', 3, NULL);
+('Admin', 'Admin', 'admin@admin.com', 'ca978112ca1bbdcafac231b39a23dc4da786eff8147c4e72b9807785afee48bb', 1, 'admin', 1, NULL),
+('Juan', 'Perez', 'juanp@correo.com', 'ef92b778bafe771e89245b89ecbc08a44a4e166c06659911881f383d4473e94f', 1, 'juanp', 2, 'Nutricionista'),
+('Ana', 'Lopez', 'anal@correo.com', 'ef92b778bafe771e89245b89ecbc08a44a4e166c06659911881f383d4473e94f', 1, 'anal', 2, 'Entrenador Personal'),
+('User', 'User', 'user@user.com', 'ca978112ca1bbdcafac231b39a23dc4da786eff8147c4e72b9807785afee48bb', 1, 'user', 3, NULL),
+('Maria', 'Rodriguez', 'mariar@correo.com', 'ef92b778bafe771e89245b89ecbc08a44a4e166c06659911881f383d4473e94f', 1, 'mariar', 3, NULL);
 
 -- Inserción de datos en la tabla RECETA
 INSERT INTO RECETA (id_profesional, nombre, descripcion, nivel_dificultad)

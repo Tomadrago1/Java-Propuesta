@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import entities.Usuario;
 import logic.ctrlUsuario;
+import logic.PasswordUtil;
 
 /**
  * Servlet implementation class signin
@@ -46,7 +47,7 @@ public class signin extends HttpServlet {
 		String user = request.getParameter("usuario");
 		String password = request.getParameter("password");
 		usu.setNombreUsuario(user);
-		usu.setPassword(password);
+		usu.setPassword(PasswordUtil.hashPassword(password));
 		usu = ctrl.validate(usu);
 		if (usu == null || usu.getEstado() == false) {
 			request.setAttribute("errorMessage", "El usuario no existe o las credenciales son incorrectas.");

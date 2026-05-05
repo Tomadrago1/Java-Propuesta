@@ -375,8 +375,27 @@ public class DaoReceta {
 		LinkedList<Receta> recetas = new LinkedList<>();
 		try {
 			stmt = DbConnector.getInstancia().getConn().prepareStatement(
-					"SELECT rec.id, rec.nombre, rec.descripcion, rec.nivel_dificultad, u.nombre, u.id, u.apellido, u.profesion FROM receta rec LEFT JOIN usuario u ON rec.id_profesional = u.id WHERE EXISTS( SELECT 1 FROM necesidad ne INNER JOIN nutriente n ON ne.id_nutriente = n.id INNER JOIN ingrediente_receta ir ON rec.id = ir.id_receta INNER JOIN nutriente_ingrediente ni ON ni.id_ingrediente = ir.id_ingrediente WHERE ne.id_usuario = ? AND ne.fecha = CURDATE() AND n.id = ni.id_nutriente GROUP BY rec.id , n.id HAVING SUM(ni.cantidad * CASE WHEN ir.unidad_medida = 'kg' THEN (ir.cantidad_porcion * 1000 / 100) WHEN ir.unidad_medida = 'gramos' THEN (ir.cantidad_porcion / 100) ELSE 0 END) BETWEEN MAX(ne.cantidad_min) AND MAX(ne.cantidad_max)) GROUP BY rec.id , rec.nombre , rec.descripcion , rec.nivel_dificultad , u.nombre , u.id , u.apellido , u.profesion;");
+					"SELECT rec.id, rec.nombre, rec.descripcion, rec.nivel_dificultad, " +
+					"u.nombre, u.id, u.apellido, u.profesion " +
+					"FROM receta rec LEFT JOIN usuario u ON rec.id_profesional = u.id " +
+					"WHERE EXISTS( " +
+					"  SELECT 1 FROM necesidad ne " +
+					"  INNER JOIN nutriente n ON ne.id_nutriente = n.id " +
+					"  INNER JOIN ingrediente_receta ir ON rec.id = ir.id_receta " +
+					"  INNER JOIN nutriente_ingrediente ni ON ni.id_ingrediente = ir.id_ingrediente " +
+					"  WHERE ne.id_usuario = ? " +
+					"  AND ne.fecha = (SELECT MAX(n2.fecha) FROM necesidad n2 WHERE n2.id_usuario = ?) " +
+					"  AND n.id = ni.id_nutriente " +
+					"  GROUP BY rec.id, n.id " +
+					"  HAVING SUM(ni.cantidad * CASE " +
+					"    WHEN ir.unidad_medida = 'kg' THEN (ir.cantidad_porcion * 1000 / 100) " +
+					"    WHEN ir.unidad_medida = 'gramos' THEN (ir.cantidad_porcion / 100) " +
+					"    ELSE 0 END) BETWEEN MAX(ne.cantidad_min) AND MAX(ne.cantidad_max)" +
+					") " +
+					"GROUP BY rec.id, rec.nombre, rec.descripcion, rec.nivel_dificultad, " +
+					"u.nombre, u.id, u.apellido, u.profesion");
 			stmt.setInt(1, idUsuario);
+			stmt.setInt(2, idUsuario);
 			rs = stmt.executeQuery();
 			if (rs != null) {
 				while (rs.next()) {

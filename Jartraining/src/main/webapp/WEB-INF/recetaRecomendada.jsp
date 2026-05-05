@@ -62,7 +62,7 @@
                     <input type="submit" value="Ver macronutrientes" class="action-btn create-btn">
                   </form>
                 </div>
-                <a href="index.html" style="color: red">Volver</a>
+                <a href="signin" onclick="history.back(); return false;" style="color: red">Volver</a>
               </div>
           </body>
 

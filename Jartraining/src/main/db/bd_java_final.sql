@@ -145,4 +145,4 @@ CREATE TABLE HORARIOS (
 );
 
 INSERT INTO usuario (id, nombre, apellido, email, contrasena, estado, nombre_usuario, tipo_usu)
-VALUES (1, 'Admin', 'Admin', 't@t', 'a', 1, 'admin', 1);
+VALUES (1, 'Admin', 'Admin', 't@t', 'ca978112ca1bbdcafac231b39a23dc4da786eff8147c4e72b9807785afee48bb', 1, 'admin', 1);

@@ -20,7 +20,16 @@
         <body>
           <div class="container">
             <h1>Recetas recomendadas</h1>
+            <p style="color: #555; margin-bottom: 15px;">
+              Estas recetas coinciden con las necesidades nutricionales que tu profesional cargó para vos.
+            </p>
             <div>
+              <% if (lr == null || lr.isEmpty()) { %>
+                <div style="text-align: center; padding: 40px 20px; color: #888;">
+                  <p style="font-size: 18px; margin-bottom: 10px;">No se encontraron recetas que coincidan con tus necesidades nutricionales.</p>
+                  <p>Consultá con tu profesional para que cargue o actualice tus necesidades nutricionales.</p>
+                </div>
+              <% } else { %>
               <table>
                 <thead>
                   <tr>
@@ -56,8 +65,11 @@
                     <% } // Fin del loop %>
                 </tbody>
               </table>
+              <% } %>
             </div>
-            <a href="index.html" style="color: red">Volver</a>
+            <div style="margin-top: 20px;">
+              <a href="signin" onclick="history.back(); return false;" style="color: red">Volver</a>
+            </div>
           </div>
         </body>
 

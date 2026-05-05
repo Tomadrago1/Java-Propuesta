@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import entities.Usuario;
 import entities.Profesional;
 import logic.ctrlUsuario;
+import logic.PasswordUtil;
 
 /**
  * Servlet implementation class GuardarUsuario
@@ -51,6 +52,7 @@ public class GuardarUsuario extends HttpServlet {
         String email = request.getParameter("email");
         String nombreUsuario = request.getParameter("nombreUsuario");
         String password = request.getParameter("password");
+        String hashedPassword = PasswordUtil.hashPassword(password);
         String tipoUsuarioString = request.getParameter("tipoUsuario");
         String profesion = request.getParameter("profesion");
         ctrlUsuario ctrl = new ctrlUsuario();
@@ -65,7 +67,7 @@ public class GuardarUsuario extends HttpServlet {
                 nuevoUsuario.setEmail(email);
                 nuevoUsuario.setNombreUsuario(nombreUsuario);
                 nuevoUsuario.setTipoUsu(tipoUsuario);
-                nuevoUsuario.setPassword(password);
+                nuevoUsuario.setPassword(hashedPassword);
                 nuevoUsuario.setEstado(true);
                 ctrl.addUsuario(nuevoUsuario);
                 break;
@@ -77,7 +79,7 @@ public class GuardarUsuario extends HttpServlet {
                 nuevoUsuario.setEmail(email);
                 nuevoUsuario.setNombreUsuario(nombreUsuario);
                 nuevoUsuario.setTipoUsu(tipoUsuario);
-                nuevoUsuario.setPassword(password);
+                nuevoUsuario.setPassword(hashedPassword);
                 nuevoUsuario.setEstado(true);
                 ctrl.addUsuario(nuevoUsuario);
                 break;
@@ -89,7 +91,7 @@ public class GuardarUsuario extends HttpServlet {
                 nuevoProfesional.setEmail(email);
                 nuevoProfesional.setNombreUsuario(nombreUsuario);
                 nuevoProfesional.setTipoUsu(tipoUsuario);
-                nuevoProfesional.setPassword(password);
+                nuevoProfesional.setPassword(hashedPassword);
                 nuevoProfesional.setEstado(true);
                 nuevoProfesional.setProfesion(profesion);
                 ctrl.addProfesional(nuevoProfesional);

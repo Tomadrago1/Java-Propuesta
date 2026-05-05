@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import entities.Usuario;
 import logic.ctrlUsuario;
+import logic.PasswordUtil;
 
 @WebServlet("/actualizarUsuario")
 public class ActualizarUsuarioServlet extends HttpServlet {
@@ -31,8 +32,9 @@ public class ActualizarUsuarioServlet extends HttpServlet {
         String nombreUsuario = request.getParameter("nombreUsuario");
         int tipo_usuario = Integer.parseInt(request.getParameter("tipoUsuario"));
         String password = request.getParameter("password");
+        String hashedPassword = PasswordUtil.hashPassword(password);
         ctrlUsuario ctrl = new ctrlUsuario();
-        Boolean success = ctrl.modificarUsuario(id, nombre, apellido, email, nombreUsuario, tipo_usuario, password);
+        Boolean success = ctrl.modificarUsuario(id, nombre, apellido, email, nombreUsuario, tipo_usuario, hashedPassword);
 
         if (success) {
             LinkedList<Usuario> usuarios = ctrl.getAll();
