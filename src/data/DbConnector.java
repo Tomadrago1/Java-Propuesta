@@ -1,14 +1,14 @@
 package data;
 
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
 
 public class DbConnector {
 
 	private static DbConnector instancia;
 
-	private String driver   = "com.mysql.cj.jdbc.Driver";
-	// En Docker el contenedor MySQL se llama 'db'. La variable de entorno DB_HOST
-	// permite sobrescribir el host sin recompilar (fallback: localhost para dev local).
+	private String driver = "com.mysql.cj.jdbc.Driver";
 	private String host     = System.getenv("DB_HOST")     != null ? System.getenv("DB_HOST")     : "localhost";
 	private String port     = System.getenv("DB_PORT")     != null ? System.getenv("DB_PORT")     : "3306";
 	private String user     = System.getenv("DB_USER")     != null ? System.getenv("DB_USER")     : "java";

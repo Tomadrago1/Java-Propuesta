@@ -1,0 +1,43 @@
+
+services:
+  # Contenedor de la Base de Datos
+  db:
+    image: mysql:8.0
+    container_name: mysql-server
+    command: --lower_case_table_names=1
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_DATABASE: jartraining
+      MYSQL_USER: java
+      MYSQL_PASSWORD: java
+    ports:
+      - "3307:3306"
+    volumes:
+      # El script init.sql se ejecuta automáticamente la primera vez que se crea el volumen
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+      - db_data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "java", "-pjava"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+      start_period: 30s
+
+  # Contenedor de tu Aplicación Java
+  web:
+    build: .
+    container_name: tomcat-app
+    ports:
+      - "8080:8080"
+    environment:
+      DB_HOST: db
+      DB_PORT: "3306"
+      DB_USER: java
+      DB_PASSWORD: java
+      DB_NAME: jartraining
+    depends_on:
+      db:
+        condition: service_healthy
+
+volumes:
+  db_data:

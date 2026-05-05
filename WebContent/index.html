@@ -1,0 +1,59 @@
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <title>JAR Training - Iniciar Sesión</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="author" content="JAR Training" />
+    <meta
+      name="description"
+      content="Sistema de gestión para gimnasio JAR Training"
+    />
+    <meta
+      name="keywords"
+      content="Gimnasio, Fitness, Entrenamiento, Nutrición"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
+    <link rel="stylesheet" href="style/login.css" />
+  </head>
+  <body>
+    <div id="contenedor">
+      <div id="central">
+        <div id="login">
+          <div class="titulo">💪 JAR Training</div>
+          <form id="loginform" action="signin" method="post">
+            <div class="input-container">
+              <i class="fas fa-user"></i>
+              <input
+                type="text"
+                name="usuario"
+                placeholder="Usuario"
+                value="admin"
+                required
+              />
+            </div>
+            <div class="input-container">
+              <i class="fas fa-lock"></i>
+              <input
+                type="password"
+                name="password"
+                placeholder="Contraseña"
+                value="a"
+                required
+              />
+            </div>
+            <button type="submit" title="Ingresar" name="Ingresar">
+              Iniciar Sesión
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,15 @@
+/* =====================================================
+   JAR TRAINING - EDITAR EJERCICIO
+   Estilos heredados de crear-editar.css
+===================================================== */
+
+@import url("crear-editar.css");
+
+/* Estilos adicionales específicos */
+.container {
+  max-width: 500px;
+}
+
+h1::before {
+  content: "✏️ ";
+}
