@@ -1,32 +1,49 @@
-# 🏋️‍♂️ JAR Training — Platform Containerized App
+# 🏋️‍♂️ JAR Training — Platform Containerized & Local App
 
 ¡Bienvenido a **JAR Training**! Esta es una plataforma web híbrida de alto rendimiento diseñada para la gestión de entrenamientos deportivos, planificación nutricional y recomendación personalizada de recetas saludables para atletas y profesionales de la salud.
 
-El proyecto está completamente containerizado en **Docker**, unificando un frontend web dinámico y un potente backend modular en **Java (Jakarta EE)**.
+El proyecto soporta tanto ejecución tradicional local en un entorno de desarrollo integrado (**Eclipse IDE**) como despliegue ágil totalmente containerizado en **Docker**.
 
 ---
 
-## 🚀 Arquitectura y Tecnologías Clave
+## 🛠️ Requisitos del Proyecto
 
-* **Frontend Web:** JSPs dinámicos, HTML5, CSS3 moderno y responsive.
-* **Servidor de Aplicación:** **Tomcat 10.1** (Jakarta EE 9+, con migración automática a `jakarta.servlet.*`).
-* **Base de Datos:** **MySQL 8.0** configurado de manera robusta y persistente.
-* **Seguridad:** Autenticación robusta basada en hashing seguro **SHA-256**.
-* **Containerización:** Entorno multi-contenedor sincronizado con **Docker Compose**.
+### 💻 Opción 1: Desarrollo Local Tradicional (IDE)
+Si vas a correr o desarrollar la aplicación directamente desde tu entorno local, los requerimientos son:
+* **Java:** versión **21**
+* **Servidor de Aplicación:** **Apache Tomcat 11.0** (compatible con Jakarta EE 10, usando `jakarta.servlet.*`)
+* **IDE:** **Eclipse IDE for Enterprise Java and Web Developers**
+* **Estructura Web:** **Dynamic Web Module 6.1**
 
----
-
-## 🛠️ Requisitos Previos
-
-Solo necesitás tener instalado:
-* [Docker Desktop](https://www.docker.com/products/docker-desktop/) (con Docker Compose activo)
-* Git
+### 🐳 Opción 2: Despliegue Containerizado (Docker)
+Si vas a correr la aplicación de forma inmediata sin necesidad de configurar compiladores ni servidores locales:
+* **Docker Desktop** (con Docker Compose activo)
 
 ---
 
-## ⚡ Inicio Rápido (Despliegue con Docker)
+## 📂 Importar y Ejecutar en Eclipse IDE
 
-Levantar la aplicación completa toma menos de un minuto y se realiza con un único comando:
+Si elegís el desarrollo local tradicional utilizando **Eclipse**, seguí estos pasos:
+
+1. **Importar el proyecto en tu Workspace:**
+   * Abrí **Eclipse IDE**.
+   * Dirigite a `File` > `Import...`
+   * Seleccioná `General` > `Existing Projects into Workspace` y elegí la carpeta raíz del proyecto.
+2. **Configurar el servidor Apache Tomcat 11.0:**
+   * En la pestaña **Servers** de Eclipse, agregá un nuevo servidor seleccionando **Apache Tomcat v11.0**.
+   * Vinculá la ruta de tu instalación local de Tomcat 11.
+3. **Desplegar el proyecto:**
+   * Hacé clic derecho sobre el servidor Tomcat configurado y seleccioná **Add and Remove...**
+   * Agregá el proyecto de **JAR Training** a la columna derecha de aplicaciones activas.
+4. **Ejecutar la aplicación:**
+   * Hacé clic derecho sobre el proyecto o el servidor y seleccioná **Run on Server**.
+   * Accedé desde tu navegador local.
+
+---
+
+## ⚡ Inicio Rápido con Docker (Alternativa)
+
+Para levantar la aplicación unificada con su base de datos de manera automática mediante contenedores:
 
 1. **Cloná el repositorio y accedé a la carpeta:**
    ```bash
@@ -64,18 +81,14 @@ El entorno se inicializa automáticamente con usuarios de prueba con contraseña
   * Configurado con `--lower_case_table_names=1` para asegurar la **compatibilidad multiplataforma** de las consultas SQL entre Windows y Linux (Docker).
   * Volumen persistente `db_data` para no perder la información al reiniciar los contenedores.
   * Salud del servicio (`healthcheck`) sincronizada para que la aplicación web espere a que la base de datos esté lista antes de arrancar.
-* **Servicio `web` (Tomcat 10.1):**
+* **Servicio `web` (Tomcat 10.1 / 11 compatible):**
   * Despliega la aplicación unificada compilando dinámicamente el frontend clásico de la rama `main` y las lógicas avanzadas de recetas recomendadas.
-
-### 🐳 Compilación Multietapa (`Dockerfile`)
-1. **Etapa 1 (Compilación):** Usa un JDK de `eclipse-temurin:11` para realizar un merge de las ramas, correr una migración "al vuelo" de `javax.servlet` a `jakarta.servlet` mediante scripts automáticos, y compilar todo el backend libre de dependencias obsoletas.
-2. **Etapa 2 (Ejecución):** Sirve la aplicación de forma óptima en un servidor limpio Tomcat 10.1.
 
 ---
 
 ## 🧼 Comandos Útiles de Mantenimiento
 
-* **Ver los logs en tiempo real (útil para depurar logins u otras acciones):**
+* **Ver los logs en tiempo real:**
   ```bash
   docker compose logs -f web
   ```
@@ -84,9 +97,4 @@ El entorno se inicializa automáticamente con usuarios de prueba con contraseña
   ```bash
   docker compose down -v
   docker compose up -d --build
-  ```
-
-* **Verificar el estado de los contenedores:**
-  ```bash
-  docker compose ps
   ```
